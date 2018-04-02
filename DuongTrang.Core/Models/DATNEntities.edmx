@@ -1,0 +1,1783 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DATNModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="500" />
+          <Property Name="Avartar" Type="nvarchar" MaxLength="256" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="200" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="CoverImage" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="BookID" />
+          </Key>
+          <Property Name="BookID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BookCode" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="BookName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Author" Type="nvarchar" MaxLength="150" />
+          <Property Name="CompanyPublishID" Type="uniqueidentifier" />
+          <Property Name="YearPublish" Type="date" />
+          <Property Name="KindID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LanguageID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CategoryID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BookFormat" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="money" />
+          <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="AddDate" Type="date" />
+          <Property Name="CreateBy" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Keyword" Type="nvarchar" MaxLength="150" />
+          <Property Name="Image" Type="nvarchar" MaxLength="256" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Borrow">
+          <Key>
+            <PropertyRef Name="BorrowID" />
+          </Key>
+          <Property Name="BorrowID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CardReaderID" Type="uniqueidentifier" />
+          <Property Name="DateBorrow" Type="date" />
+          <Property Name="AmountTotal" Type="int" />
+          <Property Name="CreateBy" Type="uniqueidentifier" />
+          <Property Name="CreateDate" Type="date" />
+          <Property Name="IsDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="BorrowDetail">
+          <Key>
+            <PropertyRef Name="BorrowDetailID" />
+          </Key>
+          <Property Name="BorrowDetailID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BorrowID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BookID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DateExpried" Type="date" Nullable="false" />
+          <Property Name="PendingStatusID" Type="uniqueidentifier" />
+          <Property Name="CreateDate" Type="date" Nullable="false" />
+          <Property Name="CreateBy" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="BorrowDetailLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BorrowDetailID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BookID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DateExpried" Type="date" />
+          <Property Name="PendingStatusID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateDate" Type="date" />
+          <Property Name="CreateBy" Type="uniqueidentifier" />
+          <Property Name="IsDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="CardReader">
+          <Key>
+            <PropertyRef Name="CardReaderID" />
+          </Key>
+          <Property Name="CardReaderID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ReaderID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DateStart" Type="date" />
+          <Property Name="DateExpried" Type="date" />
+          <Property Name="CreateBy" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateDate" Type="date" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CategoryName" Type="nchar" MaxLength="10" />
+          <Property Name="CreateBy" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateDate" Type="date" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="ChildMenu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MenuID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ChildMenuName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="LinkSPA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ChildMenuIcon" Type="varchar" MaxLength="50" />
+          <Property Name="IsDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Name="CompanyID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="256" />
+          <Property Name="IsDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="CourseID" />
+          </Key>
+          <Property Name="CourseID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CourseName" Type="nvarchar" MaxLength="150" />
+          <Property Name="CreateBy" Type="uniqueidentifier" />
+          <Property Name="CreateDate" Type="date" />
+          <Property Name="IsDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="Faculty">
+          <Key>
+            <PropertyRef Name="FacultyID" />
+          </Key>
+          <Property Name="FacultyID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Faculty" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="Infringe">
+          <Key>
+            <PropertyRef Name="Infringe" />
+          </Key>
+          <Property Name="Infringe" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BorrowDetailID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Reason" Type="nvarchar(max)" />
+          <Property Name="Fine" Type="money" />
+          <Property Name="IsDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="Kind">
+          <Key>
+            <PropertyRef Name="KindID" />
+          </Key>
+          <Property Name="KindID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Kind" Type="nvarchar" MaxLength="256" />
+          <Property Name="IsDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="LanguageID" />
+          </Key>
+          <Property Name="LanguageID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Language" Type="nvarchar" MaxLength="250" />
+          <Property Name="IsDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="Level">
+          <Key>
+            <PropertyRef Name="LevelID" />
+          </Key>
+          <Property Name="LevelID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LevelName" Type="nvarchar" MaxLength="150" />
+          <Property Name="IsDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="MenuID" />
+          </Key>
+          <Property Name="MenuID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MenuName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Icon" Type="varchar" MaxLength="50" />
+          <Property Name="IsDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="PendingStatus">
+          <Key>
+            <PropertyRef Name="PendingStatusID" />
+          </Key>
+          <Property Name="PendingStatusID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PendingStatusName" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="Reader">
+          <Key>
+            <PropertyRef Name="ReaderID" />
+          </Key>
+          <Property Name="ReaderID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ReaderKindID" Type="uniqueidentifier" />
+          <Property Name="Identifier" Type="varchar" MaxLength="50" />
+          <Property Name="ReaderName" Type="nvarchar" MaxLength="256" />
+          <Property Name="Birth" Type="date" />
+          <Property Name="Sex" Type="nvarchar" MaxLength="10" />
+          <Property Name="JobID" Type="uniqueidentifier" />
+          <Property Name="LevelID" Type="uniqueidentifier" />
+          <Property Name="FacultyID" Type="uniqueidentifier" />
+          <Property Name="CourseID" Type="uniqueidentifier" />
+          <Property Name="TrainingSystemID" Type="uniqueidentifier" />
+          <Property Name="SpecializedID" Type="uniqueidentifier" />
+          <Property Name="YearSchollID" Type="uniqueidentifier" />
+          <Property Name="Address" Type="nvarchar" MaxLength="256" />
+          <Property Name="Image" Type="nvarchar" MaxLength="256" />
+          <Property Name="IsDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="Return">
+          <Key>
+            <PropertyRef Name="ReturnID" />
+          </Key>
+          <Property Name="ReturnID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CardReaderID" Type="uniqueidentifier" />
+          <Property Name="DateReturn" Type="date" />
+          <Property Name="ReturnStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="BookID" Type="uniqueidentifier" />
+          <Property Name="IsDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="Role_Menu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" />
+          <Property Name="MenuID" Type="uniqueidentifier" />
+          <Property Name="IsDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="Specialized">
+          <Key>
+            <PropertyRef Name="SpecializedID" />
+          </Key>
+          <Property Name="SpecializedID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SpecializedName" Type="nvarchar" MaxLength="150" />
+          <Property Name="IsDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TrainingSystem">
+          <Key>
+            <PropertyRef Name="TrainingSystemID" />
+          </Key>
+          <Property Name="TrainingSystemID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TrainingSystem" Type="nchar" MaxLength="10" />
+          <Property Name="IsDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="YearSchool">
+          <Key>
+            <PropertyRef Name="YearSchoolID" />
+          </Key>
+          <Property Name="YearSchoolID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="YearSchool" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsDelete" Type="bit" />
+        </EntityType>
+        <Association Name="FK_Book_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Book_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="CompanyPublishID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Book_Kind">
+          <End Role="Kind" Type="Self.Kind" Multiplicity="1" />
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kind">
+              <PropertyRef Name="KindID" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="KindID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Book_Language">
+          <End Role="Language" Type="Self.Language" Multiplicity="1" />
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="LanguageID" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="LanguageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Borrow_CardReader">
+          <End Role="CardReader" Type="Self.CardReader" Multiplicity="0..1" />
+          <End Role="Borrow" Type="Self.Borrow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CardReader">
+              <PropertyRef Name="CardReaderID" />
+            </Principal>
+            <Dependent Role="Borrow">
+              <PropertyRef Name="CardReaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BorrowDetail_Borrow">
+          <End Role="Borrow" Type="Self.Borrow" Multiplicity="1" />
+          <End Role="BorrowDetail" Type="Self.BorrowDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Borrow">
+              <PropertyRef Name="BorrowID" />
+            </Principal>
+            <Dependent Role="BorrowDetail">
+              <PropertyRef Name="BorrowID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CardReader_Reader">
+          <End Role="Reader" Type="Self.Reader" Multiplicity="1" />
+          <End Role="CardReader" Type="Self.CardReader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reader">
+              <PropertyRef Name="ReaderID" />
+            </Principal>
+            <Dependent Role="CardReader">
+              <PropertyRef Name="ReaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChildMenu_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+          <End Role="ChildMenu" Type="Self.ChildMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="MenuID" />
+            </Principal>
+            <Dependent Role="ChildMenu">
+              <PropertyRef Name="MenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Infringe_BorrowDetail">
+          <End Role="BorrowDetail" Type="Self.BorrowDetail" Multiplicity="1" />
+          <End Role="Infringe" Type="Self.Infringe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BorrowDetail">
+              <PropertyRef Name="BorrowDetailID" />
+            </Principal>
+            <Dependent Role="Infringe">
+              <PropertyRef Name="BorrowDetailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reader_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+          <End Role="Reader" Type="Self.Reader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="Reader">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reader_Faculty">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
+          <End Role="Reader" Type="Self.Reader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="FacultyID" />
+            </Principal>
+            <Dependent Role="Reader">
+              <PropertyRef Name="FacultyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reader_Level">
+          <End Role="Level" Type="Self.Level" Multiplicity="0..1" />
+          <End Role="Reader" Type="Self.Reader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Level">
+              <PropertyRef Name="LevelID" />
+            </Principal>
+            <Dependent Role="Reader">
+              <PropertyRef Name="LevelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reader_Specialized">
+          <End Role="Specialized" Type="Self.Specialized" Multiplicity="0..1" />
+          <End Role="Reader" Type="Self.Reader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specialized">
+              <PropertyRef Name="SpecializedID" />
+            </Principal>
+            <Dependent Role="Reader">
+              <PropertyRef Name="SpecializedID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reader_TrainingSystem">
+          <End Role="TrainingSystem" Type="Self.TrainingSystem" Multiplicity="0..1" />
+          <End Role="Reader" Type="Self.Reader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrainingSystem">
+              <PropertyRef Name="TrainingSystemID" />
+            </Principal>
+            <Dependent Role="Reader">
+              <PropertyRef Name="TrainingSystemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reader_YearSchool">
+          <End Role="YearSchool" Type="Self.YearSchool" Multiplicity="0..1" />
+          <End Role="Reader" Type="Self.Reader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="YearSchool">
+              <PropertyRef Name="YearSchoolID" />
+            </Principal>
+            <Dependent Role="Reader">
+              <PropertyRef Name="YearSchollID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Return_Reader">
+          <End Role="Reader" Type="Self.Reader" Multiplicity="0..1" />
+          <End Role="Return" Type="Self.Return" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reader">
+              <PropertyRef Name="ReaderID" />
+            </Principal>
+            <Dependent Role="Return">
+              <PropertyRef Name="CardReaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Role_Menu_AspNetRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="0..1" />
+          <End Role="Role_Menu" Type="Self.Role_Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Role_Menu">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Role_Menu_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="Role_Menu" Type="Self.Role_Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="MenuID" />
+            </Principal>
+            <Dependent Role="Role_Menu">
+              <PropertyRef Name="MenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DATNModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Borrow" EntityType="Self.Borrow" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BorrowDetail" EntityType="Self.BorrowDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BorrowDetailLog" EntityType="Self.BorrowDetailLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CardReader" EntityType="Self.CardReader" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChildMenu" EntityType="Self.ChildMenu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Faculty" EntityType="Self.Faculty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Infringe" EntityType="Self.Infringe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kind" EntityType="Self.Kind" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Level" EntityType="Self.Level" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PendingStatus" EntityType="Self.PendingStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reader" EntityType="Self.Reader" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Return" EntityType="Self.Return" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role_Menu" EntityType="Self.Role_Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Specialized" EntityType="Self.Specialized" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TrainingSystem" EntityType="Self.TrainingSystem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="YearSchool" EntityType="Self.YearSchool" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Book_Category" Association="Self.FK_Book_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Book_Company" Association="Self.FK_Book_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Book_Kind" Association="Self.FK_Book_Kind">
+            <End Role="Kind" EntitySet="Kind" />
+            <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Book_Language" Association="Self.FK_Book_Language">
+            <End Role="Language" EntitySet="Language" />
+            <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Borrow_CardReader" Association="Self.FK_Borrow_CardReader">
+            <End Role="CardReader" EntitySet="CardReader" />
+            <End Role="Borrow" EntitySet="Borrow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BorrowDetail_Borrow" Association="Self.FK_BorrowDetail_Borrow">
+            <End Role="Borrow" EntitySet="Borrow" />
+            <End Role="BorrowDetail" EntitySet="BorrowDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CardReader_Reader" Association="Self.FK_CardReader_Reader">
+            <End Role="Reader" EntitySet="Reader" />
+            <End Role="CardReader" EntitySet="CardReader" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChildMenu_Menu" Association="Self.FK_ChildMenu_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="ChildMenu" EntitySet="ChildMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Infringe_BorrowDetail" Association="Self.FK_Infringe_BorrowDetail">
+            <End Role="BorrowDetail" EntitySet="BorrowDetail" />
+            <End Role="Infringe" EntitySet="Infringe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reader_Course" Association="Self.FK_Reader_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Reader" EntitySet="Reader" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reader_Faculty" Association="Self.FK_Reader_Faculty">
+            <End Role="Faculty" EntitySet="Faculty" />
+            <End Role="Reader" EntitySet="Reader" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reader_Level" Association="Self.FK_Reader_Level">
+            <End Role="Level" EntitySet="Level" />
+            <End Role="Reader" EntitySet="Reader" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reader_Specialized" Association="Self.FK_Reader_Specialized">
+            <End Role="Specialized" EntitySet="Specialized" />
+            <End Role="Reader" EntitySet="Reader" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reader_TrainingSystem" Association="Self.FK_Reader_TrainingSystem">
+            <End Role="TrainingSystem" EntitySet="TrainingSystem" />
+            <End Role="Reader" EntitySet="Reader" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reader_YearSchool" Association="Self.FK_Reader_YearSchool">
+            <End Role="YearSchool" EntitySet="YearSchool" />
+            <End Role="Reader" EntitySet="Reader" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Return_Reader" Association="Self.FK_Return_Reader">
+            <End Role="Reader" EntitySet="Reader" />
+            <End Role="Return" EntitySet="Return" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Role_Menu_AspNetRoles" Association="Self.FK_Role_Menu_AspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="Role_Menu" EntitySet="Role_Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Role_Menu_Menu" Association="Self.FK_Role_Menu_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Role_Menu" EntitySet="Role_Menu" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DATNModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Role_Menu" Relationship="Self.FK_Role_Menu_AspNetRoles" FromRole="AspNetRoles" ToRole="Role_Menu" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Avartar" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CoverImage" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="BookID" />
+          </Key>
+          <Property Name="BookID" Type="Guid" Nullable="false" />
+          <Property Name="BookCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="BookName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Author" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyPublishID" Type="Guid" />
+          <Property Name="YearPublish" Type="DateTime" Precision="0" />
+          <Property Name="KindID" Type="Guid" Nullable="false" />
+          <Property Name="LanguageID" Type="Guid" Nullable="false" />
+          <Property Name="CategoryID" Type="Guid" Nullable="false" />
+          <Property Name="BookFormat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddDate" Type="DateTime" Precision="0" />
+          <Property Name="CreateBy" Type="Guid" Nullable="false" />
+          <Property Name="Keyword" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Book_Category" FromRole="Book" ToRole="Category" />
+          <NavigationProperty Name="Kind" Relationship="Self.FK_Book_Kind" FromRole="Book" ToRole="Kind" />
+          <NavigationProperty Name="Language" Relationship="Self.FK_Book_Language" FromRole="Book" ToRole="Language" />
+          <NavigationProperty Name="Company" Relationship="DATNModel.FK_Book_Company" FromRole="Book" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="Borrow">
+          <Key>
+            <PropertyRef Name="BorrowID" />
+          </Key>
+          <Property Name="BorrowID" Type="Guid" Nullable="false" />
+          <Property Name="CardReaderID" Type="Guid" />
+          <Property Name="DateBorrow" Type="DateTime" Precision="0" />
+          <Property Name="AmountTotal" Type="Int32" />
+          <Property Name="CreateBy" Type="Guid" />
+          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <NavigationProperty Name="CardReader" Relationship="Self.FK_Borrow_CardReader" FromRole="Borrow" ToRole="CardReader" />
+          <NavigationProperty Name="BorrowDetails" Relationship="Self.FK_BorrowDetail_Borrow" FromRole="Borrow" ToRole="BorrowDetail" />
+        </EntityType>
+        <EntityType Name="BorrowDetail">
+          <Key>
+            <PropertyRef Name="BorrowDetailID" />
+          </Key>
+          <Property Name="BorrowDetailID" Type="Guid" Nullable="false" />
+          <Property Name="BorrowID" Type="Guid" Nullable="false" />
+          <Property Name="BookID" Type="Guid" Nullable="false" />
+          <Property Name="DateExpried" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PendingStatusID" Type="Guid" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CreateBy" Type="Guid" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <NavigationProperty Name="Borrow" Relationship="Self.FK_BorrowDetail_Borrow" FromRole="BorrowDetail" ToRole="Borrow" />
+          <NavigationProperty Name="Infringes" Relationship="Self.FK_Infringe_BorrowDetail" FromRole="BorrowDetail" ToRole="Infringe" />
+        </EntityType>
+        <EntityType Name="BorrowDetailLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="BorrowDetailID" Type="Guid" Nullable="false" />
+          <Property Name="BookID" Type="Guid" Nullable="false" />
+          <Property Name="DateExpried" Type="DateTime" Precision="0" />
+          <Property Name="PendingStatusID" Type="Guid" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <Property Name="CreateBy" Type="Guid" />
+          <Property Name="IsDelete" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="CardReader">
+          <Key>
+            <PropertyRef Name="CardReaderID" />
+          </Key>
+          <Property Name="CardReaderID" Type="Guid" Nullable="false" />
+          <Property Name="ReaderID" Type="Guid" Nullable="false" />
+          <Property Name="DateStart" Type="DateTime" Precision="0" />
+          <Property Name="DateExpried" Type="DateTime" Precision="0" />
+          <Property Name="CreateBy" Type="Guid" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <NavigationProperty Name="Borrows" Relationship="Self.FK_Borrow_CardReader" FromRole="CardReader" ToRole="Borrow" />
+          <NavigationProperty Name="Reader" Relationship="Self.FK_CardReader_Reader" FromRole="CardReader" ToRole="Reader" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Guid" Nullable="false" />
+          <Property Name="CategoryName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="CreateBy" Type="Guid" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <NavigationProperty Name="Books" Relationship="Self.FK_Book_Category" FromRole="Category" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="ChildMenu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="MenuID" Type="Guid" Nullable="false" />
+          <Property Name="ChildMenuName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LinkSPA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <NavigationProperty Name="Menu" Relationship="Self.FK_ChildMenu_Menu" FromRole="ChildMenu" ToRole="Menu" />
+          <Property Name="ChildMenuIcon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="CourseID" />
+          </Key>
+          <Property Name="CourseID" Type="Guid" Nullable="false" />
+          <Property Name="CourseName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CreateBy" Type="Guid" />
+          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <NavigationProperty Name="Readers" Relationship="Self.FK_Reader_Course" FromRole="Course" ToRole="Reader" />
+        </EntityType>
+        <EntityType Name="Faculty">
+          <Key>
+            <PropertyRef Name="FacultyID" />
+          </Key>
+          <Property Name="FacultyID" Type="Guid" Nullable="false" />
+          <Property Name="Faculty1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <NavigationProperty Name="Readers" Relationship="Self.FK_Reader_Faculty" FromRole="Faculty" ToRole="Reader" />
+        </EntityType>
+        <EntityType Name="Infringe">
+          <Key>
+            <PropertyRef Name="Infringe1" />
+          </Key>
+          <Property Name="Infringe1" Type="Guid" Nullable="false" />
+          <Property Name="BorrowDetailID" Type="Guid" Nullable="false" />
+          <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fine" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <NavigationProperty Name="BorrowDetail" Relationship="Self.FK_Infringe_BorrowDetail" FromRole="Infringe" ToRole="BorrowDetail" />
+        </EntityType>
+        <EntityType Name="Kind">
+          <Key>
+            <PropertyRef Name="KindID" />
+          </Key>
+          <Property Name="KindID" Type="Guid" Nullable="false" />
+          <Property Name="Kind1" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <NavigationProperty Name="Books" Relationship="Self.FK_Book_Kind" FromRole="Kind" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="LanguageID" />
+          </Key>
+          <Property Name="LanguageID" Type="Guid" Nullable="false" />
+          <Property Name="Language1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <NavigationProperty Name="Books" Relationship="Self.FK_Book_Language" FromRole="Language" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="Level">
+          <Key>
+            <PropertyRef Name="LevelID" />
+          </Key>
+          <Property Name="LevelID" Type="Guid" Nullable="false" />
+          <Property Name="LevelName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <NavigationProperty Name="Readers" Relationship="Self.FK_Reader_Level" FromRole="Level" ToRole="Reader" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="MenuID" />
+          </Key>
+          <Property Name="MenuID" Type="Guid" Nullable="false" />
+          <Property Name="MenuName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Icon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <NavigationProperty Name="ChildMenus" Relationship="Self.FK_ChildMenu_Menu" FromRole="Menu" ToRole="ChildMenu" />
+          <NavigationProperty Name="Role_Menu" Relationship="Self.FK_Role_Menu_Menu" FromRole="Menu" ToRole="Role_Menu" />
+        </EntityType>
+        <EntityType Name="PendingStatu">
+          <Key>
+            <PropertyRef Name="PendingStatusID" />
+          </Key>
+          <Property Name="PendingStatusID" Type="Guid" Nullable="false" />
+          <Property Name="PendingStatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDelete" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Reader">
+          <Key>
+            <PropertyRef Name="ReaderID" />
+          </Key>
+          <Property Name="ReaderID" Type="Guid" Nullable="false" />
+          <Property Name="ReaderKindID" Type="Guid" />
+          <Property Name="Identifier" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ReaderName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Birth" Type="DateTime" Precision="0" />
+          <Property Name="Sex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="JobID" Type="Guid" />
+          <Property Name="LevelID" Type="Guid" />
+          <Property Name="FacultyID" Type="Guid" />
+          <Property Name="CourseID" Type="Guid" />
+          <Property Name="TrainingSystemID" Type="Guid" />
+          <Property Name="SpecializedID" Type="Guid" />
+          <Property Name="YearSchollID" Type="Guid" />
+          <Property Name="Address" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <NavigationProperty Name="CardReaders" Relationship="Self.FK_CardReader_Reader" FromRole="Reader" ToRole="CardReader" />
+          <NavigationProperty Name="Course" Relationship="Self.FK_Reader_Course" FromRole="Reader" ToRole="Course" />
+          <NavigationProperty Name="Faculty" Relationship="Self.FK_Reader_Faculty" FromRole="Reader" ToRole="Faculty" />
+          <NavigationProperty Name="Level" Relationship="Self.FK_Reader_Level" FromRole="Reader" ToRole="Level" />
+          <NavigationProperty Name="Specialized" Relationship="Self.FK_Reader_Specialized" FromRole="Reader" ToRole="Specialized" />
+          <NavigationProperty Name="TrainingSystem" Relationship="Self.FK_Reader_TrainingSystem" FromRole="Reader" ToRole="TrainingSystem" />
+          <NavigationProperty Name="YearSchool" Relationship="Self.FK_Reader_YearSchool" FromRole="Reader" ToRole="YearSchool" />
+          <NavigationProperty Name="Returns" Relationship="Self.FK_Return_Reader" FromRole="Reader" ToRole="Return" />
+        </EntityType>
+        <EntityType Name="Return">
+          <Key>
+            <PropertyRef Name="ReturnID" />
+          </Key>
+          <Property Name="ReturnID" Type="Guid" Nullable="false" />
+          <Property Name="CardReaderID" Type="Guid" />
+          <Property Name="DateReturn" Type="DateTime" Precision="0" />
+          <Property Name="ReturnStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BookID" Type="Guid" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <NavigationProperty Name="Reader" Relationship="Self.FK_Return_Reader" FromRole="Return" ToRole="Reader" />
+        </EntityType>
+        <EntityType Name="Role_Menu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="RoleId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="MenuID" Type="Guid" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <NavigationProperty Name="AspNetRole" Relationship="Self.FK_Role_Menu_AspNetRoles" FromRole="Role_Menu" ToRole="AspNetRoles" />
+          <NavigationProperty Name="Menu" Relationship="Self.FK_Role_Menu_Menu" FromRole="Role_Menu" ToRole="Menu" />
+        </EntityType>
+        <EntityType Name="Specialized">
+          <Key>
+            <PropertyRef Name="SpecializedID" />
+          </Key>
+          <Property Name="SpecializedID" Type="Guid" Nullable="false" />
+          <Property Name="SpecializedName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <NavigationProperty Name="Readers" Relationship="Self.FK_Reader_Specialized" FromRole="Specialized" ToRole="Reader" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TrainingSystem">
+          <Key>
+            <PropertyRef Name="TrainingSystemID" />
+          </Key>
+          <Property Name="TrainingSystemID" Type="Guid" Nullable="false" />
+          <Property Name="TrainingSystem1" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <NavigationProperty Name="Readers" Relationship="Self.FK_Reader_TrainingSystem" FromRole="TrainingSystem" ToRole="Reader" />
+        </EntityType>
+        <EntityType Name="YearSchool">
+          <Key>
+            <PropertyRef Name="YearSchoolID" />
+          </Key>
+          <Property Name="YearSchoolID" Type="Guid" Nullable="false" />
+          <Property Name="YearSchool1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <NavigationProperty Name="Readers" Relationship="Self.FK_Reader_YearSchool" FromRole="YearSchool" ToRole="Reader" />
+        </EntityType>
+        <Association Name="FK_Role_Menu_AspNetRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="0..1" />
+          <End Role="Role_Menu" Type="Self.Role_Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Role_Menu">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Book_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Book_Kind">
+          <End Role="Kind" Type="Self.Kind" Multiplicity="1" />
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kind">
+              <PropertyRef Name="KindID" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="KindID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Book_Language">
+          <End Role="Language" Type="Self.Language" Multiplicity="1" />
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="LanguageID" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="LanguageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Borrow_CardReader">
+          <End Role="CardReader" Type="Self.CardReader" Multiplicity="0..1" />
+          <End Role="Borrow" Type="Self.Borrow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CardReader">
+              <PropertyRef Name="CardReaderID" />
+            </Principal>
+            <Dependent Role="Borrow">
+              <PropertyRef Name="CardReaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BorrowDetail_Borrow">
+          <End Role="Borrow" Type="Self.Borrow" Multiplicity="1" />
+          <End Role="BorrowDetail" Type="Self.BorrowDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Borrow">
+              <PropertyRef Name="BorrowID" />
+            </Principal>
+            <Dependent Role="BorrowDetail">
+              <PropertyRef Name="BorrowID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Infringe_BorrowDetail">
+          <End Role="BorrowDetail" Type="Self.BorrowDetail" Multiplicity="1" />
+          <End Role="Infringe" Type="Self.Infringe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BorrowDetail">
+              <PropertyRef Name="BorrowDetailID" />
+            </Principal>
+            <Dependent Role="Infringe">
+              <PropertyRef Name="BorrowDetailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CardReader_Reader">
+          <End Role="Reader" Type="Self.Reader" Multiplicity="1" />
+          <End Role="CardReader" Type="Self.CardReader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reader">
+              <PropertyRef Name="ReaderID" />
+            </Principal>
+            <Dependent Role="CardReader">
+              <PropertyRef Name="ReaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChildMenu_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+          <End Role="ChildMenu" Type="Self.ChildMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="MenuID" />
+            </Principal>
+            <Dependent Role="ChildMenu">
+              <PropertyRef Name="MenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reader_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+          <End Role="Reader" Type="Self.Reader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="Reader">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reader_Faculty">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
+          <End Role="Reader" Type="Self.Reader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="FacultyID" />
+            </Principal>
+            <Dependent Role="Reader">
+              <PropertyRef Name="FacultyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reader_Level">
+          <End Role="Level" Type="Self.Level" Multiplicity="0..1" />
+          <End Role="Reader" Type="Self.Reader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Level">
+              <PropertyRef Name="LevelID" />
+            </Principal>
+            <Dependent Role="Reader">
+              <PropertyRef Name="LevelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Role_Menu_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="Role_Menu" Type="Self.Role_Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="MenuID" />
+            </Principal>
+            <Dependent Role="Role_Menu">
+              <PropertyRef Name="MenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reader_Specialized">
+          <End Role="Specialized" Type="Self.Specialized" Multiplicity="0..1" />
+          <End Role="Reader" Type="Self.Reader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specialized">
+              <PropertyRef Name="SpecializedID" />
+            </Principal>
+            <Dependent Role="Reader">
+              <PropertyRef Name="SpecializedID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reader_TrainingSystem">
+          <End Role="TrainingSystem" Type="Self.TrainingSystem" Multiplicity="0..1" />
+          <End Role="Reader" Type="Self.Reader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrainingSystem">
+              <PropertyRef Name="TrainingSystemID" />
+            </Principal>
+            <Dependent Role="Reader">
+              <PropertyRef Name="TrainingSystemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reader_YearSchool">
+          <End Role="YearSchool" Type="Self.YearSchool" Multiplicity="0..1" />
+          <End Role="Reader" Type="Self.Reader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="YearSchool">
+              <PropertyRef Name="YearSchoolID" />
+            </Principal>
+            <Dependent Role="Reader">
+              <PropertyRef Name="YearSchollID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Return_Reader">
+          <End Role="Reader" Type="Self.Reader" Multiplicity="0..1" />
+          <End Role="Return" Type="Self.Return" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reader">
+              <PropertyRef Name="ReaderID" />
+            </Principal>
+            <Dependent Role="Return">
+              <PropertyRef Name="CardReaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="DATNEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="Books" EntityType="Self.Book" />
+          <EntitySet Name="Borrows" EntityType="Self.Borrow" />
+          <EntitySet Name="BorrowDetails" EntityType="Self.BorrowDetail" />
+          <EntitySet Name="BorrowDetailLogs" EntityType="Self.BorrowDetailLog" />
+          <EntitySet Name="CardReaders" EntityType="Self.CardReader" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="ChildMenus" EntityType="Self.ChildMenu" />
+          <EntitySet Name="Courses" EntityType="Self.Course" />
+          <EntitySet Name="Faculties" EntityType="Self.Faculty" />
+          <EntitySet Name="Infringes" EntityType="Self.Infringe" />
+          <EntitySet Name="Kinds" EntityType="Self.Kind" />
+          <EntitySet Name="Languages" EntityType="Self.Language" />
+          <EntitySet Name="Levels" EntityType="Self.Level" />
+          <EntitySet Name="Menus" EntityType="Self.Menu" />
+          <EntitySet Name="PendingStatus" EntityType="Self.PendingStatu" />
+          <EntitySet Name="Readers" EntityType="Self.Reader" />
+          <EntitySet Name="Returns" EntityType="Self.Return" />
+          <EntitySet Name="Role_Menu" EntityType="Self.Role_Menu" />
+          <EntitySet Name="Specializeds" EntityType="Self.Specialized" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TrainingSystems" EntityType="Self.TrainingSystem" />
+          <EntitySet Name="YearSchools" EntityType="Self.YearSchool" />
+          <AssociationSet Name="FK_Role_Menu_AspNetRoles" Association="Self.FK_Role_Menu_AspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="Role_Menu" EntitySet="Role_Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Book_Category" Association="Self.FK_Book_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Book" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Book_Kind" Association="Self.FK_Book_Kind">
+            <End Role="Kind" EntitySet="Kinds" />
+            <End Role="Book" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Book_Language" Association="Self.FK_Book_Language">
+            <End Role="Language" EntitySet="Languages" />
+            <End Role="Book" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Borrow_CardReader" Association="Self.FK_Borrow_CardReader">
+            <End Role="CardReader" EntitySet="CardReaders" />
+            <End Role="Borrow" EntitySet="Borrows" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BorrowDetail_Borrow" Association="Self.FK_BorrowDetail_Borrow">
+            <End Role="Borrow" EntitySet="Borrows" />
+            <End Role="BorrowDetail" EntitySet="BorrowDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Infringe_BorrowDetail" Association="Self.FK_Infringe_BorrowDetail">
+            <End Role="BorrowDetail" EntitySet="BorrowDetails" />
+            <End Role="Infringe" EntitySet="Infringes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CardReader_Reader" Association="Self.FK_CardReader_Reader">
+            <End Role="Reader" EntitySet="Readers" />
+            <End Role="CardReader" EntitySet="CardReaders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChildMenu_Menu" Association="Self.FK_ChildMenu_Menu">
+            <End Role="Menu" EntitySet="Menus" />
+            <End Role="ChildMenu" EntitySet="ChildMenus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reader_Course" Association="Self.FK_Reader_Course">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Reader" EntitySet="Readers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reader_Faculty" Association="Self.FK_Reader_Faculty">
+            <End Role="Faculty" EntitySet="Faculties" />
+            <End Role="Reader" EntitySet="Readers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reader_Level" Association="Self.FK_Reader_Level">
+            <End Role="Level" EntitySet="Levels" />
+            <End Role="Reader" EntitySet="Readers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Role_Menu_Menu" Association="Self.FK_Role_Menu_Menu">
+            <End Role="Menu" EntitySet="Menus" />
+            <End Role="Role_Menu" EntitySet="Role_Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reader_Specialized" Association="Self.FK_Reader_Specialized">
+            <End Role="Specialized" EntitySet="Specializeds" />
+            <End Role="Reader" EntitySet="Readers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reader_TrainingSystem" Association="Self.FK_Reader_TrainingSystem">
+            <End Role="TrainingSystem" EntitySet="TrainingSystems" />
+            <End Role="Reader" EntitySet="Readers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reader_YearSchool" Association="Self.FK_Reader_YearSchool">
+            <End Role="YearSchool" EntitySet="YearSchools" />
+            <End Role="Reader" EntitySet="Readers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Return_Reader" Association="Self.FK_Return_Reader">
+            <End Role="Reader" EntitySet="Readers" />
+            <End Role="Return" EntitySet="Returns" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="Companies" EntityType="DATNModel.Company" />
+          <AssociationSet Name="FK_Book_Company" Association="DATNModel.FK_Book_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Book" EntitySet="Books" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Name="CompanyID" Type="Guid" Nullable="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <NavigationProperty Name="Books" Relationship="DATNModel.FK_Book_Company" FromRole="Company" ToRole="Book" />
+        </EntityType>
+        <Association Name="FK_Book_Company">
+          <End Type="DATNModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="DATNModel.Book" Role="Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="CompanyPublishID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DATNModelStoreContainer" CdmEntityContainer="DATNEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="DATNModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="DATNModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="DATNModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="DATNModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="DATNModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Avartar" ColumnName="Avartar" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="CoverImage" ColumnName="CoverImage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Books">
+            <EntityTypeMapping TypeName="DATNModel.Book">
+              <MappingFragment StoreEntitySet="Book">
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="BookCode" ColumnName="BookCode" />
+                <ScalarProperty Name="BookName" ColumnName="BookName" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="CompanyPublishID" ColumnName="CompanyPublishID" />
+                <ScalarProperty Name="YearPublish" ColumnName="YearPublish" />
+                <ScalarProperty Name="KindID" ColumnName="KindID" />
+                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="BookFormat" ColumnName="BookFormat" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="Keyword" ColumnName="Keyword" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Borrows">
+            <EntityTypeMapping TypeName="DATNModel.Borrow">
+              <MappingFragment StoreEntitySet="Borrow">
+                <ScalarProperty Name="BorrowID" ColumnName="BorrowID" />
+                <ScalarProperty Name="CardReaderID" ColumnName="CardReaderID" />
+                <ScalarProperty Name="DateBorrow" ColumnName="DateBorrow" />
+                <ScalarProperty Name="AmountTotal" ColumnName="AmountTotal" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BorrowDetails">
+            <EntityTypeMapping TypeName="DATNModel.BorrowDetail">
+              <MappingFragment StoreEntitySet="BorrowDetail">
+                <ScalarProperty Name="BorrowDetailID" ColumnName="BorrowDetailID" />
+                <ScalarProperty Name="BorrowID" ColumnName="BorrowID" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="DateExpried" ColumnName="DateExpried" />
+                <ScalarProperty Name="PendingStatusID" ColumnName="PendingStatusID" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BorrowDetailLogs">
+            <EntityTypeMapping TypeName="DATNModel.BorrowDetailLog">
+              <MappingFragment StoreEntitySet="BorrowDetailLog">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BorrowDetailID" ColumnName="BorrowDetailID" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="DateExpried" ColumnName="DateExpried" />
+                <ScalarProperty Name="PendingStatusID" ColumnName="PendingStatusID" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CardReaders">
+            <EntityTypeMapping TypeName="DATNModel.CardReader">
+              <MappingFragment StoreEntitySet="CardReader">
+                <ScalarProperty Name="CardReaderID" ColumnName="CardReaderID" />
+                <ScalarProperty Name="ReaderID" ColumnName="ReaderID" />
+                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+                <ScalarProperty Name="DateExpried" ColumnName="DateExpried" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="DATNModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChildMenus">
+            <EntityTypeMapping TypeName="DATNModel.ChildMenu">
+              <MappingFragment StoreEntitySet="ChildMenu">
+                <ScalarProperty Name="ChildMenuIcon" ColumnName="ChildMenuIcon" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+                <ScalarProperty Name="ChildMenuName" ColumnName="ChildMenuName" />
+                <ScalarProperty Name="LinkSPA" ColumnName="LinkSPA" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="DATNModel.Course">
+              <MappingFragment StoreEntitySet="Course">
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Faculties">
+            <EntityTypeMapping TypeName="DATNModel.Faculty">
+              <MappingFragment StoreEntitySet="Faculty">
+                <ScalarProperty Name="FacultyID" ColumnName="FacultyID" />
+                <ScalarProperty Name="Faculty1" ColumnName="Faculty" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Infringes">
+            <EntityTypeMapping TypeName="DATNModel.Infringe">
+              <MappingFragment StoreEntitySet="Infringe">
+                <ScalarProperty Name="Infringe1" ColumnName="Infringe" />
+                <ScalarProperty Name="BorrowDetailID" ColumnName="BorrowDetailID" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Fine" ColumnName="Fine" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kinds">
+            <EntityTypeMapping TypeName="DATNModel.Kind">
+              <MappingFragment StoreEntitySet="Kind">
+                <ScalarProperty Name="KindID" ColumnName="KindID" />
+                <ScalarProperty Name="Kind1" ColumnName="Kind" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Languages">
+            <EntityTypeMapping TypeName="DATNModel.Language">
+              <MappingFragment StoreEntitySet="Language">
+                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+                <ScalarProperty Name="Language1" ColumnName="Language" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Levels">
+            <EntityTypeMapping TypeName="DATNModel.Level">
+              <MappingFragment StoreEntitySet="Level">
+                <ScalarProperty Name="LevelID" ColumnName="LevelID" />
+                <ScalarProperty Name="LevelName" ColumnName="LevelName" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menus">
+            <EntityTypeMapping TypeName="DATNModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PendingStatus">
+            <EntityTypeMapping TypeName="DATNModel.PendingStatu">
+              <MappingFragment StoreEntitySet="PendingStatus">
+                <ScalarProperty Name="PendingStatusID" ColumnName="PendingStatusID" />
+                <ScalarProperty Name="PendingStatusName" ColumnName="PendingStatusName" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Readers">
+            <EntityTypeMapping TypeName="DATNModel.Reader">
+              <MappingFragment StoreEntitySet="Reader">
+                <ScalarProperty Name="ReaderID" ColumnName="ReaderID" />
+                <ScalarProperty Name="ReaderKindID" ColumnName="ReaderKindID" />
+                <ScalarProperty Name="Identifier" ColumnName="Identifier" />
+                <ScalarProperty Name="ReaderName" ColumnName="ReaderName" />
+                <ScalarProperty Name="Birth" ColumnName="Birth" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="JobID" ColumnName="JobID" />
+                <ScalarProperty Name="LevelID" ColumnName="LevelID" />
+                <ScalarProperty Name="FacultyID" ColumnName="FacultyID" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="TrainingSystemID" ColumnName="TrainingSystemID" />
+                <ScalarProperty Name="SpecializedID" ColumnName="SpecializedID" />
+                <ScalarProperty Name="YearSchollID" ColumnName="YearSchollID" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Returns">
+            <EntityTypeMapping TypeName="DATNModel.Return">
+              <MappingFragment StoreEntitySet="Return">
+                <ScalarProperty Name="ReturnID" ColumnName="ReturnID" />
+                <ScalarProperty Name="CardReaderID" ColumnName="CardReaderID" />
+                <ScalarProperty Name="DateReturn" ColumnName="DateReturn" />
+                <ScalarProperty Name="ReturnStatus" ColumnName="ReturnStatus" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role_Menu">
+            <EntityTypeMapping TypeName="DATNModel.Role_Menu">
+              <MappingFragment StoreEntitySet="Role_Menu">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Specializeds">
+            <EntityTypeMapping TypeName="DATNModel.Specialized">
+              <MappingFragment StoreEntitySet="Specialized">
+                <ScalarProperty Name="SpecializedID" ColumnName="SpecializedID" />
+                <ScalarProperty Name="SpecializedName" ColumnName="SpecializedName" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DATNModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TrainingSystems">
+            <EntityTypeMapping TypeName="DATNModel.TrainingSystem">
+              <MappingFragment StoreEntitySet="TrainingSystem">
+                <ScalarProperty Name="TrainingSystemID" ColumnName="TrainingSystemID" />
+                <ScalarProperty Name="TrainingSystem1" ColumnName="TrainingSystem" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="YearSchools">
+            <EntityTypeMapping TypeName="DATNModel.YearSchool">
+              <MappingFragment StoreEntitySet="YearSchool">
+                <ScalarProperty Name="YearSchoolID" ColumnName="YearSchoolID" />
+                <ScalarProperty Name="YearSchool1" ColumnName="YearSchool" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="DATNModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="DATNModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

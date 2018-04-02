@@ -1,0 +1,71 @@
+﻿@model List<DuongTrang.Core.CustomModels.MenuViewModels>
+
+<script type="text/ng-template" id="menu-items-tpl">
+    <li>
+        <a ui-sref="app.dashboard-variant-4">
+            <i class="linecons-cog"></i>
+            <span class="title ng-binding ng-scope">Dashboard</span>
+        </a>
+    </li>
+    @foreach (var item in Model)
+    {
+        <li ng-if="@item.listchild.Count" ng-class="{'has-sub' : @item.listchild.Count >= 1}">
+            <a>
+                <i class="@item.Icon"></i>
+                <span class="title ng-binding ng-scope">@item.MenuName</span>
+            </a>
+            <ul>
+                @foreach (var itemchild in item.listchild)
+                {
+                    <li>
+                        <a ui-sref="@itemchild.LinkSPA">
+                            <i class="@itemchild.ChildMenuIcon"></i>
+                            <span class="title ng-binding ng-scope">@itemchild.ChildMenuName</span>
+                        </a>
+                    </li>
+
+                }
+            </ul>
+        </li>
+    }
+    <li>
+        <a ui-sref="lockscreen">
+            <i class="linecons-lock"></i>
+            <span class="title ng-binding ng-scope">Màn hình khóa</span>
+        </a>
+    </li>
+</script>
+
+
+<!-- Sidebar User Info Bar - Added in 1.3 -->
+<section class="sidebar-user-info" ng-class="{'mobile-is-visible': layoutOptions.sidebar.isMenuOpenMobile}">
+    <div class="sidebar-user-info-inner">
+        <a href="#/app/extra-profile" class="user-profile">
+            <img ng-src="{{user.Avatar}}" width="60" height="60" class="img-circle img-corona" alt="user-pic" />
+            <span>
+                <strong>{{user.FullName}}</strong>
+                {{user.Roles}}
+            </span>
+        </a>
+        <ul class="user-links list-unstyled">
+            <li>
+                <a href="#/app/extra-profile" title="Edit profile">
+                    <i class="linecons-user"></i>
+                    Edit profile
+                </a>
+            </li>
+            <li>
+                <a href="#/app/mailbox-inbox" title="Mailbox">
+                    <i class="linecons-mail"></i>
+                    Mailbox
+                </a>
+            </li>
+            <li class="logout-link">
+                <a href="#/login" title="Log out">
+                    <i class="fa-power-off"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</section>
+<ul id="main-menu" class="main-menu" ng-class="{'mobile-is-visible': layoutOptions.sidebar.isMenuOpenMobile}" ng-include="'menu-items-tpl'"></ul>

@@ -1,0 +1,72 @@
+﻿<div class="login-container">
+
+	<div class="row">
+	
+		<div class="col-sm-7">
+			
+			<script type="text/javascript">
+				jQuery(document).ready(function($)
+				{
+					// Reveal Login form
+					setTimeout(function(){ $(".fade-in-effect").addClass('in'); }, 1);
+					
+					
+					// Clicking on thumbnail will focus on password field
+					$(".user-thumb a").on('click', function(ev)
+					{
+						ev.preventDefault();
+						$("#passwd").focus();
+					});
+					
+					
+					// Form validation and AJAX request
+					$(".lockcreen-form").validate({
+						rules: {
+							passwd: {
+								required: true
+							}
+						},
+						
+						messages: {
+							passwd: {
+								required: 'Hãy nhập mật khẩu của bạn.'
+							}
+						},
+						
+					});
+					
+					// Set Form focus
+					$("form#lockscreen .form-group:has(.form-control):first .form-control").focus();
+				});
+			</script>
+			
+			<form ng-submit="login()" role="form" id="lockscreen" class="lockcreen-form fade-in-effect">
+				
+				<div class="user-thumb">
+					<a href="">
+						<img ng-src="{{user.Avatar}}" class="img-responsive img-circle" />
+					</a>
+				</div>
+				
+				<div class="form-group">
+                    <h3>Chào mừng trở lại , {{user.FullName}}</h3>
+					<p>Hãy nhập mật khẩu của bạn để trở lại.</p>
+                    <div class="errors-container">
+                        <div class="text-danger">{{loginerror}}</div>
+
+                    </div>
+					<div class="input-group">
+						<input type="password" class="form-control input-dark" name="passwd" id="passwd" placeholder="Password" ng-model="password"/>
+						<span class="input-group-btn">
+							<button type="submit" class="btn btn-primary">Đăng nhập</button>
+						</span>
+					</div>
+				</div>
+				
+			</form>
+			
+		</div>
+		
+	</div>
+	
+</div>
