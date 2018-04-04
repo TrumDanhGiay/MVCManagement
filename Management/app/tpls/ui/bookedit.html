@@ -1,0 +1,196 @@
+﻿<page-title ng-if="layoutOptions.pageTitles" title="Thêm Sách" description="Thêm sách vào thư viện"></page-title>
+<div class="row">
+    <div class="col-sm-12">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Nhập thông tin sách</h3>
+                <div class="panel-options">
+                    <a href="" data-toggle="panel">
+                        <span class="collapse-icon">&ndash;</span>
+                        <span class="expand-icon">+</span>
+                    </a>
+                    <a href="" data-toggle="remove">
+                        &times;
+                    </a>
+                </div>
+            </div>
+            <div class="panel-body">
+
+                <script type="text/javascript">
+			jQuery(document).ready(function($)
+			{
+				var i = 1,
+					$example_dropzone_filetable = $("#example-dropzone-filetable"),
+					example_dropzone = $("#advancedDropzone").dropzone({
+					url: 'data/upload-file.php',
+
+					// Events
+					addedfile: function(file)
+					{
+						if(i == 1)
+						{
+							$example_dropzone_filetable.find('tbody').html('');
+						}
+
+						var size = parseInt(file.size/1024, 10);
+						size = size < 1024 ? (size + " KB") : (parseInt(size/1024, 10) + " MB");
+
+						var $entry = $('<tr>\
+										<td class="text-center">'+(i++)+'</td>\
+										<td>'+file.name+'</td>\
+										<td><div class="progress progress-striped"><div class="progress-bar progress-bar-warning"></div></div></td>\
+										<td>'+size+'</td>\
+										<td>Uploading...</td>\
+									</tr>');
+
+						$example_dropzone_filetable.find('tbody').append($entry);
+						file.fileEntryTd = $entry;
+						file.progressBar = $entry.find('.progress-bar');
+					},
+
+					uploadprogress: function(file, progress, bytesSent)
+					{
+						file.progressBar.width(progress + '%');
+					},
+
+					success: function(file)
+					{
+						file.fileEntryTd.find('td:last').html('<span class="text-success">Uploaded</span>');
+						file.progressBar.removeClass('progress-bar-warning').addClass('progress-bar-success');
+					},
+
+					error: function(file)
+					{
+						file.fileEntryTd.find('td:last').html('<span class="text-danger">Failed</span>');
+						file.progressBar.removeClass('progress-bar-warning').addClass('progress-bar-red');
+					}
+				});
+
+				$("#advancedDropzone").css({
+					minHeight: 200
+				});
+
+			});
+                </script>
+
+                <br />
+                <div class="row">
+                    <form role="form" class="form-horizontal">
+                        <div class="form-group" ng-class="{'has-success' : data.bookname != null}">
+                            <label class="col-sm-1 control-label" for="bookcode" >Mã sách</label>
+
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control" id="bookcode" placeholder="Nhập mã sách" ng-model="bookCode" ng-blur="tabbedout(bookCode)">
+                            </div>
+                            <label class="col-sm-1 control-label" for="companypublish">Nhà phát hành</label>
+
+                            <div class="col-sm-2">
+                                <select class="form-control" name="data.company" ng-model="data.company" >
+                                    <option ng-repeat="item in company" value="{{$index}}" ng-selected="data.company == item">{{item}}</option>
+                                </select>
+                            </div>
+                            <label class="col-sm-1 control-label" for="Kind">Loại</label>
+
+                            <div class="col-sm-5">
+                                <select class="form-control" name="data.kind"  ng-model="data.kind">
+                                    <option ng-repeat="item in kind" value="{{$index}}" ng-selected="data.kind == item">{{item}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-success' : data.bookname != null}">
+                            <label class="col-sm-1 control-label" for="bookname">Tên sách</label>
+
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" name="data.bookname" id="bookname" ng-model="data.bookname" placeholder="Nhập tên sách">
+                            </div>
+                            <label class="col-sm-1 control-label" for="language">Ngôn ngữ</label>
+
+                            <div class="col-sm-5">
+                                <select class="form-control" name="data.language" ng-model="data.language">
+                                    <option ng-repeat="item in language" value="{{$index}}" ng-selected="data.language == item">{{item}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-success' : data.bookname != null}">
+                            <label class="col-sm-1 control-label" for="author">Tác giả</label>
+
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" id="author" name="data.author" ng-model="data.author" placeholder="Nhập tác giả">
+                            </div>
+                            <label class="col-sm-1 control-label" for="category">Danh mục</label>
+
+                            <div class="col-sm-5">
+                                <select class="form-control" name="data.category" ng-model="data.category">
+                                    <option ng-repeat="item in category" value="{{$index}}" ng-selected="data.category == item">{{item}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-success' : data.bookname != null}">
+                            <label class="col-sm-1 control-label" for="price">Giá</label>
+
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control" id="price" name="data.price" ng-model="data.price" placeholder="Nhập giá">
+                            </div>
+
+                            <label class="col-sm-1 control-label" for="yeahpublish">Ngày xuất bản</label>
+
+                            <div class="col-sm-2">
+                                <div class="input-group">
+                                    <input type="text" class="form-control datepicker" name="data.yeah" ng-model="data.yeah" data-format="D, dd MM yyyy">
+
+                                    <div class="input-group-addon">
+                                        <a href=""><i class="linecons-calendar"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <label class="col-sm-1 control-label" for="yeahpublish">Loại sách</label>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control" id="price" placeholder="Nhập giá">
+                            </div>
+
+                            <label class="col-sm-1 control-label" for="yeahpublish">Từ khóa</label>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control" id="price" placeholder="Nhập từ khóa">
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-success' : data.bookname != null}">
+                            <div class="col-sm-3 text-center">
+                                <div id="advancedDropzone" class="droppable-area">
+                                    Kéo file ảnh vào đây
+                                </div>
+                            </div>
+                            <div class="col-sm-9" style="margin-top:20px">
+                                <table class="table table-bordered table-striped" id="example-dropzone-filetable">
+                                    <thead>
+                                        <tr>
+                                            <th width="1%" class="text-center">#</th>
+                                            <th width="50%">Tên</th>
+                                            <th width="20%">Tiến trình upload</th>
+                                            <th>Kích cỡ</th>
+                                            <th>Trạng thái</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="5">File bạn up load sẽ hiện ở đây</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </form>
+                    <form class="form-horizontal" role="form" style="margin-top:20px;background:#eee;">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <textarea placeholder="Nhập nội dung giới thiệu sách" class="form-control wysihtml5" name="data.content" ng-model="data.content" data-stylesheet-url="assets/js/wysihtml5/lib/css/wysiwyg-color.css" name="sample_wysiwyg" id="sample_wysiwyg"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -23,6 +23,7 @@ namespace DuongTrang.Core.Models
     
         public System.Guid MenuID { get; set; }
         public string MenuName { get; set; }
+        public string Parrent { get; set; }
         public string Icon { get; set; }
         public Nullable<bool> IsDelete { get; set; }
     

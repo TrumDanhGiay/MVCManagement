@@ -4,7 +4,7 @@ angular.module('trang.directives', []).
 	directive('settingsPane', function(){
 		return {
 			restrict: 'E',
-			templateUrl: "Home/SettingPanel",
+			templateUrl: appHelper.templatePath('layout/settings-pane'),
 			controller: 'SettingsPaneCtrl'
 		};
 	}).
@@ -57,7 +57,19 @@ angular.module('trang.directives', []).
 			restrict: 'E',
 			replace: true,
             templateUrl: "Home/Navbar",
-            controller: function ($scope, $sessionStorage) { $scope.user = $sessionStorage["user"]; } 
+            controller: function ($scope, $state, $sessionStorage, BaseServices) {
+                $scope.user = $sessionStorage["user"];
+                $scope.logout = function () {
+                    BaseServices.logout('api/Account/Logout', sessionStorage['token'])
+                    .then(function (response) {
+                        sessionStorage.removeItem('token');
+                        $state.go('login-light');
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                }
+            }
 		};
 	}).
 	directive('pageTitle', function(){

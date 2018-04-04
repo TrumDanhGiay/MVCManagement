@@ -11,6 +11,7 @@ namespace DuongTrang.Core.CustomModels
     {
         public string MenuName { get; set; }
         public string Icon { get; set; }
+        public string Parrent { get; set; }
         public List<ChildMenu> listchild { get; set; }
     }
 }

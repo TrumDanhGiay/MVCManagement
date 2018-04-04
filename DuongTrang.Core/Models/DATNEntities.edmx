@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DATNModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DATNModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -147,9 +147,7 @@
             <PropertyRef Name="CategoryID" />
           </Key>
           <Property Name="CategoryID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="CategoryName" Type="nchar" MaxLength="10" />
-          <Property Name="CreateBy" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="CreateDate" Type="date" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="256" />
           <Property Name="IsDelete" Type="bit" />
         </EntityType>
         <EntityType Name="ChildMenu">
@@ -229,6 +227,7 @@
           </Key>
           <Property Name="MenuID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="MenuName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Parrent" Type="varchar" MaxLength="50" />
           <Property Name="Icon" Type="varchar" MaxLength="50" />
           <Property Name="IsDelete" Type="bit" />
         </EntityType>
@@ -706,7 +705,8 @@
             <End Role="Role_Menu" EntitySet="Role_Menu" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DATNModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -796,9 +796,9 @@
           <Property Name="Image" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="IsDelete" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Category" Relationship="Self.FK_Book_Category" FromRole="Book" ToRole="Category" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Book_Company" FromRole="Book" ToRole="Company" />
           <NavigationProperty Name="Kind" Relationship="Self.FK_Book_Kind" FromRole="Book" ToRole="Kind" />
           <NavigationProperty Name="Language" Relationship="Self.FK_Book_Language" FromRole="Book" ToRole="Language" />
-          <NavigationProperty Name="Company" Relationship="DATNModel.FK_Book_Company" FromRole="Book" ToRole="Company" />
         </EntityType>
         <EntityType Name="Borrow">
           <Key>
@@ -861,9 +861,7 @@
             <PropertyRef Name="CategoryID" />
           </Key>
           <Property Name="CategoryID" Type="Guid" Nullable="false" />
-          <Property Name="CategoryName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="CreateBy" Type="Guid" Nullable="false" />
-          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CategoryName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="IsDelete" Type="Boolean" />
           <NavigationProperty Name="Books" Relationship="Self.FK_Book_Category" FromRole="Category" ToRole="Book" />
         </EntityType>
@@ -875,9 +873,18 @@
           <Property Name="MenuID" Type="Guid" Nullable="false" />
           <Property Name="ChildMenuName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LinkSPA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ChildMenuIcon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IsDelete" Type="Boolean" />
           <NavigationProperty Name="Menu" Relationship="Self.FK_ChildMenu_Menu" FromRole="ChildMenu" ToRole="Menu" />
-          <Property Name="ChildMenuIcon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Name="CompanyID" Type="Guid" Nullable="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <NavigationProperty Name="Books" Relationship="Self.FK_Book_Company" FromRole="Company" ToRole="Book" />
         </EntityType>
         <EntityType Name="Course">
           <Key>
@@ -943,6 +950,7 @@
           </Key>
           <Property Name="MenuID" Type="Guid" Nullable="false" />
           <Property Name="MenuName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Parrent" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Icon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IsDelete" Type="Boolean" />
           <NavigationProperty Name="ChildMenus" Relationship="Self.FK_ChildMenu_Menu" FromRole="Menu" ToRole="ChildMenu" />
@@ -1094,6 +1102,18 @@
             </Principal>
             <Dependent Role="Book">
               <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Book_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="CompanyPublishID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1294,6 +1314,7 @@
           <EntitySet Name="CardReaders" EntityType="Self.CardReader" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="ChildMenus" EntityType="Self.ChildMenu" />
+          <EntitySet Name="Companies" EntityType="Self.Company" />
           <EntitySet Name="Courses" EntityType="Self.Course" />
           <EntitySet Name="Faculties" EntityType="Self.Faculty" />
           <EntitySet Name="Infringes" EntityType="Self.Infringe" />
@@ -1323,6 +1344,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Book_Category" Association="Self.FK_Book_Category">
             <End Role="Category" EntitySet="Categories" />
+            <End Role="Book" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Book_Company" Association="Self.FK_Book_Company">
+            <End Role="Company" EntitySet="Companies" />
             <End Role="Book" EntitySet="Books" />
           </AssociationSet>
           <AssociationSet Name="FK_Book_Kind" Association="Self.FK_Book_Kind">
@@ -1389,33 +1414,7 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
-          <EntitySet Name="Companies" EntityType="DATNModel.Company" />
-          <AssociationSet Name="FK_Book_Company" Association="DATNModel.FK_Book_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="Book" EntitySet="Books" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Company">
-          <Key>
-            <PropertyRef Name="CompanyID" />
-          </Key>
-          <Property Name="CompanyID" Type="Guid" Nullable="false" />
-          <Property Name="CompanyName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="IsDelete" Type="Boolean" />
-          <NavigationProperty Name="Books" Relationship="DATNModel.FK_Book_Company" FromRole="Company" ToRole="Book" />
-        </EntityType>
-        <Association Name="FK_Book_Company">
-          <End Type="DATNModel.Company" Role="Company" Multiplicity="0..1" />
-          <End Type="DATNModel.Book" Role="Book" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyID" />
-            </Principal>
-            <Dependent Role="Book">
-              <PropertyRef Name="CompanyPublishID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1563,8 +1562,6 @@
               <MappingFragment StoreEntitySet="Category">
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
-                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1572,11 +1569,20 @@
           <EntitySetMapping Name="ChildMenus">
             <EntityTypeMapping TypeName="DATNModel.ChildMenu">
               <MappingFragment StoreEntitySet="ChildMenu">
-                <ScalarProperty Name="ChildMenuIcon" ColumnName="ChildMenuIcon" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="MenuID" ColumnName="MenuID" />
                 <ScalarProperty Name="ChildMenuName" ColumnName="ChildMenuName" />
                 <ScalarProperty Name="LinkSPA" ColumnName="LinkSPA" />
+                <ScalarProperty Name="ChildMenuIcon" ColumnName="ChildMenuIcon" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="DATNModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
                 <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1644,6 +1650,7 @@
               <MappingFragment StoreEntitySet="Menu">
                 <ScalarProperty Name="MenuID" ColumnName="MenuID" />
                 <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+                <ScalarProperty Name="Parrent" ColumnName="Parrent" />
                 <ScalarProperty Name="Icon" ColumnName="Icon" />
                 <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
               </MappingFragment>
@@ -1748,15 +1755,6 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="Companies">
-            <EntityTypeMapping TypeName="DATNModel.Company">
-              <MappingFragment StoreEntitySet="Company">
-                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

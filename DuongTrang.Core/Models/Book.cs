@@ -33,8 +33,8 @@ namespace DuongTrang.Core.Models
         public bool IsDelete { get; set; }
     
         public virtual Category Category { get; set; }
+        public virtual Company Company { get; set; }
         public virtual Kind Kind { get; set; }
         public virtual Language Language { get; set; }
-        public virtual Company Company { get; set; }
     }
 }

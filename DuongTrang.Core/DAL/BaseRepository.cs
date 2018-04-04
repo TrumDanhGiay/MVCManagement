@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -56,6 +57,7 @@ namespace DuongTrang.Core.DAL
             return _entities.SaveChangesAsync();
         }
 
+
         #region Dispose
         public void Dispose()
         {
@@ -74,6 +76,14 @@ namespace DuongTrang.Core.DAL
                 }
             }
         }
+
+        public IQueryable<TEntity> FindBy(Expression<Func<TEntity, bool>> predicate)
+        {
+            IQueryable<TEntity> query =dbSet.Where(predicate);
+            return query;
+        }
+
+
         #endregion
     }
 }

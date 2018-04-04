@@ -18,8 +18,8 @@ namespace DuongTrang.Core.Models
         public System.Guid MenuID { get; set; }
         public string ChildMenuName { get; set; }
         public string LinkSPA { get; set; }
-        public Nullable<bool> IsDelete { get; set; }
         public string ChildMenuIcon { get; set; }
+        public Nullable<bool> IsDelete { get; set; }
     
         public virtual Menu Menu { get; set; }
     }

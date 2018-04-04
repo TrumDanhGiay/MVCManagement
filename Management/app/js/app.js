@@ -13,6 +13,7 @@ var app = angular.module('xenon-app', [
 	'trang.factory',
 	'trang.services',
     'ngStorage',
+    'datatables',
 
 	// Added in v1.3
 	'FBAngular'
@@ -30,175 +31,206 @@ app.run(function()
 });
 
 
-app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASSETS){
+app.config(function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASSETS) {
+    $ocLazyLoadProvider.config({
+        debug: true
+    });
 
     $urlRouterProvider.otherwise('/login');
 
-	$stateProvider.
+    $stateProvider.
 		// Main Layout Structure
 		state('app', {
-			abstract: true,
-			url: '/app',
-			templateUrl: appHelper.templatePath('layout/app-body'),
-			controller: function($rootScope){
-				$rootScope.isLoginPage        = false;
-				$rootScope.isLightLoginPage   = false;
-				$rootScope.isLockscreenPage   = false;
-				$rootScope.isMainPage         = true;
-			}
+		    abstract: true,
+		    url: '/app',
+		    templateUrl: appHelper.templatePath('layout/app-body'),
+		    controller: function ($rootScope) {
+		        $rootScope.isLoginPage = false;
+		        $rootScope.isLightLoginPage = false;
+		        $rootScope.isLockscreenPage = false;
+		        $rootScope.isMainPage = true;
+		    }
 		}).
 
 		// Dashboards
 		state('app.dashboard-variant-1', {
-			url: '/dashboard-variant-1',
-			templateUrl: appHelper.templatePath('dashboards/variant-1'),
-			resolve: {
-				resources: function($ocLazyLoad){
-					return $ocLazyLoad.load([
+		    url: '/dashboard-variant-1',
+		    templateUrl: appHelper.templatePath('dashboards/variant-1'),
+		    resolve: {
+		        resources: function ($ocLazyLoad) {
+		            return $ocLazyLoad.load([
 						ASSETS.charts.dxGlobalize,
 						ASSETS.extra.toastr,
-					]);
-				},
-				dxCharts: function($ocLazyLoad){
-					return $ocLazyLoad.load([
+		            ]);
+		        },
+		        dxCharts: function ($ocLazyLoad) {
+		            return $ocLazyLoad.load([
 						ASSETS.charts.dxCharts,
-					]);
-				},
-			}
+		            ]);
+		        },
+		    }
 		}).
 		state('app.dashboard-variant-2', {
-			url: '/dashboard-variant-2',
-			templateUrl: appHelper.templatePath('dashboards/variant-2'),
-			resolve: {
-				resources: function($ocLazyLoad){
-					return $ocLazyLoad.load([
+		    url: '/dashboard-variant-2',
+		    templateUrl: appHelper.templatePath('dashboards/variant-2'),
+		    resolve: {
+		        resources: function ($ocLazyLoad) {
+		            return $ocLazyLoad.load([
 						ASSETS.charts.dxGlobalize,
-					]);
-				},
-				dxCharts: function($ocLazyLoad){
-					return $ocLazyLoad.load([
+		            ]);
+		        },
+		        dxCharts: function ($ocLazyLoad) {
+		            return $ocLazyLoad.load([
 						ASSETS.charts.dxCharts,
-					]);
-				},
-			}
+		            ]);
+		        },
+		    }
 		}).
 		state('app.dashboard-variant-3', {
-			url: '/dashboard-variant-3',
-			templateUrl: appHelper.templatePath('dashboards/variant-3'),
-			resolve: {
-				resources: function($ocLazyLoad){
-					return $ocLazyLoad.load([
+		    url: '/dashboard-variant-3',
+		    templateUrl: appHelper.templatePath('dashboards/variant-3'),
+		    resolve: {
+		        resources: function ($ocLazyLoad) {
+		            return $ocLazyLoad.load([
 						ASSETS.charts.dxGlobalize,
 						ASSETS.maps.vectorMaps,
-					]);
-				},
-				dxCharts: function($ocLazyLoad){
-					return $ocLazyLoad.load([
+		            ]);
+		        },
+		        dxCharts: function ($ocLazyLoad) {
+		            return $ocLazyLoad.load([
 						ASSETS.charts.dxCharts,
-					]);
-				},
-			}
+		            ]);
+		        },
+		    }
 		}).
 		state('app.dashboard-variant-4', {
-			url: '/dashboard-variant-4',
-			templateUrl: appHelper.templatePath('dashboards/variant-4'),
-			resolve: {
-				resources: function($ocLazyLoad){
-					return $ocLazyLoad.load([
+		    url: '/dashboard',
+		    templateUrl: appHelper.templatePath('dashboards/variant-4'),
+		    resolve: {
+		        resources: function ($ocLazyLoad) {
+		            return $ocLazyLoad.load([
 						ASSETS.icons.meteocons,
 						ASSETS.maps.vectorMaps,
-					]);
-				}
-			}
+		            ]);
+		        }
+		    }
 		}).
 
 		// Update Highlights
 		state('app.update-highlights', {
-			url: '/update-highlights',
-			templateUrl: appHelper.templatePath('update-highlights'),
+		    url: '/update-highlights',
+		    templateUrl: appHelper.templatePath('update-highlights'),
 		}).
 
 		// Layouts
 		state('app.layout-and-skins', {
-			url: '/layout-and-skins',
-			templateUrl: appHelper.templatePath('layout-and-skins'),
+		    url: '/layout-and-skins',
+		    templateUrl: appHelper.templatePath('layout-and-skins'),
 		}).
 
 		// UI Elements
 		state('app.ui-panels', {
-			url: '/ui-panels',
-			templateUrl: appHelper.templatePath('ui/panels'),
+		    url: '/ui-panels',
+		    templateUrl: appHelper.templatePath('ui/panels'),
 		}).
 		state('app.ui-buttons', {
-			url: '/ui-buttons',
-			templateUrl: appHelper.templatePath('ui/buttons')
+		    url: '/ui-buttons',
+		    templateUrl: appHelper.templatePath('ui/buttons')
 		}).
 		state('app.ui-tabs-accordions', {
-			url: '/ui-tabs-accordions',
-			templateUrl: appHelper.templatePath('ui/tabs-accordions')
+		    url: '/ui-tabs-accordions',
+		    templateUrl: appHelper.templatePath('ui/tabs-accordions')
 		}).
 		state('app.ui-modals', {
-			url: '/ui-modals',
-			templateUrl: appHelper.templatePath('ui/modals'),
-			controller: 'UIModalsCtrl'
+		    url: '/ui-modals',
+		    templateUrl: appHelper.templatePath('ui/modals'),
+		    controller: 'UIModalsCtrl'
 		}).
 		state('app.ui-breadcrumbs', {
-			url: '/ui-breadcrumbs',
-			templateUrl: appHelper.templatePath('ui/breadcrumbs')
+		    url: '/ui-breadcrumbs',
+		    templateUrl: appHelper.templatePath('ui/breadcrumbs')
 		}).
 		state('app.ui-blockquotes', {
-			url: '/ui-blockquotes',
-			templateUrl: appHelper.templatePath('ui/blockquotes')
+		    url: '/ui-blockquotes',
+		    templateUrl: appHelper.templatePath('ui/blockquotes')
 		}).
 		state('app.ui-progress-bars', {
-			url: '/ui-progress-bars',
-			templateUrl: appHelper.templatePath('ui/progress-bars')
+		    url: '/ui-progress-bars',
+		    templateUrl: appHelper.templatePath('ui/progress-bars')
 		}).
 		state('app.ui-navbars', {
-			url: '/ui-navbars',
-			templateUrl: appHelper.templatePath('ui/navbars')
+		    url: '/ui-navbars',
+		    templateUrl: appHelper.templatePath('ui/navbars')
 		}).
 		state('app.ui-alerts', {
-			url: '/ui-alerts',
-			templateUrl: appHelper.templatePath('ui/alerts')
+		    url: '/ui-alerts',
+		    templateUrl: appHelper.templatePath('ui/alerts')
 		}).
 		state('app.ui-pagination', {
-			url: '/ui-pagination',
-			templateUrl: appHelper.templatePath('ui/pagination')
+		    url: '/ui-pagination',
+		    templateUrl: appHelper.templatePath('ui/pagination')
 		}).
 		state('app.ui-typography', {
-			url: '/ui-typography',
-			templateUrl: appHelper.templatePath('ui/typography')
+		    url: '/ui-typography',
+		    templateUrl: appHelper.templatePath('ui/typography')
 		}).
 		state('app.ui-other-elements', {
-			url: '/ui-other-elements',
-			templateUrl: appHelper.templatePath('ui/other-elements')
+		    url: '/ui-other-elements',
+		    templateUrl: appHelper.templatePath('ui/other-elements')
 		}).
 
 		// Widgets
 		state('app.widgets', {
-			url: '/widgets',
-			templateUrl: appHelper.templatePath('widgets'),
-			resolve: {
-				deps: function($ocLazyLoad){
-					return $ocLazyLoad.load([
+		    url: '/widgets',
+		    templateUrl: appHelper.templatePath('widgets'),
+		    resolve: {
+		        deps: function ($ocLazyLoad) {
+		            return $ocLazyLoad.load([
 						ASSETS.maps.vectorMaps,
 						ASSETS.icons.meteocons
-					]);
-				}
-			}
-        }).
+		            ]);
+		        }
+		    }
+		}).
 
         //Quản lý
         state('app.BookManagement', {
             url: '/bookmangement',
             templateUrl: "Home/BookManagement",
+            controller: "BookController",
             resolve: {
                 deps: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([
                         ASSETS.tables.datatables,
                     ]);
                 },
+            }
+        }).
+        state('app.CUBook', {
+            url: '/book/:id',
+            templateUrl: appHelper.templatePath('ui/bookedit'),
+            controller: "EditBookController",
+            resolve: {
+                dropzone: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+						ASSETS.forms.dropzone,
+                    ]);
+                },
+                datepicker: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+						ASSETS.forms.datepicker,
+                    ]);
+                },
+                bootstrap: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+						ASSETS.core.bootstrap,
+                    ]);
+                },
+                bootstrapWysihtml5: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+						ASSETS.forms.bootstrapWysihtml5,
+                    ]);
+                }
             }
         }).
 
@@ -796,7 +828,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 
 		// Logins and Lockscreen
 		state('login', {
-			url: '/login',
+			url: '/login-dark',
 			templateUrl: appHelper.templatePath('login'),
 			controller: 'LoginCtrl',
 			resolve: {
@@ -809,7 +841,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 			}
 		}).
 		state('login-light', {
-			url: '/login-light',
+			url: '/login',
 			templateUrl: appHelper.templatePath('login-light'),
 			controller: 'LoginLightCtrl',
 			resolve: {

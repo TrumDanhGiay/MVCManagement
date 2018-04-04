@@ -9,7 +9,7 @@ namespace DuongTrang.Core.IServices
 {
     public interface IBookRepository : IBaseRepository<Book>
     {
-        Book GetSingle(string id);
+        object GetSingle(string id);
         IQueryable<object> GetAllBook();
     }
 }

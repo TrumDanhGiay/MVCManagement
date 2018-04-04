@@ -12,7 +12,6 @@ using DuongTrang.Core.CustomModels;
 
 namespace Management.Controllers.AdminController
 {
-    [AuthorizeRole(ListRoles.Administrator)]
     public class BookController : ApiController
     {
         private readonly IBookRepository _bookRepository;
@@ -27,9 +26,9 @@ namespace Management.Controllers.AdminController
         }
 
         // GET api/<controller>/5
-        public Book Get(string name)
+        public object Get(string id)
         {
-            return _bookRepository.GetSingle(name);
+            return _bookRepository.GetSingle(id);
         }
 
         [AuthorizeRole(ListRoles.Administrator)]

@@ -37,6 +37,7 @@ namespace DuongTrang.Core.Models
         public virtual DbSet<CardReader> CardReaders { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<ChildMenu> ChildMenus { get; set; }
+        public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<Course> Courses { get; set; }
         public virtual DbSet<Faculty> Faculties { get; set; }
         public virtual DbSet<Infringe> Infringes { get; set; }
@@ -52,6 +53,5 @@ namespace DuongTrang.Core.Models
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TrainingSystem> TrainingSystems { get; set; }
         public virtual DbSet<YearSchool> YearSchools { get; set; }
-        public virtual DbSet<Company> Companies { get; set; }
     }
 }

@@ -275,6 +275,7 @@
     <Compile Include="Controllers\AdminController\BookController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="CustomViewModels\BookViewModels.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -311,6 +312,7 @@
     <Content Include="app\js\angular\angular-cookies.js" />
     <Content Include="app\js\angular\angular-cookies.min.js" />
     <Content Include="app\js\angular\angular-csp.css" />
+    <Content Include="app\js\angular\angular-datatables.js" />
     <Content Include="app\js\angular\angular-loader.js" />
     <Content Include="app\js\angular\angular-loader.min.js" />
     <Content Include="app\js\angular\angular-mocks.js" />
@@ -1122,6 +1124,7 @@
     <Content Include="app\tpls\layout\footer.html" />
     <Content Include="app\tpls\layout\horizontal-menu.html" />
     <Content Include="app\tpls\layout\page-title.html" />
+    <Content Include="app\tpls\layout\settings-pane.html" />
     <Content Include="app\tpls\layout\sidebar-chat.html" />
     <Content Include="app\tpls\layout\sidebar-logo.html" />
     <Content Include="app\tpls\lockscreen.html" />
@@ -1135,6 +1138,7 @@
     <Content Include="app\tpls\tables\responsive.html" />
     <Content Include="app\tpls\ui\alerts.html" />
     <Content Include="app\tpls\ui\blockquotes.html" />
+    <Content Include="app\tpls\ui\bookedit.html" />
     <Content Include="app\tpls\ui\breadcrumbs.html" />
     <Content Include="app\tpls\ui\buttons.html" />
     <Content Include="app\tpls\ui\modals.html" />

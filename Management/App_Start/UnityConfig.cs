@@ -27,6 +27,7 @@ namespace Management
             // e.g. container.RegisterType<ITestService, TestService>();
             container.RegisterType<IBookRepository, BookRepository>();
             container.RegisterType<IMenuRepository, MenuRepository>();
+            container.RegisterType<IDataFirstRepository, DataFirstRepository>();
             container.RegisterType<AccountController>(new InjectionConstructor());
             container.RegisterType(typeof(ISecureDataFormat<>), typeof(SecureDataFormat<>));
             container.RegisterType<ITextEncoder, Base64UrlTextEncoder>();
