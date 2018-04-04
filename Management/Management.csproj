@@ -1227,43 +1227,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\angular-animate.js" />
-    <Content Include="Scripts\angular-animate.min.js" />
-    <Content Include="Scripts\angular-aria.js" />
-    <Content Include="Scripts\angular-aria.min.js" />
-    <Content Include="Scripts\angular-cookies.js" />
-    <Content Include="Scripts\angular-cookies.min.js" />
-    <Content Include="Scripts\angular-csp.css" />
-    <Content Include="Scripts\angular-loader.js" />
-    <Content Include="Scripts\angular-loader.min.js" />
-    <Content Include="Scripts\angular-message-format.js" />
-    <Content Include="Scripts\angular-message-format.min.js" />
-    <Content Include="Scripts\angular-messages.js" />
-    <Content Include="Scripts\angular-messages.min.js" />
-    <Content Include="Scripts\angular-mocks.js" />
-    <Content Include="Scripts\angular-parse-ext.js" />
-    <Content Include="Scripts\angular-parse-ext.min.js" />
-    <Content Include="Scripts\angular-resource.js" />
-    <Content Include="Scripts\angular-resource.min.js" />
-    <Content Include="Scripts\angular-route.js" />
-    <Content Include="Scripts\angular-route.min.js" />
-    <Content Include="Scripts\angular-sanitize.js" />
-    <Content Include="Scripts\angular-sanitize.min.js" />
-    <Content Include="Scripts\angular-scenario.js" />
-    <Content Include="Scripts\angular-touch.js" />
-    <Content Include="Scripts\angular-touch.min.js" />
-    <Content Include="Scripts\angular-ui-router-title.js" />
-    <Content Include="Scripts\angular-ui-router.js" />
-    <Content Include="Scripts\angular-ui-router.min.js" />
-    <Content Include="Scripts\angular.js" />
-    <Content Include="Scripts\angular.min.js" />
-    <Content Include="Scripts\AngularJS\AngularApp.js" />
-    <Content Include="Scripts\AngularJS\AngularController.js" />
-    <Content Include="Scripts\AngularJS\AngularFactory.js" />
-    <Content Include="Scripts\Book\BookController.js" />
-    <Content Include="Scripts\Book\BookDirective.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
     <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\ResourceModel.cshtml" />
@@ -1286,20 +1249,6 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\Dashboard\AngularDashboard.js" />
-    <Content Include="Scripts\errors.json" />
-    <Content Include="Scripts\angular.min.js.map" />
-    <Content Include="Scripts\angular-touch.min.js.map" />
-    <Content Include="Scripts\angular-sanitize.min.js.map" />
-    <Content Include="Scripts\angular-route.min.js.map" />
-    <Content Include="Scripts\angular-resource.min.js.map" />
-    <Content Include="Scripts\angular-parse-ext.min.js.map" />
-    <Content Include="Scripts\angular-messages.min.js.map" />
-    <Content Include="Scripts\angular-message-format.min.js.map" />
-    <Content Include="Scripts\angular-loader.min.js.map" />
-    <Content Include="Scripts\angular-cookies.min.js.map" />
-    <Content Include="Scripts\angular-aria.min.js.map" />
-    <Content Include="Scripts\angular-animate.min.js.map" />
     <Content Include="app\js\angular\angular-animate.min.js.map" />
     <Content Include="app\js\angular\angular-cookies.min.js.map" />
     <Content Include="app\js\angular\angular-loader.min.js.map" />
@@ -1310,21 +1259,6 @@
     <Content Include="app\js\angular\angular.min.js.map" />
     <Content Include="app\js\angular\errors.json" />
     <Content Include="app\js\angular\version.json" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\Navbar\NavbarController.js" />
-    <Content Include="Scripts\respond.js" />
-    <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\src\loading-bar.css" />
-    <Content Include="Scripts\src\loading-bar.js" />
-    <Content Include="Scripts\src\ocLazyLoad.js" />
     <Content Include="assets\css\bootstrap.css" />
     <Content Include="assets\css\custom.css" />
     <Content Include="assets\css\fonts\elusive\css\animation.css" />
@@ -2263,6 +2197,16 @@
     <Content Include="assets\less\index.html" />
     <Content Include="assets\less\other-less\index.html" />
     <Content Include="assets\less\xenon-less\index.html" />
+    <Content Include="Scripts\AngularJS\AngularApp.js" />
+    <Content Include="Scripts\AngularJS\AngularController.js" />
+    <Content Include="Scripts\AngularJS\AngularFactory.js" />
+    <Content Include="Scripts\Book\BookController.js" />
+    <Content Include="Scripts\Book\BookDirective.js" />
+    <Content Include="Scripts\Dashboard\AngularDashboard.js" />
+    <Content Include="Scripts\Navbar\NavbarController.js" />
+    <Content Include="Scripts\src\loading-bar.css" />
+    <Content Include="Scripts\src\loading-bar.js" />
+    <Content Include="Scripts\src\ocLazyLoad.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -2274,10 +2218,8 @@
     </Content>
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\_references.js" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Scripts\version.json" />
     <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Views\Home\UserProfile.cshtml" />
     <Content Include="Views\Home\LayoutAdmin.cshtml" />
@@ -2563,7 +2505,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DuongTrang.Core\DuongTrang.Core.csproj">

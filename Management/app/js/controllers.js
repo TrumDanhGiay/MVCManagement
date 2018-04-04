@@ -503,7 +503,7 @@ angular.module('trang.controllers', []).
 
         }
     }).
-    controller('EditBookController', function ($scope, BaseServices) {
+    controller('EditBookController', function ($scope, $sce, BaseServices) {
         $scope.data = {};
 
         BaseServices.AuthencationKeyGet("api/Values", sessionStorage['token']).
@@ -526,11 +526,12 @@ angular.module('trang.controllers', []).
                         $scope.data.author = response.data.Author;
                         $scope.data.company = response.data.CompanyName;
                         $scope.data.price = response.data.Price;
-                        $scope.data.content = response.data.Content;
+                        $('#sample_wysiwyg').data("wysihtml5").editor.setValue(response.data.Content);
                         $scope.data.kind = response.data.Kind1;
                         $scope.data.language = response.data.Language1;
                         $scope.data.category = response.data.CategoryName;
-                        $scope.data.yeah = response.data.YearPublish;
+                        $scope.data.yeah = moment(response.data.YearPublish).format('ddd, ll');
+                        $('#sample_wysiwyg').data("wysihtml5").editor.focus();
                     }
                 }).catch(function (error) {
                     console.log(error);
