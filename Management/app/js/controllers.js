@@ -521,21 +521,32 @@ angular.module('trang.controllers', []).
         $scope.tabbedout = function (bookCode) {
             BaseServices.AuthencationKeyGet('api/Book/' + bookCode, sessionStorage['token'])
                 .then(function (response) {
+                    console.log(response);
                     if (response.data.length != 0) {
-                        $scope.data.bookname = response.data.BookName;
-                        $scope.data.author = response.data.Author;
-                        $scope.data.company = response.data.CompanyName;
-                        $scope.data.price = response.data.Price;
-                        $('#sample_wysiwyg').data("wysihtml5").editor.setValue(response.data.Content);
-                        $scope.data.kind = response.data.Kind1;
-                        $scope.data.language = response.data.Language1;
-                        $scope.data.category = response.data.CategoryName;
-                        $scope.data.yeah = moment(response.data.YearPublish).format('ddd, ll');
+                        $scope.data.bookname = response.data[0].BookName;
+                        $scope.data.author = response.data[0].Author;
+                        $scope.data.company = response.data[0].CompanyName;
+                        $scope.data.price = response.data[0].Price;
+                        $('#sample_wysiwyg').data("wysihtml5").editor.setValue(response.data[0].Content);
+                        $scope.data.kind = response.data[0].Kind1;
+                        $scope.data.language = response.data[0].Language1;
+                        $scope.data.category = response.data[0].CategoryName;
+                        $scope.data.yeah = moment(response.data[0].YearPublish).format('ddd, ll');
                         $('#sample_wysiwyg').data("wysihtml5").editor.focus();
+                        $scope.data.image = response.data[1];
                     }
                 }).catch(function (error) {
                     console.log(error);
                 })
+        };
+
+        $scope.setPreviewImage = function (photo) {
+            if ($scope.previewImage != '/BookImage/' + photo.Image1) {
+                $scope.previewImage = '/BookImage/' + photo.Image1;
+            }
+            else {
+                $scope.previewImage = null;
+            }
         }
     })
 ;

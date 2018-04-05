@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d8f6aaa6d4ed4a96a8c2c3211b5c2129" Name="Diagram1" ZoomLevel="98">
+      <Diagram DiagramId="d8f6aaa6d4ed4a96a8c2c3211b5c2129" Name="Diagram1" ZoomLevel="68">
         <EntityTypeShape EntityType="DATNModel.C__MigrationHistory" Width="1.5" PointX="2.75" PointY="10.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DATNModel.AspNetRole" Width="1.5" PointX="12.75" PointY="10" IsExpanded="true" />
         <EntityTypeShape EntityType="DATNModel.AspNetUserClaim" Width="1.5" PointX="17.25" PointY="8.625" IsExpanded="true" />
@@ -54,6 +54,8 @@
         <AssociationConnector Association="DATNModel.FK_Reader_YearSchool" ManuallyRouted="false" />
         <AssociationConnector Association="DATNModel.FK_Return_Reader" ManuallyRouted="false" />
         <AssociationConnector Association="DATNModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DATNModel.Image" Width="1.5" PointX="12.25" PointY="12.625" />
+        <AssociationConnector Association="DATNModel.FK_Image_Book" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

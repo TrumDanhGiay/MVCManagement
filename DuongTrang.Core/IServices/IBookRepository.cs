@@ -11,5 +11,7 @@ namespace DuongTrang.Core.IServices
     {
         object GetSingle(string id);
         IQueryable<object> GetAllBook();
+        Task<int> SaveBookImageAsync(string bookcode, string url, int size);
+        Guid CheckImageCount(string bookcode);
     }
 }

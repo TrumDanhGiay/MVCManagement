@@ -331,7 +331,6 @@ angular.module('trang.directives', []).
 			link: function(scope, el, attr)
 			{
 				var $el = angular.element(el);
-
 				if( ! jQuery.isFunction(jQuery.fn.dropzone))
 					return false;
 

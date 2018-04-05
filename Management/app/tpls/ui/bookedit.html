@@ -20,25 +20,38 @@
                 <script type="text/javascript">
 			jQuery(document).ready(function($)
 			{
-				var i = 1,
+			    var check = 0;
+				var i = 0,
 					$example_dropzone_filetable = $("#example-dropzone-filetable"),
 					example_dropzone = $("#advancedDropzone").dropzone({
-					url: 'data/upload-file.php',
+					url: 'api/Book/PostBookImage',
 
 					// Events
 					addedfile: function(file)
 					{
-						if(i == 1)
-						{
-							$example_dropzone_filetable.find('tbody').html('');
-						}
+					    this.options.url = "api/Book/PostBookImage/" + $('#bookcode').val();
+					    this.options.autoQueue = false;
+					    this.options.autoProcessQueue = false;
+					    if ($('#bookcode').val() == "") {
+					        this.cancelUpload(file);
+					        $('#error').text('Nhập mã sách trước khi upload ảnh');
+					        return;
+					    }
+					    if (check == 1) {
+					        return;
+					    }
+
+					    this.options.autoQueue = true;
+					    this.options.autoProcessQueue = true;
 
 						var size = parseInt(file.size/1024, 10);
-						size = size < 1024 ? (size + " KB") : (parseInt(size/1024, 10) + " MB");
+						size = size < 1024 ? (size + " KB") : (parseInt(size / 1024, 10) + " MB");
+						var filename = file.name.split(".").pop().toLowerCase();
+						console.log(filename);
 
 						var $entry = $('<tr>\
 										<td class="text-center">'+(i++)+'</td>\
-										<td>'+file.name+'</td>\
+										<td>' + file.name + filename + '</td>\
 										<td><div class="progress progress-striped"><div class="progress-bar progress-bar-warning"></div></div></td>\
 										<td>'+size+'</td>\
 										<td>Uploading...</td>\
@@ -51,19 +64,26 @@
 
 					uploadprogress: function(file, progress, bytesSent)
 					{
+					    $('#error').text('');
 						file.progressBar.width(progress + '%');
 					},
 
 					success: function(file)
 					{
+					    $('#error').text('');
 						file.fileEntryTd.find('td:last').html('<span class="text-success">Uploaded</span>');
 						file.progressBar.removeClass('progress-bar-warning').addClass('progress-bar-success');
 					},
 
 					error: function(file)
 					{
-						file.fileEntryTd.find('td:last').html('<span class="text-danger">Failed</span>');
-						file.progressBar.removeClass('progress-bar-warning').addClass('progress-bar-red');
+					    $('#error').text('');
+					    if (file.status == "canceled") {
+					        return;
+					    }
+					    check = 1;
+					    file.fileEntryTd.find('td:last').html('<span class="text-danger">' + file.xhr.responseText + '</span>');
+					    file.progressBar.removeClass('progress-bar-warning').addClass('progress-bar-red');
 					}
 				});
 
@@ -78,7 +98,7 @@
                 <div class="row">
                     <form role="form" class="form-horizontal">
                         <div class="form-group" ng-class="{'has-success' : data.bookname != null}">
-                            <label class="col-sm-1 control-label" for="bookcode" >Mã sách</label>
+                            <label class="col-sm-1 control-label" for="bookcode">Mã sách</label>
 
                             <div class="col-sm-2">
                                 <input type="text" class="form-control" id="bookcode" placeholder="Nhập mã sách" ng-model="bookCode" ng-blur="tabbedout(bookCode)">
@@ -86,14 +106,14 @@
                             <label class="col-sm-1 control-label" for="companypublish">Nhà phát hành</label>
 
                             <div class="col-sm-2">
-                                <select class="form-control" name="data.company" ng-model="data.company" >
+                                <select class="form-control" name="data.company" ng-model="data.company">
                                     <option ng-repeat="item in company" value="{{$index}}" ng-selected="data.company == item">{{item}}</option>
                                 </select>
                             </div>
                             <label class="col-sm-1 control-label" for="Kind">Loại</label>
 
                             <div class="col-sm-5">
-                                <select class="form-control" name="data.kind"  ng-model="data.kind">
+                                <select class="form-control" name="data.kind" ng-model="data.kind">
                                     <option ng-repeat="item in kind" value="{{$index}}" ng-selected="data.kind == item">{{item}}</option>
                                 </select>
                             </div>
@@ -158,10 +178,12 @@
                         <div class="form-group" ng-class="{'has-success' : data.bookname != null}">
                             <div class="col-sm-3 text-center">
                                 <div id="advancedDropzone" class="droppable-area">
+                                    <img class="img-circle img-corona" width="160" height="160" ng-src="{{previewImage}}" ng-if="previewImage != null"/>
                                     Kéo file ảnh vào đây
                                 </div>
                             </div>
                             <div class="col-sm-9" style="margin-top:20px">
+                                <div id="error" class="text-danger"></div>
                                 <table class="table table-bordered table-striped" id="example-dropzone-filetable">
                                     <thead>
                                         <tr>
@@ -173,8 +195,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <tr ng-if="data.image == undefine">
                                             <td colspan="5">File bạn up load sẽ hiện ở đây</td>
+                                        </tr>
+                                        <tr ng-repeat="item in data.image">
+                                            <td>{{$index}}</td>
+                                            <td ng-mouseenter="setPreviewImage(item)" ng-mouseleave="setPreviewImage(item)">{{item.Image1}}</td>
+                                            <td><div class="progress progress-striped"><div class="progress-bar progress-bar-success"></div></div></td>
+                                            <td>{{item.Size}}</td>
+                                            <td>Đã lưu</td>
                                         </tr>
                                     </tbody>
                                 </table>

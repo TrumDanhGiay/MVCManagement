@@ -121,6 +121,9 @@
     <Compile Include="Models\Faculty.cs">
       <DependentUpon>DATNEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Image.cs">
+      <DependentUpon>DATNEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Infringe.cs">
       <DependentUpon>DATNEntities.tt</DependentUpon>
     </Compile>

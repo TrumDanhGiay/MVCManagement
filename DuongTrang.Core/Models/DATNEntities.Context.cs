@@ -53,5 +53,6 @@ namespace DuongTrang.Core.Models
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TrainingSystem> TrainingSystems { get; set; }
         public virtual DbSet<YearSchool> YearSchools { get; set; }
+        public virtual DbSet<Image> Images { get; set; }
     }
 }

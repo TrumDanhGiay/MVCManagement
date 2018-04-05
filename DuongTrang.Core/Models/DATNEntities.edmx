@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DATNModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DATNModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -89,7 +89,6 @@
           <Property Name="AddDate" Type="date" />
           <Property Name="CreateBy" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Keyword" Type="nvarchar" MaxLength="150" />
-          <Property Name="Image" Type="nvarchar" MaxLength="256" />
           <Property Name="IsDelete" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Borrow">
@@ -186,6 +185,15 @@
           <Property Name="FacultyID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Faculty" Type="nvarchar" MaxLength="50" />
           <Property Name="IsDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="Image">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BookID" Type="uniqueidentifier" />
+          <Property Name="Image" Type="varchar" MaxLength="256" />
+          <Property Name="Size" Type="int" />
         </EntityType>
         <EntityType Name="Infringe">
           <Key>
@@ -466,6 +474,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Image_Book">
+          <End Role="Book" Type="Self.Book" Multiplicity="0..1" />
+          <End Role="Image" Type="Self.Image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="BookID" />
+            </Principal>
+            <Dependent Role="Image">
+              <PropertyRef Name="BookID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Infringe_BorrowDetail">
           <End Role="BorrowDetail" Type="Self.BorrowDetail" Multiplicity="1" />
           <End Role="Infringe" Type="Self.Infringe" Multiplicity="*" />
@@ -603,6 +623,7 @@
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Faculty" EntityType="Self.Faculty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Infringe" EntityType="Self.Infringe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Kind" EntityType="Self.Kind" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
@@ -664,6 +685,10 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
+          <AssociationSet Name="FK_Image_Book" Association="Self.FK_Image_Book">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="Image" EntitySet="Image" />
+          </AssociationSet>
           <AssociationSet Name="FK_Infringe_BorrowDetail" Association="Self.FK_Infringe_BorrowDetail">
             <End Role="BorrowDetail" EntitySet="BorrowDetail" />
             <End Role="Infringe" EntitySet="Infringe" />
@@ -705,8 +730,7 @@
             <End Role="Role_Menu" EntitySet="Role_Menu" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DATNModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -793,7 +817,6 @@
           <Property Name="AddDate" Type="DateTime" Precision="0" />
           <Property Name="CreateBy" Type="Guid" Nullable="false" />
           <Property Name="Keyword" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Image" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="IsDelete" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Category" Relationship="Self.FK_Book_Category" FromRole="Book" ToRole="Category" />
           <NavigationProperty Name="Company" Relationship="Self.FK_Book_Company" FromRole="Book" ToRole="Company" />
@@ -1414,7 +1437,34 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="Images" EntityType="DATNModel.Image" />
+          <AssociationSet Name="FK_Image_Book" Association="DATNModel.FK_Image_Book">
+            <End Role="Book" EntitySet="Books" />
+            <End Role="Image" EntitySet="Images" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Image">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="BookID" Type="Guid" />
+          <Property Name="Image1" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="Size" Type="Int32" />
+          <NavigationProperty Name="Book" Relationship="DATNModel.FK_Image_Book" FromRole="Image" ToRole="Book" />
+        </EntityType>
+        <Association Name="FK_Image_Book">
+          <End Type="DATNModel.Book" Role="Book" Multiplicity="0..1" />
+          <End Type="DATNModel.Image" Role="Image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="BookID" />
+            </Principal>
+            <Dependent Role="Image">
+              <PropertyRef Name="BookID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1498,7 +1548,6 @@
                 <ScalarProperty Name="AddDate" ColumnName="AddDate" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
                 <ScalarProperty Name="Keyword" ColumnName="Keyword" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1755,6 +1804,16 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Images">
+            <EntityTypeMapping TypeName="DATNModel.Image">
+              <MappingFragment StoreEntitySet="Image">
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Image1" ColumnName="Image" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

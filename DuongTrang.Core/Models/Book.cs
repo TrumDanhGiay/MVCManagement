@@ -29,7 +29,6 @@ namespace DuongTrang.Core.Models
         public Nullable<System.DateTime> AddDate { get; set; }
         public System.Guid CreateBy { get; set; }
         public string Keyword { get; set; }
-        public string Image { get; set; }
         public bool IsDelete { get; set; }
     
         public virtual Category Category { get; set; }
