@@ -13,9 +13,7 @@ angular.module('trang.controllers', []).
 	    $rootScope.isLightLoginPage = true;
 	    $rootScope.isLockscreenPage = false;
 	    $rootScope.isMainPage = false;
-	    $('#username').focus();
-	    $('#passwd').focus();
-	    $('#username').focus();
+
 	    $scope.login = function () {
 	        if ($('#login').valid()) {
 	            var acc = "grant_type=password&username=" + $scope.username + "&password=" + $scope.password;

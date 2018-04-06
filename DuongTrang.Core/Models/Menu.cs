@@ -23,9 +23,9 @@ namespace DuongTrang.Core.Models
     
         public System.Guid MenuID { get; set; }
         public string MenuName { get; set; }
-        public string Parrent { get; set; }
         public string Icon { get; set; }
         public Nullable<bool> IsDelete { get; set; }
+        public string Link { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChildMenu> ChildMenus { get; set; }

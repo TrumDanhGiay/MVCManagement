@@ -1,7 +1,7 @@
 ﻿@model List<DuongTrang.Core.CustomModels.MenuViewModels>
 
 <script type="text/ng-template" id="menu-items-tpl">
-    <li ui-sref-active ="app.dashboard-variant-4">
+    <li ui-sref-active ="active">
         <a ui-sref="app.dashboard-variant-4">
             <i class="linecons-cog"></i>
             <span class="title ng-binding ng-scope">Dashboard</span>
@@ -9,18 +9,18 @@
     </li>
     @foreach (var item in Model)
     {
-        <li ng-if="@item.listchild.Count" ng-class="{'has-sub' : @item.listchild.Count >= 1}">
+        <li id="@item.Link" ng-if="@item.menuItems.Count" ng-class="{'has-sub' : @item.menuItems.Count >= 1}">
             <a>
                 <i class="@item.Icon"></i>
                 <span class="title ng-binding ng-scope">@item.MenuName</span>
             </a>
             <ul>
-                @foreach (var itemchild in item.listchild)
+                @foreach (var itemchild in item.menuItems)
                 {
-                    <li>
-                        <a ui-sref="@itemchild.LinkSPA">
-                            <i class="@itemchild.ChildMenuIcon"></i>
-                            <span class="title ng-binding ng-scope">@itemchild.ChildMenuName</span>
+                    <li ui-sref-active ="active">
+                        <a ui-sref="@itemchild.Link">
+                            <i class="@itemchild.Icon"></i>
+                            <span class="title ng-binding ng-scope">@itemchild.MenuName</span>
                         </a>
                     </li>
 

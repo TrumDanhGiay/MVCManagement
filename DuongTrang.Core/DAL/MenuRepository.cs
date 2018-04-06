@@ -37,8 +37,12 @@ namespace DuongTrang.Core.DAL
                 {
                     MenuName = item.MenuName,
                     Icon = item.Icon,
-                    Parrent = item.Parrent,
-                    listchild = listChildMenu.Where(x => x.MenuID == item.MenuID).ToList()
+                    Link = item.Link,
+                    menuItems = listChildMenu.Where(x => x.MenuID == item.MenuID).Select(u => new ChildMenuViewModels {
+                        Link = u.LinkSPA,
+                        MenuName = u.ChildMenuName,
+                        Icon = u.ChildMenuIcon
+                    }).ToList()
                 });
             }
             return listViewModels;

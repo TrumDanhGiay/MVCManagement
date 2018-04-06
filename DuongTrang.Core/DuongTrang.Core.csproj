@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomModels\BookViewModels.cs" />
+    <Compile Include="CustomModels\ChildMenuViewModels.cs" />
     <Compile Include="CustomModels\MenuViewModels.cs" />
     <Compile Include="DAL\BaseRepository.cs" />
     <Compile Include="DAL\BookRepository.cs" />

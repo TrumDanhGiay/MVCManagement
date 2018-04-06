@@ -1006,3 +1006,8 @@ app.constant('ASSETS', {
 		]
 	}
 });
+
+app.run(function ($rootScope, $location) {
+    $rootScope.$on('$stateChangeSuccess', function (e, toState, toParams, fromState, fromParams) {
+    });
+})
