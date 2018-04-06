@@ -40,6 +40,20 @@ namespace Management.Controllers.AdminController
         [AllowAnonymous]
         public async Task<HttpResponseMessage> PostBookImage(string bookcode)
         {
+            if(bookcode != null)
+            {
+                if (_bookRepository.CheckImageCount(bookcode) == Guid.Parse("C56A4180-65AA-42EC-A945-5FD21DEC0538"))
+                {
+                    var message1 = string.Format("Hãy lưu sách trước khi upload ảnh.");
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, message1);
+                }
+            }
+            else
+            {
+                var message1 = string.Format("Hãy nhập mã sách.");
+                return Request.CreateResponse(HttpStatusCode.NotFound, message1);
+            }
+            
             Dictionary<string, object> dict = new Dictionary<string, object>();
             try
             {
@@ -87,6 +101,7 @@ namespace Management.Controllers.AdminController
                     }
                     if (bookcode != null)
                     {
+                        
                         if(_bookRepository.CheckImageCount(bookcode) != new Guid())
                         {
                             var message1 = string.Format("Thành công.");

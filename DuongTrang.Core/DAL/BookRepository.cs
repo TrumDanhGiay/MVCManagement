@@ -108,7 +108,11 @@ namespace DuongTrang.Core.DAL
         public Guid CheckImageCount(string bookcode)
         {
             var bookid = Context.Books.Where(x => x.BookCode.Trim().Equals(bookcode.Trim())).Select(u => u.BookID).FirstOrDefault();
-            if (Context.Images.Count(x => x.BookID == bookid) < 3)
+            if(bookid == new Guid())
+            {
+                return Guid.Parse("C56A4180-65AA-42EC-A945-5FD21DEC0538");
+            }
+            else if (Context.Images.Count(x => x.BookID == bookid) < 3)
             {
                 return bookid;
             }

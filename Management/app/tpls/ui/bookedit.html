@@ -20,6 +20,16 @@
                 <script type="text/javascript">
 			jQuery(document).ready(function($)
 			{
+			    $(document).on('mouseenter', '#image', function (e, v) {
+			        var valueOfTd = '/BookImage/' + $(this).find('td').eq(1).text();
+			            $('#advancedDropzone').css("background-image", "url(" + valueOfTd + ")");
+			            $('#advancedDropzone').css("background-size", "cover");
+			            $('#advancedDropzone').css("color", "transparent");
+			    });
+			    $(document).on('mouseleave', '#image', function (e, v) {
+			        $('#advancedDropzone').css("background", "#ededed");
+			        $('#advancedDropzone').css("color", "#646565");
+			    });
 			    var check = 0;
 				var i = 0,
 					$example_dropzone_filetable = $("#example-dropzone-filetable"),
@@ -49,9 +59,8 @@
 						var filename = file.name.split(".").pop().toLowerCase();
 						console.log(filename);
 
-						var $entry = $('<tr>\
-										<td class="text-center">'+(i++)+'</td>\
-										<td>' + file.name + filename + '</td>\
+						var $entry = $('<tr id="image">\
+										<td>' + file.name + '.' + filename + '</td>\
 										<td><div class="progress progress-striped"><div class="progress-bar progress-bar-warning"></div></div></td>\
 										<td>'+size+'</td>\
 										<td>Uploading...</td>\
@@ -81,7 +90,10 @@
 					    if (file.status == "canceled") {
 					        return;
 					    }
-					    check = 1;
+					    console.log(file.xhr);
+					    if (file.xhr.status == 406) {
+					        check = 1;
+					    }
 					    file.fileEntryTd.find('td:last').html('<span class="text-danger">' + file.xhr.responseText + '</span>');
 					    file.progressBar.removeClass('progress-bar-warning').addClass('progress-bar-red');
 					}
@@ -177,8 +189,7 @@
                         </div>
                         <div class="form-group" ng-class="{'has-success' : data.bookname != null}">
                             <div class="col-sm-3 text-center">
-                                <div id="advancedDropzone" class="droppable-area">
-                                    <img class="img-circle img-corona" width="160" height="160" ng-src="{{previewImage}}" ng-if="previewImage != null"/>
+                                <div id="advancedDropzone" class="droppable-area" ng-style=" previewImage != null ? {'background-image':'url(' + previewImage + ')', 'background-size' : 'cover', 'color' : 'transparent'} : {'background' : '#ededed' , 'color' : '#646565'}">
                                     Kéo file ảnh vào đây
                                 </div>
                             </div>
@@ -187,7 +198,6 @@
                                 <table class="table table-bordered table-striped" id="example-dropzone-filetable">
                                     <thead>
                                         <tr>
-                                            <th width="1%" class="text-center">#</th>
                                             <th width="50%">Tên</th>
                                             <th width="20%">Tiến trình upload</th>
                                             <th>Kích cỡ</th>
@@ -198,9 +208,8 @@
                                         <tr ng-if="data.image == undefine">
                                             <td colspan="5">File bạn up load sẽ hiện ở đây</td>
                                         </tr>
-                                        <tr ng-repeat="item in data.image">
-                                            <td>{{$index}}</td>
-                                            <td ng-mouseenter="setPreviewImage(item)" ng-mouseleave="setPreviewImage(item)">{{item.Image1}}</td>
+                                        <tr ng-repeat="item in data.image" ng-mouseenter="setPreviewImage(item)" ng-mouseleave="setPreviewImage(item)">
+                                            <td>{{item.Image1}}</td>
                                             <td><div class="progress progress-striped"><div class="progress-bar progress-bar-success"></div></div></td>
                                             <td>{{item.Size}}</td>
                                             <td>Đã lưu</td>
