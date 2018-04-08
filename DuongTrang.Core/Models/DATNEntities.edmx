@@ -83,7 +83,6 @@
           <Property Name="KindID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="LanguageID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CategoryID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="BookFormat" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Price" Type="money" />
           <Property Name="Content" Type="nvarchar(max)" />
           <Property Name="AddDate" Type="date" />
@@ -811,7 +810,6 @@
           <Property Name="KindID" Type="Guid" Nullable="false" />
           <Property Name="LanguageID" Type="Guid" Nullable="false" />
           <Property Name="CategoryID" Type="Guid" Nullable="false" />
-          <Property Name="BookFormat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="AddDate" Type="DateTime" Precision="0" />
@@ -1542,7 +1540,6 @@
                 <ScalarProperty Name="KindID" ColumnName="KindID" />
                 <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-                <ScalarProperty Name="BookFormat" ColumnName="BookFormat" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Content" ColumnName="Content" />
                 <ScalarProperty Name="AddDate" ColumnName="AddDate" />

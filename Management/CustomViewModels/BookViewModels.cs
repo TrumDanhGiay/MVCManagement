@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DuongTrang.Core.CustomModels
+namespace Management.CustomViewModels
 {
     public class BookViewModels
     {
@@ -16,11 +16,10 @@ namespace DuongTrang.Core.CustomModels
         public string Kind { get; set; }
         public string Language { get; set; }
         public string Category { get; set; }
-        public string BookFormat { get; set; }
-        public string Price { get; set; }
+        public decimal Price { get; set; }
         public string Content { get; set; }
         public DateTime AddDate { get; set; }
         public string CreateBy { get; set; }
-        public string Image { get; set; }
+        public string Keyword { get; set; }
     }
 }

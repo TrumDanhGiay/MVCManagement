@@ -18,6 +18,7 @@ namespace Management.Controllers
         // GET api/<controller>
         public object Get()
         {
+            var dataFist = dataFirstRepository.getDataFirst();
             return dataFirstRepository.getDataFirst();
         }
 

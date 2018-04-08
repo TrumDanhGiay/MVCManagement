@@ -23,7 +23,6 @@ namespace DuongTrang.Core.Models
         public System.Guid KindID { get; set; }
         public System.Guid LanguageID { get; set; }
         public System.Guid CategoryID { get; set; }
-        public string BookFormat { get; set; }
         public Nullable<decimal> Price { get; set; }
         public string Content { get; set; }
         public Nullable<System.DateTime> AddDate { get; set; }

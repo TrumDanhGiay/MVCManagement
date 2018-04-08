@@ -9,7 +9,7 @@
     </li>
     @foreach (var item in Model)
     {
-        <li id="@item.Link" ng-if="@item.menuItems.Count" ng-class="{'has-sub' : @item.menuItems.Count >= 1}">
+        <li id="@item.Link" ng-if="@item.menuItems.Count" ng-class="{'has-sub' : @item.menuItems.Count >= 1, 'opened active':$state.includes('@item.Link')}">
             <a>
                 <i class="@item.Icon"></i>
                 <span class="title ng-binding ng-scope">@item.MenuName</span>

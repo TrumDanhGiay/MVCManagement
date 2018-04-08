@@ -57,10 +57,12 @@
     <Compile Include="DAL\BaseRepository.cs" />
     <Compile Include="DAL\BookRepository.cs" />
     <Compile Include="DAL\DataFirstRepository.cs" />
+    <Compile Include="DAL\GetIdByName.cs" />
     <Compile Include="DAL\MenuRepository.cs" />
     <Compile Include="IServices\IBaseRepository.cs" />
     <Compile Include="IServices\IBookRepository.cs" />
     <Compile Include="IServices\IDataFirstRepository.cs" />
+    <Compile Include="IServices\IGetIdByName.cs" />
     <Compile Include="IServices\IMenuRepository.cs" />
     <Compile Include="Models\AspNetRole.cs">
       <DependentUpon>DATNEntities.tt</DependentUpon>

@@ -6,7 +6,7 @@ angular.module('trang.controllers', []).
         $rootScope.isLightLoginPage = false;
         $rootScope.isLockscreenPage = false;
         $rootScope.isMainPage = false;
-        
+
     }).
 	controller('LoginLightCtrl', function ($scope, $rootScope, $state, $sessionStorage, BaseServices) {
 	    $rootScope.isLoginPage = true;
@@ -504,42 +504,49 @@ angular.module('trang.controllers', []).
 
         }
     }).
-    controller('EditBookController', function ($scope, $sce, BaseServices) {
+    controller('EditBookController', function ($scope, BaseServices, $sessionStorage) {
+        $scope.checkhavebook = 0;
         $scope.data = {};
+        $scope.data.createby = $sessionStorage['user'].FullName;
 
         BaseServices.AuthencationKeyGet("api/Values", sessionStorage['token']).
             then(function (response) {
-            if (response.data.length != 0) {
-                $scope.kind = response.data[0];
-                $scope.language = response.data[1];
-                $scope.company = response.data[2];
-                $scope.category = response.data[3];
-            }
-        }).catch(function (error) {
-            console.log(error);
-        })
+                if (response.data.length != 0) {
+                    $scope.kind = response.data[0];
+                    $scope.language = response.data[1];
+                    $scope.company = response.data[2];
+                    $scope.category = response.data[3];
+                }
+            }).catch(function (error) {
+                console.log(error);
+            })
 
         $scope.tabbedout = function (bookCode) {
             BaseServices.AuthencationKeyGet('api/Book/' + bookCode, sessionStorage['token'])
                 .then(function (response) {
-                    console.log(response);
                     if (response.data.length != 0) {
-                        $scope.data.bookname = response.data[0].BookName;
-                        $scope.data.author = response.data[0].Author;
-                        $scope.data.company = response.data[0].CompanyName;
-                        $scope.data.price = response.data[0].Price;
-                        $('#sample_wysiwyg').data("wysihtml5").editor.setValue(response.data[0].Content);
-                        $scope.data.kind = response.data[0].Kind1;
-                        $scope.data.language = response.data[0].Language1;
-                        $scope.data.category = response.data[0].CategoryName;
-                        $scope.data.yeah = moment(response.data[0].YearPublish).format('ddd, ll');
-                        $('#sample_wysiwyg').data("wysihtml5").editor.focus();
-                        $scope.data.image = response.data[1];
+                        $scope.checkhavebook = 1;
+                        binding_data(response);
                     }
                 }).catch(function (error) {
-                    console.log(error);
                 })
         };
+
+        function binding_data(response) {
+            $scope.data.bookname = response.data[0].BookName;
+            $scope.data.author = response.data[0].Author;
+            $scope.data.company = response.data[0].CompanyName;
+            $scope.data.price = response.data[0].Price;
+            $('#sample_wysiwyg').data("wysihtml5").editor.setValue(response.data[0].Content);
+            $scope.data.kind = response.data[0].Kind1;
+            $scope.data.language = response.data[0].Language1;
+            $scope.data.category = response.data[0].CategoryName;
+            $scope.data.yeah = moment(response.data[0].YearPublish).format('ddd, ll');
+            $scope.data.keyword = response.data[0].Keyword;
+            $scope.data.createby = response.data[0].FullName;
+            $('#sample_wysiwyg').data("wysihtml5").editor.focus();
+            $scope.data.image = response.data[1];
+        }
 
         $scope.setPreviewImage = function (photo) {
             if ($scope.previewImage != '/BookImage/' + photo.Image1) {
@@ -548,6 +555,43 @@ angular.module('trang.controllers', []).
             else {
                 $scope.previewImage = null;
             }
+        }
+
+        $scope.save = function () {
+            var objBook = {
+                BookCode: $scope.bookCode,
+                CompanyPublishName: $scope.data.company,
+                Kind: $scope.data.kind,
+                BookName: $scope.data.bookname,
+                Language: $scope.data.language,
+                Author: $scope.data.author,
+                Category: $scope.data.category,
+                Price: $scope.data.price,
+                YearPublish: moment($scope.data.yea).format('L'),
+                Keyword: $scope.data.keyword,
+                Content: $('#sample_wysiwyg').data("wysihtml5").editor.getValue()
+            }
+            if ($scope.checkhavebook == 0) {
+                BaseServices.AuthencationKey('api/Book', objBook, sessionStorage['token']).then(function (response) {
+                    console.log(response);
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            }
+            else {
+                BaseServices.AuthencationKeyPut('api/Book/' + $scope.bookCode, objBook, sessionStorage['token']).then(function (response) {
+                    console.log(response);
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            }
+        };
+
+        $scope.clearform = function () {
+            $scope.data = {};
+            $scope.bookCode = "";
+            $scope.checkhavebook = 0;
+            $('#sample_wysiwyg').data("wysihtml5").editor.clear();
         }
     })
 ;

@@ -14,5 +14,7 @@ namespace DuongTrang.Core.IServices
         void Delete(TEntity entity);
         IQueryable<TEntity> GetAll();
         IQueryable<TEntity> FindBy(Expression<Func<TEntity, bool>> predicate);
+        Task<int> SaveChangesAsync();
     }
+
 }

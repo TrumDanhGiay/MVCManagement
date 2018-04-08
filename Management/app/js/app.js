@@ -194,7 +194,12 @@ app.config(function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, AS
 		}).
 
         //Quản lý
-        state('app.BookManagement', {
+
+        state('app.management', {
+            url: '/management',
+            template : '<ui-view></uiview>'
+        }).
+        state('app.management.BookManagement', {
             url: '/bookmangement',
             templateUrl: "Home/BookManagement",
             controller: "BookController",
@@ -206,7 +211,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, AS
                 },
             }
         }).
-        state('app.CUBook', {
+        state('app.management.CUBook', {
             url: '/book/:id',
             templateUrl: appHelper.templatePath('ui/bookedit'),
             controller: "EditBookController",
@@ -1007,7 +1012,6 @@ app.constant('ASSETS', {
 	}
 });
 
-app.run(function ($rootScope, $location) {
-    $rootScope.$on('$stateChangeSuccess', function (e, toState, toParams, fromState, fromParams) {
-    });
-})
+app.run(function ($rootScope, $state) {
+    $rootScope.$state = $state;
+});

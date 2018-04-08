@@ -47,6 +47,26 @@ app.factory('BaseServices', ['$http', function ($http) {
         });
     };
 
+    //Authorize Request put
+    dataFactory.AuthencationKeyPut = function (url, object, key) {
+        return $http.put(url, object, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + key
+            }
+        });
+    };
+
+    //Authorize Request delete
+    dataFactory.AuthencationKeyDelete = function (url, key) {
+        return $http.delete(url, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + key
+            }
+        });
+    };
+
     //Authorize Request get
     dataFactory.AuthencationKeyGet = function (url, key) {
         return $http.get(url, {

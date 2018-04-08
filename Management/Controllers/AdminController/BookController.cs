@@ -5,13 +5,13 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using DuongTrang.Core.IServices;
-using DuongTrang.Core.Models;
 using Management.APICustomAuthorize;
 using Management.Property;
-using DuongTrang.Core.CustomModels;
 using System.Threading.Tasks;
 using System.Web;
 using System.Diagnostics;
+using Management.CustomViewModels;
+using Microsoft.AspNet.Identity;
 
 namespace Management.Controllers.AdminController
 {
@@ -19,9 +19,11 @@ namespace Management.Controllers.AdminController
     public class BookController : ApiController
     {
         private readonly IBookRepository _bookRepository;
-        public BookController(IBookRepository bookRepository)
+        private readonly IGetIdByName _getIdByName;
+        public BookController(IBookRepository bookRepository, IGetIdByName getIdByName)
         {
             _bookRepository = bookRepository;
+            _getIdByName = getIdByName;
         }
         // GET api/<controller>
         public IEnumerable<object> Get()
@@ -32,6 +34,19 @@ namespace Management.Controllers.AdminController
         // GET api/<controller>/5
         public object Get(string id)
         {
+            if (id != null)
+            {
+                if (_bookRepository.CheckImageCount(id) == Guid.Parse("C56A4180-65AA-42EC-A945-5FD21DEC0538"))
+                {
+                    var message1 = string.Format("Hãy lưu sách trước khi upload ảnh.");
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, message1);
+                }
+            }
+            else
+            {
+                var message1 = string.Format("Hãy nhập mã sách.");
+                return Request.CreateResponse(HttpStatusCode.NotFound, message1);
+            }
             return _bookRepository.GetSingle(id);
         }
 
@@ -133,19 +148,65 @@ namespace Management.Controllers.AdminController
 
         [AuthorizeRole(ListRoles.Administrator)]
         // POST api/<controller>
-        public void Post([FromBody]string value)
+        public async Task<IHttpActionResult> Post([FromBody]BookViewModels bookViewModels)
         {
+            _bookRepository.Insert(new DuongTrang.Core.Models.Book {
+                BookID = Guid.NewGuid(),
+                AddDate = DateTime.Now,
+                Author = bookViewModels.Author,
+                BookCode = bookViewModels.BookCode,
+                BookName = bookViewModels.BookName,
+                CategoryID = _getIdByName.GetCategoryID(bookViewModels.Category),
+                CompanyPublishID = _getIdByName.GetCompanyID(bookViewModels.CompanyPublishName),
+                Content = bookViewModels.Content,
+                CreateBy = Guid.Parse(User.Identity.GetUserId()),
+                Keyword = bookViewModels.Keyword,
+                IsDelete = false,
+                Price = bookViewModels.Price,
+                LanguageID = _getIdByName.GetLanguageID(bookViewModels.Language),
+                KindID = _getIdByName.GetKindID(bookViewModels.Kind),
+                YearPublish = DateTime.Parse(bookViewModels.YearPublish)
+            });
+            await _bookRepository.SaveChangesAsync();
+            return Ok("Lưu thành công");
         }
 
         [AuthorizeRole(ListRoles.Administrator)]
         // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
+        public async Task<IHttpActionResult> Put(string id, [FromBody]BookViewModels bookViewModels)
         {
+            if(id != null)
+            {
+                _bookRepository.Update(new DuongTrang.Core.Models.Book
+                {
+                    BookID = Guid.NewGuid(),
+                    AddDate = DateTime.Now,
+                    Author = bookViewModels.Author,
+                    BookCode = bookViewModels.BookCode,
+                    BookName = bookViewModels.BookName,
+                    CategoryID = _getIdByName.GetCategoryID(bookViewModels.Category),
+                    CompanyPublishID = _getIdByName.GetCompanyID(bookViewModels.CompanyPublishName),
+                    Content = bookViewModels.Content,
+                    CreateBy = Guid.Parse(User.Identity.GetUserId()),
+                    Keyword = bookViewModels.Keyword,
+                    IsDelete = false,
+                    Price = bookViewModels.Price,
+                    LanguageID = _getIdByName.GetLanguageID(bookViewModels.Language),
+                    KindID = _getIdByName.GetKindID(bookViewModels.Kind),
+                    YearPublish = DateTime.Parse(bookViewModels.YearPublish)
+                });
+                await _bookRepository.SaveChangesAsync();
+                return Ok("Sửa thành công");
+            }
+            else
+            {
+                return BadRequest("Có lỗi xảy ra");
+            }
         }
 
         [AuthorizeRole(ListRoles.Administrator)]
         // DELETE api/<controller>/5
-        public void Delete(int id)
+        public void Delete(string id)
         {
         }
     }

@@ -47,12 +47,7 @@ namespace DuongTrang.Core.DAL
             _entities.Entry(entity).State = System.Data.Entity.EntityState.Modified;
         }
 
-        public virtual int Save()
-        {
-             return _entities.SaveChanges();
-        }
-
-        public virtual Task<int> SaveChaneAsync ()
+        public Task<int> SaveChangesAsync()
         {
             return _entities.SaveChangesAsync();
         }
@@ -79,7 +74,7 @@ namespace DuongTrang.Core.DAL
 
         public IQueryable<TEntity> FindBy(Expression<Func<TEntity, bool>> predicate)
         {
-            IQueryable<TEntity> query =dbSet.Where(predicate);
+            IQueryable<TEntity> query = dbSet.Where(predicate);
             return query;
         }
 

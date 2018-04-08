@@ -1,10 +1,21 @@
 ﻿<page-title ng-if="layoutOptions.pageTitles" title="Thêm Sách" description="Thêm sách vào thư viện"></page-title>
 <div class="row">
+    <style type="text/css">
+        .succspan {
+            float: right;
+            margin-right: 6px;
+            margin-top: -22px;
+            position: relative;
+            z-index: 2;
+            color: green;
+        }
+    </style>
     <div class="col-sm-12">
 
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Nhập thông tin sách</h3>
+                <button class="btn btn-secondary" ng-click="save()" ng-disabled="bookform.$invalid">Lưu thông tin</button>
+                <button class="btn btn-white" ng-click="clearform()" ng-disabled="bookform.$pristine">Reset Form</button>
                 <div class="panel-options">
                     <a href="" data-toggle="panel">
                         <span class="collapse-icon">&ndash;</span>
@@ -108,68 +119,68 @@
 
                 <br />
                 <div class="row">
-                    <form role="form" class="form-horizontal">
-                        <div class="form-group" ng-class="{'has-success' : data.bookname != null}">
-                            <label class="col-sm-1 control-label" for="bookcode">Mã sách</label>
-
+                    <form role="form" name="bookform" class="form-horizontal" novalidate>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label" for="bookcode">Mã sách </label>
                             <div class="col-sm-2">
-                                <input type="text" class="form-control" id="bookcode" placeholder="Nhập mã sách" ng-model="bookCode" ng-blur="tabbedout(bookCode)">
+                                <input type="text" class="form-control" id="bookcode" placeholder="Nhập mã sách" ng-model="bookCode" ng-blur="tabbedout(bookCode)" ng-required="true">
+                                <span class="fa fa-check succspan" ng-show="checkhavebook == 1"></span>
                             </div>
                             <label class="col-sm-1 control-label" for="companypublish">Nhà phát hành</label>
 
                             <div class="col-sm-2">
-                                <select class="form-control" name="data.company" ng-model="data.company">
-                                    <option ng-repeat="item in company" value="{{$index}}" ng-selected="data.company == item">{{item}}</option>
+                                <select class="form-control" name="data.company" ng-model="data.company" ng-required="true">
+                                    <option ng-repeat="item in company" value="{{item}}" ng-selected="data.company == item">{{item}}</option>
                                 </select>
                             </div>
                             <label class="col-sm-1 control-label" for="Kind">Loại</label>
 
                             <div class="col-sm-5">
-                                <select class="form-control" name="data.kind" ng-model="data.kind">
-                                    <option ng-repeat="item in kind" value="{{$index}}" ng-selected="data.kind == item">{{item}}</option>
+                                <select class="form-control" name="data.kind" ng-model="data.kind" ng-required="true">
+                                    <option ng-repeat="item in kind" value="{{item}}" ng-selected="data.kind == item">{{item}}</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group" ng-class="{'has-success' : data.bookname != null}">
+                        <div class="form-group">
                             <label class="col-sm-1 control-label" for="bookname">Tên sách</label>
 
                             <div class="col-sm-5">
-                                <input type="text" class="form-control" name="data.bookname" id="bookname" ng-model="data.bookname" placeholder="Nhập tên sách">
+                                <input type="text" class="form-control" name="data.bookname" id="bookname" ng-model="data.bookname" placeholder="Nhập tên sách" ng-required="true">
                             </div>
                             <label class="col-sm-1 control-label" for="language">Ngôn ngữ</label>
 
                             <div class="col-sm-5">
                                 <select class="form-control" name="data.language" ng-model="data.language">
-                                    <option ng-repeat="item in language" value="{{$index}}" ng-selected="data.language == item">{{item}}</option>
+                                    <option ng-repeat="item in language" value="{{item}}" ng-selected="data.language == item" ng-required="true">{{item}}</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group" ng-class="{'has-success' : data.bookname != null}">
+                        <div class="form-group">
                             <label class="col-sm-1 control-label" for="author">Tác giả</label>
 
                             <div class="col-sm-5">
-                                <input type="text" class="form-control" id="author" name="data.author" ng-model="data.author" placeholder="Nhập tác giả">
+                                <input type="text" class="form-control" id="author" name="data.author" ng-model="data.author" placeholder="Nhập tác giả" ng-required="true">
                             </div>
                             <label class="col-sm-1 control-label" for="category">Danh mục</label>
 
                             <div class="col-sm-5">
                                 <select class="form-control" name="data.category" ng-model="data.category">
-                                    <option ng-repeat="item in category" value="{{$index}}" ng-selected="data.category == item">{{item}}</option>
+                                    <option ng-repeat="item in category" value="{{item}}" ng-selected="data.category == item" ng-required="true">{{item}}</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group" ng-class="{'has-success' : data.bookname != null}">
+                        <div class="form-group">
                             <label class="col-sm-1 control-label" for="price">Giá</label>
 
                             <div class="col-sm-2">
-                                <input type="text" class="form-control" id="price" name="data.price" ng-model="data.price" placeholder="Nhập giá">
+                                <input type="text" class="form-control" id="price" name="data.price" ng-model="data.price" placeholder="Nhập giá" ng-required="true">
                             </div>
 
                             <label class="col-sm-1 control-label" for="yeahpublish">Ngày xuất bản</label>
 
                             <div class="col-sm-2">
                                 <div class="input-group">
-                                    <input type="text" class="form-control datepicker" name="data.yeah" ng-model="data.yeah" data-format="D, dd MM yyyy">
+                                    <input type="text" class="form-control datepicker" name="data.yeah" ng-model="data.yeah" data-format="D, dd MM yyyy" ng-required="true">
 
                                     <div class="input-group-addon">
                                         <a href=""><i class="linecons-calendar"></i></a>
@@ -177,17 +188,17 @@
                                 </div>
                             </div>
 
-                            <label class="col-sm-1 control-label" for="yeahpublish">Loại sách</label>
+                            <label class="col-sm-1 control-label" for="yeahpublish">Người tạo</label>
                             <div class="col-sm-2">
-                                <input type="text" class="form-control" id="price" placeholder="Nhập giá">
+                                <input type="text" class="form-control" id="price" placeholder="Người tạo" ng-model="data.createby" ng-disabled="1">
                             </div>
 
                             <label class="col-sm-1 control-label" for="yeahpublish">Từ khóa</label>
                             <div class="col-sm-2">
-                                <input type="text" class="form-control" id="price" placeholder="Nhập từ khóa">
+                                <input type="text" class="form-control" id="price" placeholder="Nhập từ khóa" ng-model="data.keyword" ng-required="true">
                             </div>
                         </div>
-                        <div class="form-group" ng-class="{'has-success' : data.bookname != null}">
+                        <div class="form-group">
                             <div class="col-sm-3 text-center">
                                 <div id="advancedDropzone" class="droppable-area" ng-style=" previewImage != null ? {'background-image':'url(' + previewImage + ')', 'background-size' : 'cover', 'color' : 'transparent'} : {'background' : '#ededed' , 'color' : '#646565'}">
                                     Kéo file ảnh vào đây
