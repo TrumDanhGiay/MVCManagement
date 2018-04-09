@@ -592,6 +592,37 @@ angular.module('trang.controllers', []).
             $scope.bookCode = "";
             $scope.checkhavebook = 0;
             $('#sample_wysiwyg').data("wysihtml5").editor.clear();
+            $scope.data.image = {};
         }
+    })
+    .controller('BorrowController', function ($scope, $state, BaseServices, $sessionStorage, ASSETS, DTOptionsBuilder) {
+        //load init data
+        BaseServices.AuthencationKeyGet('api/Borrow', sessionStorage['token'])
+                .then(function (response) {
+                    console.log(response.data);
+                    $scope.listborrow = response.data;
+                }).catch(function (error) {
+                    console.log(error);
+                });
+        //option for datatable
+        $scope.dtOptions = DTOptionsBuilder.newOptions()
+       .withDisplayLength(10)
+       .withOption('bLengthChange', true)
+       .withOption('responsive', true)
+        //refresh event
+        $scope.refresh = function () {
+            BaseServices.AuthencationKeyGet('api/Borrow', sessionStorage['token'])
+                .then(function (response) {
+                    console.log(response.data);
+                    $scope.listbook = response.data;
+                }).catch(function (error) {
+                    console.log(error);
+                });
+        };
+
+        //click td element
+        $scope.handling = function (item) {
+            $state.go('app.major.handing');
+        };
     })
 ;

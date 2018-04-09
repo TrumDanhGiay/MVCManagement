@@ -21,7 +21,7 @@ namespace DuongTrang.Core.Models
         }
     
         public System.Guid CardReaderID { get; set; }
-        public System.Guid ReaderID { get; set; }
+        public string ReaderID { get; set; }
         public Nullable<System.DateTime> DateStart { get; set; }
         public Nullable<System.DateTime> DateExpried { get; set; }
         public System.Guid CreateBy { get; set; }

@@ -14,6 +14,12 @@ namespace DuongTrang.Core.Models
     
     public partial class Book
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Book()
+        {
+            this.Images = new HashSet<Image>();
+        }
+    
         public System.Guid BookID { get; set; }
         public string BookCode { get; set; }
         public string BookName { get; set; }
@@ -34,5 +40,7 @@ namespace DuongTrang.Core.Models
         public virtual Company Company { get; set; }
         public virtual Kind Kind { get; set; }
         public virtual Language Language { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Image> Images { get; set; }
     }
 }

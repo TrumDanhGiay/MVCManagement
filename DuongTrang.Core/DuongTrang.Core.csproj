@@ -56,11 +56,13 @@
     <Compile Include="CustomModels\MenuViewModels.cs" />
     <Compile Include="DAL\BaseRepository.cs" />
     <Compile Include="DAL\BookRepository.cs" />
+    <Compile Include="DAL\BorrowRepository.cs" />
     <Compile Include="DAL\DataFirstRepository.cs" />
     <Compile Include="DAL\GetIdByName.cs" />
     <Compile Include="DAL\MenuRepository.cs" />
     <Compile Include="IServices\IBaseRepository.cs" />
     <Compile Include="IServices\IBookRepository.cs" />
+    <Compile Include="IServices\IBorrowRepository.cs" />
     <Compile Include="IServices\IDataFirstRepository.cs" />
     <Compile Include="IServices\IGetIdByName.cs" />
     <Compile Include="IServices\IMenuRepository.cs" />
@@ -100,9 +102,6 @@
     <Compile Include="Models\Company.cs">
       <DependentUpon>DATNEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Course.cs">
-      <DependentUpon>DATNEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>DATNEntities.tt</DependentUpon>
     </Compile>
@@ -130,6 +129,9 @@
     <Compile Include="Models\Infringe.cs">
       <DependentUpon>DATNEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Job.cs">
+      <DependentUpon>DATNEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Kind.cs">
       <DependentUpon>DATNEntities.tt</DependentUpon>
     </Compile>
@@ -154,16 +156,10 @@
     <Compile Include="Models\Role_Menu.cs">
       <DependentUpon>DATNEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Specialized.cs">
-      <DependentUpon>DATNEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>DATNEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TrainingSystem.cs">
-      <DependentUpon>DATNEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\YearSchool.cs">
       <DependentUpon>DATNEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -183,25 +179,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="Scripts\typings\devextreme\devextreme-15.1.3.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\devextreme\devextreme-15.1.4.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\devextreme\devextreme-15.1.5.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\devextreme\devextreme-15.1.6.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\devextreme\devextreme-15.1.7.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\devextreme\devextreme-15.1.8.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\devextreme\devextreme-15.2.10.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\devextreme\devextreme-15.2.12.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\devextreme\devextreme-15.2.13.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\devextreme\devextreme-15.2.4.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\devextreme\devextreme-15.2.5.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\devextreme\devextreme-15.2.7.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\devextreme\devextreme-15.2.9.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\devextreme\devextreme-16.1.6.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\devextreme\devextreme-16.1.7.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\devextreme\devextreme.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Models\DATNEntities.Context.tt">

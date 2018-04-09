@@ -1,0 +1,54 @@
+﻿
+
+<page-title ng-if="layoutOptions.pageTitles" title="Nghiệp vụ" description="Danh sách yêu cầu mượn hiện có"></page-title>
+
+
+<!-- Responsive Table -->
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+
+                <div class="panel-options">
+
+                    <a href="" data-toggle="panel">
+                        <span class="collapse-icon">&ndash;</span>
+                        <span class="expand-icon">+</span>
+                    </a>
+
+                    <a href="" data-toggle="reload" ng-click="refresh()">
+                        <i class="fa-rotate-right"></i>
+                    </a>
+
+                    <a href="" data-toggle="remove">
+                        &times;
+                    </a>
+                </div>
+            </div>
+            <div class="panel-body">
+
+                <table cellspacing="0" class="table table-small-font table-bordered table-striped" datatable="ng" dt-options="dtOptions" width="100%;">
+                    <thead>
+                        <tr>
+                            <th data-priority="1">Mã yêu cầu</th>
+                            <th data-priority="3">Tên người mượn</th>
+                            <th data-priority="1">Ngày đặt mượn</th>
+                            <th data-priority="3">Tổng</th>
+                            <th data-priority="3">Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="borrow in listborrow" ng-dblclick="handling(borrow)" style="cursor:pointer">
+                            <td>{{borrow.BorrowCode}}</td>
+                            <td>{{borrow.FullName}}</td>
+                            <td>{{borrow.DateBorrow | date :  "dd.MM.yyyy"}}</td>
+                            <td>{{borrow.AmountTotal}}</td>
+                            <td>{{borrow.PendingStatusName}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

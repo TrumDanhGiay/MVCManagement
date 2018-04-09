@@ -27,9 +27,12 @@ namespace DuongTrang.Core.Models
         public Nullable<System.Guid> CreateBy { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<bool> IsDelete { get; set; }
+        public Nullable<int> PendingStatusID { get; set; }
+        public string BorrowCode { get; set; }
     
         public virtual CardReader CardReader { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BorrowDetail> BorrowDetails { get; set; }
+        public virtual PendingStatu PendingStatu { get; set; }
     }
 }

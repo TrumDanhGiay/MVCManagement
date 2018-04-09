@@ -38,9 +38,10 @@ namespace DuongTrang.Core.Models
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<ChildMenu> ChildMenus { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
-        public virtual DbSet<Course> Courses { get; set; }
         public virtual DbSet<Faculty> Faculties { get; set; }
+        public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<Infringe> Infringes { get; set; }
+        public virtual DbSet<Job> Jobs { get; set; }
         public virtual DbSet<Kind> Kinds { get; set; }
         public virtual DbSet<Language> Languages { get; set; }
         public virtual DbSet<Level> Levels { get; set; }
@@ -49,10 +50,7 @@ namespace DuongTrang.Core.Models
         public virtual DbSet<Reader> Readers { get; set; }
         public virtual DbSet<Return> Returns { get; set; }
         public virtual DbSet<Role_Menu> Role_Menu { get; set; }
-        public virtual DbSet<Specialized> Specializeds { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TrainingSystem> TrainingSystems { get; set; }
-        public virtual DbSet<YearSchool> YearSchools { get; set; }
-        public virtual DbSet<Image> Images { get; set; }
     }
 }

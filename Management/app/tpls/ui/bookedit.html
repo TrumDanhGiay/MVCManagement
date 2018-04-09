@@ -32,7 +32,7 @@
 			jQuery(document).ready(function($)
 			{
 			    $(document).on('mouseenter', '#image', function (e, v) {
-			        var valueOfTd = '/BookImage/' + $(this).find('td').eq(1).text();
+			        var valueOfTd = '/BookImage/' + $(this).find('td').eq(0).text();
 			            $('#advancedDropzone').css("background-image", "url(" + valueOfTd + ")");
 			            $('#advancedDropzone').css("background-size", "cover");
 			            $('#advancedDropzone').css("color", "transparent");
@@ -68,7 +68,6 @@
 						var size = parseInt(file.size/1024, 10);
 						size = size < 1024 ? (size + " KB") : (parseInt(size / 1024, 10) + " MB");
 						var filename = file.name.split(".").pop().toLowerCase();
-						console.log(filename);
 
 						var $entry = $('<tr id="image">\
 										<td>' + file.name + '.' + filename + '</td>\
@@ -216,7 +215,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-if="data.image == undefine">
+                                        <tr ng-show="data.image.length == undefined">
                                             <td colspan="5">File bạn up load sẽ hiện ở đây</td>
                                         </tr>
                                         <tr ng-repeat="item in data.image" ng-mouseenter="setPreviewImage(item)" ng-mouseleave="setPreviewImage(item)">

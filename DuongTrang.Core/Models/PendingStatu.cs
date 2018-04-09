@@ -14,8 +14,17 @@ namespace DuongTrang.Core.Models
     
     public partial class PendingStatu
     {
-        public System.Guid PendingStatusID { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public PendingStatu()
+        {
+            this.Borrows = new HashSet<Borrow>();
+        }
+    
+        public int PendingID { get; set; }
         public string PendingStatusName { get; set; }
         public Nullable<bool> IsDelete { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Borrow> Borrows { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace DuongTrang.Core.Models
     public partial class Return
     {
         public System.Guid ReturnID { get; set; }
-        public Nullable<System.Guid> CardReaderID { get; set; }
+        public string CardReaderID { get; set; }
         public Nullable<System.DateTime> DateReturn { get; set; }
         public string ReturnStatus { get; set; }
         public Nullable<System.Guid> BookID { get; set; }

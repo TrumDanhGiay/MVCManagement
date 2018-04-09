@@ -526,7 +526,6 @@ angular.module('trang.directives', []).
 			  			if($this.hasClass('validate'))
 			  			{
 							var $valid = $this.valid();
-
 							if( ! $valid)
 							{
 								$this.data('validator').focusInvalid();

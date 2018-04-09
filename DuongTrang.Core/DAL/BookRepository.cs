@@ -26,8 +26,7 @@ namespace DuongTrang.Core.DAL
                .Join(Context.Kinds, a => a.Book.KindID, c => c.KindID, (a, c) => new { a.Book, a.Company, Kind = c })
                .Join(Context.Languages, a => a.Book.LanguageID, d => d.LanguageID, (a, d) => new { a.Book, a.Company, a.Kind, Language = d })
                .Join(Context.Categories, a => a.Book.CategoryID, e => e.CategoryID, (a, e) => new { a.Book, a.Company, a.Kind, a.Language, Category = e })
-               .Join(Context.Images, a => a.Book.BookID, f => f.BookID, (a, f) => new { a.Book, a.Company, a.Kind, a.Language, a.Category, Image = f }).DefaultIfEmpty()
-               .Join(Context.AspNetUsers, a => a.Book.CreateBy.ToString(), g => g.Id, (a, g) => new { a.Book, a.Company, a.Kind, a.Language, a.Category, a.Image, AspNetUser = g })
+               .Join(Context.AspNetUsers, a => a.Book.CreateBy.ToString(), g => g.Id, (a, g) => new { a.Book, a.Company, a.Kind, a.Language, a.Category, AspNetUser = g })
                .Where(a => a.Book.IsDelete == false && a.Book.BookCode.Trim().Equals(code.Trim()))
                .Select(a => new
                {
@@ -89,7 +88,13 @@ namespace DuongTrang.Core.DAL
             return listBook;
         }
 
-
+        /// <summary>
+        /// Lưu ảnh sách vào db
+        /// </summary>
+        /// <param name="bookcode">Mã sách</param>
+        /// <param name="url">Đường dẫn ảnh</param>
+        /// <param name="size">Dung lượng ảnh</param>
+        /// <returns>Kết quả</returns>
         public Task<int> SaveBookImageAsync(string bookcode, string url, int size)
         {
 
@@ -105,6 +110,13 @@ namespace DuongTrang.Core.DAL
             return Context.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// Kiểm tra số lượng ảnh từng sách đang có trong db
+        /// </summary>
+        /// <param name="bookcode">Mã sách</param>
+        /// <returns>Id sách nếu thỏa mãn</returns>
+        /// <returns>C56A4180-65AA-42EC-A945-5FD21DEC0538 nếu không tìm thấy mã sách</returns>
+        /// <returns>new Guid nếu số lượng ảnh đã lớn hơn 3</returns>
         public Guid CheckImageCount(string bookcode)
         {
             var bookid = Context.Books.Where(x => x.BookCode.Trim().Equals(bookcode.Trim())).Select(u => u.BookID).FirstOrDefault();
@@ -120,12 +132,27 @@ namespace DuongTrang.Core.DAL
             {
                 return new Guid();
             }
-        }
+        } 
 
+        /// <summary>
+        /// Lấy ID sách theo mã sách
+        /// </summary>
+        /// <param name="bookcode">Mã sách</param>
+        /// <returns>Mã sách</returns>
         public Guid GetBookIdByBookCode(string bookcode)
         {
             var bookid = Context.Books.Where(x => x.BookCode.Trim().Equals(bookcode.Trim())).Select(u => u.BookID).FirstOrDefault();
             return bookid;
         }
+
+        /// <summary>
+        /// Xóa sách
+        /// </summary>
+        /// <param name="id">Mã sách cần xóa</param>
+        public void DeleteBook(string id)
+        {
+            Context.Books.Remove(Context.Books.FirstOrDefault(x => x.BookCode.Trim().Equals(id.Trim())));
+        }
+
     }
 }

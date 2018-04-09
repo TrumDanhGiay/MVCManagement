@@ -21,31 +21,23 @@ namespace DuongTrang.Core.Models
             this.Returns = new HashSet<Return>();
         }
     
-        public System.Guid ReaderID { get; set; }
-        public Nullable<System.Guid> ReaderKindID { get; set; }
+        public string ReaderID { get; set; }
+        public string IdUser { get; set; }
         public string Identifier { get; set; }
-        public string ReaderName { get; set; }
-        public Nullable<System.DateTime> Birth { get; set; }
-        public string Sex { get; set; }
         public Nullable<System.Guid> JobID { get; set; }
         public Nullable<System.Guid> LevelID { get; set; }
         public Nullable<System.Guid> FacultyID { get; set; }
-        public Nullable<System.Guid> CourseID { get; set; }
         public Nullable<System.Guid> TrainingSystemID { get; set; }
-        public Nullable<System.Guid> SpecializedID { get; set; }
-        public Nullable<System.Guid> YearSchollID { get; set; }
-        public string Address { get; set; }
-        public string Image { get; set; }
+        public Nullable<int> YearSchool { get; set; }
         public Nullable<bool> IsDelete { get; set; }
     
+        public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CardReader> CardReaders { get; set; }
-        public virtual Course Course { get; set; }
         public virtual Faculty Faculty { get; set; }
+        public virtual Job Job { get; set; }
         public virtual Level Level { get; set; }
-        public virtual Specialized Specialized { get; set; }
         public virtual TrainingSystem TrainingSystem { get; set; }
-        public virtual YearSchool YearSchool { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Return> Returns { get; set; }
     }

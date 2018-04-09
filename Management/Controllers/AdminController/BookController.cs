@@ -10,14 +10,21 @@ using Management.Property;
 using System.Threading.Tasks;
 using System.Web;
 using System.Diagnostics;
-using Management.CustomViewModels;
 using Microsoft.AspNet.Identity;
+using Management.Const;
+using DuongTrang.Core.CustomModels;
 
 namespace Management.Controllers.AdminController
 {
+    /// <summary>
+    /// Sách API
+    /// </summary>
     [Authorize]
     public class BookController : ApiController
     {
+        /// <summary>
+        /// Dependency Injection
+        /// </summary>
         private readonly IBookRepository _bookRepository;
         private readonly IGetIdByName _getIdByName;
         public BookController(IBookRepository bookRepository, IGetIdByName getIdByName)
@@ -25,12 +32,21 @@ namespace Management.Controllers.AdminController
             _bookRepository = bookRepository;
             _getIdByName = getIdByName;
         }
+        /// <summary>
+        /// Lấy danh sách sách
+        /// </summary>
+        /// <returns>Dánh sách sách</returns>
         // GET api/<controller>
         public IEnumerable<object> Get()
         {
             return _bookRepository.GetAllBook();
         }
 
+        /// <summary>
+        /// Lấy sách theo mã sách
+        /// </summary>
+        /// <param name="id">Mã sách</param>
+        /// <returns>Thông tin sách và danh sách ảnh</returns>
         // GET api/<controller>/5
         public object Get(string id)
         {
@@ -50,6 +66,11 @@ namespace Management.Controllers.AdminController
             return _bookRepository.GetSingle(id);
         }
 
+        /// <summary>
+        /// Upload ảnh cho từng sách
+        /// </summary>
+        /// <param name="bookcode">Mã sách</param>
+        /// <returns>Kết quả lưu</returns>
         [Route("api/Book/PostBookImage/{bookcode}")]
         [HttpPost]
         [AllowAnonymous]
@@ -146,6 +167,11 @@ namespace Management.Controllers.AdminController
             }
         }
 
+        /// <summary>
+        /// Thêm sách - Roles : Administrator
+        /// </summary>
+        /// <param name="bookViewModels">Thông tin sách thêm</param>
+        /// <returns></returns>
         [AuthorizeRole(ListRoles.Administrator)]
         // POST api/<controller>
         public async Task<IHttpActionResult> Post([FromBody]BookViewModels bookViewModels)
@@ -168,9 +194,15 @@ namespace Management.Controllers.AdminController
                 YearPublish = DateTime.Parse(bookViewModels.YearPublish)
             });
             await _bookRepository.SaveChangesAsync();
-            return Ok("Lưu thành công");
+            return Ok(MConst.SuccessInsertAPI);
         }
 
+        /// <summary>
+        /// Sửa sách - Roles : Administrator
+        /// </summary>
+        /// <param name="id">ID sách sửa</param>
+        /// <param name="bookViewModels">Thông tin sửa sách</param>
+        /// <returns></returns>
         [AuthorizeRole(ListRoles.Administrator)]
         // PUT api/<controller>/5
         public async Task<IHttpActionResult> Put(string id, [FromBody]BookViewModels bookViewModels)
@@ -179,7 +211,7 @@ namespace Management.Controllers.AdminController
             {
                 _bookRepository.Update(new DuongTrang.Core.Models.Book
                 {
-                    BookID = Guid.NewGuid(),
+                    BookID = _bookRepository.GetBookIdByBookCode(bookViewModels.BookCode),
                     AddDate = DateTime.Now,
                     Author = bookViewModels.Author,
                     BookCode = bookViewModels.BookCode,
@@ -195,19 +227,48 @@ namespace Management.Controllers.AdminController
                     KindID = _getIdByName.GetKindID(bookViewModels.Kind),
                     YearPublish = DateTime.Parse(bookViewModels.YearPublish)
                 });
-                await _bookRepository.SaveChangesAsync();
-                return Ok("Sửa thành công");
+                try
+                {
+                    await _bookRepository.SaveChangesAsync();
+                    return Ok(MConst.SuccessEditAPI);
+                }
+                catch (Exception e)
+                {
+                    return BadRequest(MConst.ErrorAPI + e.Message);
+                }
             }
             else
             {
-                return BadRequest("Có lỗi xảy ra");
+                return BadRequest(MConst.NullID);
             }
         }
 
+        /// <summary>
+        /// Xóa sách - Roles : Administrator
+        /// </summary>
+        /// <param name="id">Mã sách</param>
+        /// <returns></returns>
         [AuthorizeRole(ListRoles.Administrator)]
         // DELETE api/<controller>/5
-        public void Delete(string id)
+        public async Task<IHttpActionResult> Delete(string id)
         {
+            if (id != null)
+            {
+                _bookRepository.DeleteBook(id);
+                try
+                {
+                    await _bookRepository.SaveChangesAsync();
+                    return Ok(MConst.SuccessDeleteAPI);
+                }
+                catch (Exception e)
+                {
+                    return BadRequest(MConst.ErrorAPI + e.Message);
+                }
+            }
+            else
+            {
+                return BadRequest(MConst.NullID);
+            }
         }
     }
 }

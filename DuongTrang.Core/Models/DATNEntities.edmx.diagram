@@ -4,58 +4,56 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d8f6aaa6d4ed4a96a8c2c3211b5c2129" Name="Diagram1" ZoomLevel="68">
-        <EntityTypeShape EntityType="DATNModel.C__MigrationHistory" Width="1.5" PointX="2.75" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DATNModel.AspNetRole" Width="1.5" PointX="12.75" PointY="10" IsExpanded="true" />
-        <EntityTypeShape EntityType="DATNModel.AspNetUserClaim" Width="1.5" PointX="17.25" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DATNModel.AspNetUserLogin" Width="1.5" PointX="17.25" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DATNModel.AspNetUser" Width="1.5" PointX="15" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DATNModel.Book" Width="1.5" PointX="10" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="DATNModel.Borrow" Width="1.5" PointX="7.5" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DATNModel.BorrowDetail" Width="1.5" PointX="9.75" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="DATNModel.BorrowDetailLog" Width="1.5" PointX="4.75" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DATNModel.CardReader" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DATNModel.Category" Width="1.5" PointX="7.75" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DATNModel.ChildMenu" Width="1.5" PointX="15" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DATNModel.Company" Width="1.5" PointX="7.75" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DATNModel.Course" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DATNModel.Faculty" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DATNModel.Infringe" Width="1.5" PointX="12" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DATNModel.Kind" Width="1.5" PointX="7.75" PointY="12.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DATNModel.Language" Width="1.5" PointX="7.75" PointY="15.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DATNModel.Level" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DATNModel.Menu" Width="1.5" PointX="12.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DATNModel.PendingStatu" Width="1.5" PointX="2.75" PointY="14.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DATNModel.Reader" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DATNModel.Return" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DATNModel.Role_Menu" Width="1.5" PointX="15" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DATNModel.Specialized" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DATNModel.sysdiagram" Width="1.5" PointX="4.75" PointY="14.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DATNModel.TrainingSystem" Width="1.5" PointX="0.75" PointY="16.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DATNModel.YearSchool" Width="1.5" PointX="0.75" PointY="18.75" IsExpanded="true" />
+      <Diagram DiagramId="50b734827d2b4828a3ac067eb9807848" Name="Diagram1">
+        <EntityTypeShape EntityType="DATNModel.C__MigrationHistory" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DATNModel.AspNetRole" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DATNModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DATNModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DATNModel.AspNetUser" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DATNModel.Book" Width="1.5" PointX="11" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DATNModel.Borrow" Width="1.5" PointX="12.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DATNModel.BorrowDetail" Width="1.5" PointX="15" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DATNModel.BorrowDetailLog" Width="1.5" PointX="12.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DATNModel.CardReader" Width="1.5" PointX="10.5" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DATNModel.Category" Width="1.5" PointX="8.75" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DATNModel.ChildMenu" Width="1.5" PointX="3" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DATNModel.Company" Width="1.5" PointX="8.75" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DATNModel.Faculty" Width="1.5" PointX="6" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DATNModel.Image" Width="1.5" PointX="13.25" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DATNModel.Infringe" Width="1.5" PointX="17.25" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DATNModel.Job" Width="1.5" PointX="6" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DATNModel.Kind" Width="1.5" PointX="8.75" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DATNModel.Language" Width="1.5" PointX="8.75" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DATNModel.Level" Width="1.5" PointX="6" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DATNModel.Menu" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DATNModel.PendingStatu" Width="1.5" PointX="12.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DATNModel.Reader" Width="1.5" PointX="8.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DATNModel.Return" Width="1.5" PointX="10.5" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DATNModel.Role_Menu" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DATNModel.sysdiagram" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DATNModel.TrainingSystem" Width="1.5" PointX="6" PointY="17.625" IsExpanded="true" />
         <AssociationConnector Association="DATNModel.FK_Role_Menu_AspNetRoles" ManuallyRouted="false" />
         <AssociationConnector Association="DATNModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="DATNModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="DATNModel.FK_Reader_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="DATNModel.FK_Book_Category" ManuallyRouted="false" />
         <AssociationConnector Association="DATNModel.FK_Book_Company" ManuallyRouted="false" />
         <AssociationConnector Association="DATNModel.FK_Book_Kind" ManuallyRouted="false" />
         <AssociationConnector Association="DATNModel.FK_Book_Language" ManuallyRouted="false" />
+        <AssociationConnector Association="DATNModel.FK_Image_Book" ManuallyRouted="false" />
         <AssociationConnector Association="DATNModel.FK_Borrow_CardReader" ManuallyRouted="false" />
         <AssociationConnector Association="DATNModel.FK_BorrowDetail_Borrow" ManuallyRouted="false" />
         <AssociationConnector Association="DATNModel.FK_Infringe_BorrowDetail" ManuallyRouted="false" />
         <AssociationConnector Association="DATNModel.FK_CardReader_Reader" ManuallyRouted="false" />
         <AssociationConnector Association="DATNModel.FK_ChildMenu_Menu" ManuallyRouted="false" />
-        <AssociationConnector Association="DATNModel.FK_Reader_Course" ManuallyRouted="false" />
         <AssociationConnector Association="DATNModel.FK_Reader_Faculty" ManuallyRouted="false" />
+        <AssociationConnector Association="DATNModel.FK_Reader_Job" ManuallyRouted="false" />
         <AssociationConnector Association="DATNModel.FK_Reader_Level" ManuallyRouted="false" />
         <AssociationConnector Association="DATNModel.FK_Role_Menu_Menu" ManuallyRouted="false" />
-        <AssociationConnector Association="DATNModel.FK_Reader_Specialized" ManuallyRouted="false" />
         <AssociationConnector Association="DATNModel.FK_Reader_TrainingSystem" ManuallyRouted="false" />
-        <AssociationConnector Association="DATNModel.FK_Reader_YearSchool" ManuallyRouted="false" />
         <AssociationConnector Association="DATNModel.FK_Return_Reader" ManuallyRouted="false" />
         <AssociationConnector Association="DATNModel.AspNetUserRoles" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="DATNModel.Image" Width="1.5" PointX="12.25" PointY="12.625" />
-        <AssociationConnector Association="DATNModel.FK_Image_Book" />
+        <AssociationConnector Association="DATNModel.FK_Borrow_PendingStatus" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

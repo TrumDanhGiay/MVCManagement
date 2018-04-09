@@ -12,18 +12,16 @@ namespace DuongTrang.Core.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Course
+    public partial class Job
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Course()
+        public Job()
         {
             this.Readers = new HashSet<Reader>();
         }
     
-        public System.Guid CourseID { get; set; }
-        public string CourseName { get; set; }
-        public Nullable<System.Guid> CreateBy { get; set; }
-        public Nullable<System.DateTime> CreateDate { get; set; }
+        public System.Guid JobID { get; set; }
+        public string JobName { get; set; }
         public Nullable<bool> IsDelete { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

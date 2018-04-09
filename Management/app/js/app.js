@@ -238,6 +238,45 @@ app.config(function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, AS
                 }
             }
         }).
+         //Nghiệp vụ
+        state('app.major', {
+            url: '/major',
+            template: '<ui-view></uiview>'
+        }).
+        state('app.major.borrow', {
+            url: '/borrow',
+            templateUrl: appHelper.templatePath('ui/borrow'),
+            controller: 'BorrowController',
+            resolve: {
+                deps: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        ASSETS.tables.datatables,
+                    ]);
+                },
+            }
+        }).
+        state('app.major.handing', {
+            url: '/handing',
+            templateUrl: appHelper.templatePath('ui/handing'),
+            resolve: {
+                fwDependencies: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+						ASSETS.core.bootstrap,
+						ASSETS.core.jQueryUI,
+						ASSETS.forms.jQueryValidate,
+						ASSETS.forms.inputmask,
+						ASSETS.forms.multiSelect,
+						ASSETS.forms.datepicker,
+						ASSETS.forms.selectboxit,
+						ASSETS.forms.formWizard,
+                    ]);
+                },
+                formWizard: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                    ]);
+                },
+            },
+        }).
 
 		// Mailbox
 		state('app.mailbox-inbox', {
