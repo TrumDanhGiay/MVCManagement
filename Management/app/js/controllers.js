@@ -622,7 +622,103 @@ angular.module('trang.controllers', []).
 
         //click td element
         $scope.handling = function (item) {
-            $state.go('app.major.handing');
+            sessionStorage["CardReaderID"] = item.CardReaderID;
+            $state.go('app.major.handing', { "id": item.BorrowCode });
         };
+    })
+
+    .controller('HandingController', function ($scope, $state, $stateParams, BaseServices, $sessionStorage, $rootScope, $modal) {
+        $scope.param = $stateParams.id;
+        $scope.CardReaderID = sessionStorage["CardReaderID"];
+        $scope.BookCodeSelected = null;
+        //load init data
+        BaseServices.AuthencationKeyGet('api/Borrow/' + $scope.param, sessionStorage['token'])
+                .then(function (response) {
+                    if (response.data != 0) {
+                        BaseServices.AuthencationKeyPut('api/Borrow/' + $scope.param, 2, sessionStorage['token'])
+                        .then(function (response1) {
+                        }).catch(function (error) {
+                            console.log(error);
+                        });
+                        $scope.listborrow = response.data;
+                        $scope.BookCodeSelected = $scope.listborrow[0].BookCode;
+                        $scope.getbook($scope.listborrow[0].BookCode);
+                        $scope.timetoget = moment($scope.listborrow[0].TimeToGet).format('hh:mm A');
+                        $scope.dateborrow = moment($scope.listborrow[0].DateBorrow).format('DD/MM/YYYY');
+                        $scope.dateexpried = moment($scope.listborrow[0].DateExpried).format('DD/MM/YYYY');
+                    }
+                    else {
+                        toastr.info('Đã có thủ thư khác xử lý yêu cầu này');
+                        $scope.listborrow = [{ PendingStatusName: 'Đang xử lý' }];
+                    }
+
+                }).catch(function (error) {
+                    console.log(error);
+                });
+        BaseServices.AuthencationKeyGet('api/Reader/' + $scope.CardReaderID, sessionStorage['token'])
+                .then(function (response) {
+                    $scope.infomation = response.data[0];
+                }).catch(function (error) {
+                    console.log(error);
+                });
+        // //option for datatable
+        // $scope.dtOptions = DTOptionsBuilder.newOptions()
+        //.withDisplayLength(10)
+        //.withOption('bLengthChange', true)
+        //.withOption('responsive', true)
+
+        //getbookinfo
+        $scope.getbook = function (bookcode) {
+            $scope.BookCodeSelected = bookcode;
+            BaseServices.AuthencationKeyGet('api/Book/' + bookcode, sessionStorage['token'])
+                .then(function (response) {
+                    $scope.bookinfo = response.data[0];
+                }).catch(function (error) {
+                    console.log(error);
+                });
+        }
+
+        //Open modal reson
+        $scope.openModal = function (modal_size, modal_backdrop) {
+            $rootScope.currentModal = $modal.open({
+                templateUrl: 'modal-confirm',
+                size: modal_size,
+                backdrop: typeof modal_backdrop == 'undefined' ? true : modal_backdrop,
+            });
+        }
+
+        //denied borrow
+        $rootScope.denided = function () {
+            var PendingStatus = 6;
+            BaseServices.AuthencationKeyPut('api/Borrow/' + $scope.param, PendingStatus, sessionStorage['token'])
+            .then(function (response) {
+                console.log(response);
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
+
+        $scope.accept = function () {
+            var opts = {
+                "closeButton": true,
+                "debug": false,
+                "positionClass": "toast-bottom-right",
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "8000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+            toastr.success("Bạn đã xác nhận yêu cầu mượn " + $scope.param + " .", "Xác nhận mượn thành công", opts);
+            BaseServices.AuthencationKeyPut('api/Borrow/' + $scope.param, 3, sessionStorage['token'])
+            .then(function (response) {
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
     })
 ;

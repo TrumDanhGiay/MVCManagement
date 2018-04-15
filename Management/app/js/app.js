@@ -251,13 +251,15 @@ app.config(function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, AS
                 deps: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([
                         ASSETS.tables.datatables,
+                        ASSETS.extra.toastr
                     ]);
                 },
             }
         }).
         state('app.major.handing', {
-            url: '/handing',
+            url: '/handing/:id',
             templateUrl: appHelper.templatePath('ui/handing'),
+            controller : 'HandingController',
             resolve: {
                 fwDependencies: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([
@@ -269,6 +271,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, AS
 						ASSETS.forms.datepicker,
 						ASSETS.forms.selectboxit,
 						ASSETS.forms.formWizard,
+                        ASSETS.forms.timepicker,
                     ]);
                 },
                 formWizard: function ($ocLazyLoad) {

@@ -1,7 +1,6 @@
 ﻿
 
-<page-title ng-if="layoutOptions.pageTitles" title="Xử lý yêu cầu mượn" description="Mã mượn"></page-title>
-
+<page-title ng-if="layoutOptions.pageTitles" title="Xử lý yêu cầu mượn" description="Mã mượn : {{param}} "></page-title>
 
 <script type="text/javascript">
 	jQuery(document).ready(function($)
@@ -26,38 +25,31 @@
 		});
 	});
 </script>
+<style>
+    .selected {
+        background-color: #daf9b8 !important;
+    }
+</style>
 
 <form role="forl" id="rootwizard" class="form-wizard validate" novalidate>
 
     <ul class="tabs">
         <li class="active">
-            <a href="#fwv-1" data-toggle="tab">
+            <a href="#fwv-1" target="_self" data-toggle="tab">
                 Thông tin mượn
                 <span>1</span>
             </a>
         </li>
         <li>
-            <a href="#fwv-2" data-toggle="tab">
-                Address
+            <a href="#fwv-2" target="_self" data-toggle="tab">
+                Xử lý
                 <span>2</span>
             </a>
         </li>
         <li>
-            <a href="#fwv-3" data-toggle="tab">
-                Education
+            <a href="#fwv-3" target="_self" data-toggle="tab">
+                Xác nhận với người mượn
                 <span>3</span>
-            </a>
-        </li>
-        <li>
-            <a href="#fwv-4" data-toggle="tab">
-                Personal Info
-                <span>4</span>
-            </a>
-        </li>
-        <li>
-            <a href="#fwv-5" data-toggle="tab">
-                Register
-                <span>5</span>
             </a>
         </li>
     </ul>
@@ -69,470 +61,102 @@
     <div class="tab-content no-margin">
 
         <!-- Tabs Content -->
-        <div class="tab-pane with-bg active" id="fwv-1">
-
-            <div class="row">
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label" for="full_name">Full Name</label>
-                        <input class="form-control" name="full_name" id="full_name" data-validate="required" placeholder="Your full name" />
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label" for="birthdate">Date of Birth</label>
-                        <input class="form-control" inputmask name="birthdate" id="birthdate" data-validate="required" data-mask="date" placeholder="Pre-formatted birth date" />
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label class="control-label" for="about">Write Something About You</label>
-                        <textarea class="form-control autogrow" name="about" id="about" data-validate="minlength[10]" rows="5" placeholder="Could be used also as Motivation Letter"></textarea>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="tab-pane with-bg" id="fwv-2">
-
-            <div class="row">
-
-                <div class="col-md-8">
-                    <div class="form-group">
-                        <label class="control-label" for="street">Street</label>
-                        <input class="form-control" name="street" id="street" data-validate="required" placeholder="Enter your street address" />
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="control-label" for="door_no">Door no.</label>
-                        <input class="form-control" name="door_no" id="door_no" data-validate="number" placeholder="Numbers only" />
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label class="control-label" for="address_line_2">Address Line 2</label>
-                        <input class="form-control" name="address_line_2" id="address_line_2" placeholder="(Optional) Secondary Address" />
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-5">
-                    <div class="form-group">
-                        <label class="control-label" for="city">City</label>
-                        <input class="form-control" name="city" id="city" data-validate="required" placeholder="Current city" />
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="control-label" for="state">State</label>
-
-                        <select name="test" class="selectboxit">
-                            <optgroup label="United States">
-                                <option value="1">Alabama</option>
-                                <option value="2">Boston</option>
-                                <option value="3">Ohaio</option>
-                                <option value="4">New York</option>
-                                <option value="5">Washington</option>
-                            </optgroup>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label class="control-label" for="zip">Zip</label>
-                        <input class="form-control" inputmask name="zip" id="zip" data-mask="** *** **" data-validate="required" placeholder="Zip Code" />
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="tab-pane with-bg" id="fwv-3">
-
-            <strong>Primary School</strong>
-            <br />
-            <br />
-
+        <div class="tab-pane with-bg active" id="fwv-1" ng-style=" listborrow[0].PendingStatusName == 'Từ chối' ? {'pointer-events' : 'none', 'opacity' : '0.5', 'background' : '#CCC'} : {'pointer-events' : 'auto', 'opacity' : '1.0', 'background' : '#FFF'}">
 
             <div class="row">
 
                 <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="control-label" for="prim_subject">Subject</label>
-                        <input class="form-control" name="prim_subject" id="prim_subject" data-validate="require" placeholder="Graduation Degree" />
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="control-label" for="prim_school">School Name</label>
-                        <input class="form-control" name="prim_school" id="prim_school" placeholder="Which school did you attended" />
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="control-label" for="prim_date_start">Start Date</label>
-                        <input class="form-control datepicker" name="prim_date_start" id="prim_date_start" data-start-view="2" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="control-label" for="prim_date_end">End Date</label>
-                        <input class="form-control datepicker" name="prim_date_end" id="prim_date_end" data-start-view="2" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-            </div>
-
-            <br />
-
-            <strong>Secondary School</strong>
-            <br />
-            <br />
-
-            <div class="row">
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="control-label" for="second_subject">Subject</label>
-                        <input class="form-control" name="second_subject" id="second_subject" data-validate="require" placeholder="High School" />
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="control-label" for="second_school">School Name</label>
-                        <input class="form-control" name="second_school" id="second_school" placeholder="Which school did you attended" />
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="control-label" for="second_date_start">Start Date</label>
-                        <input class="form-control datepicker" name="second_date_start" id="second_date_start" data-start-view="2" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="control-label" for="second_date_end">End Date</label>
-                        <input class="form-control datepicker" name="second_date_end" id="second_date_end" data-start-view="2" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-            </div>
-
-            <br />
-
-            <div class="row">
-
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label class="control-label" for="other_qualifications"><strong>Other Qualifications</strong></label>
-                        <textarea class="form-control autogrow" name="other_qualifications" id="other_qualifications" placeholder="List one subject per row"></textarea>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="tab-pane with-bg" id="fwv-4">
-
-            <strong>Current &amp; Past Jobs</strong>
-            <br />
-            <br />
-
-            <div class="row">
-
-                <div class="col-md-1">
-                    <label class="control-label">&nbsp;</label>
-                    <p class="text-right">
-                        <span class="label label-info">1</span>
-                    </p>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label class="control-label" for="job_position_1">Company Name</label>
-                        <input class="form-control" name="job_position_1" id="job_position_1" data-validate="require" placeholder="Your current job" />
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="control-label" for="job_position_1">Job Position</label>
-                        <input class="form-control" name="job_position_1" id="job_position_1" data-validate="require" placeholder="Your current position" />
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="control-label" for="job_position_start_date_1">Start Date</label>
-                        <input class="form-control datepicker" name="job_position_start_date_1" id="job_position_start_date_1" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="control-label" for="job_position_end_date_1">End Date</label>
-                        <input class="form-control datepicker" name="job_position_end_date_1" id="job_position_end_date_1" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-1">
-                    <label class="control-label">&nbsp;</label>
-                    <p class="text-right">
-                        <span class="label label-info">2</span>
-                    </p>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label class="control-label" for="job_position_2">Company Name</label>
-                        <input class="form-control" name="job_position_2" id="job_position_2" data-validate="require" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="control-label" for="job_position_2">Job Position</label>
-                        <input class="form-control" name="job_position_2" id="job_position_2" data-validate="require" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="control-label" for="job_position_start_date_2">Start Date</label>
-                        <input class="form-control datepicker" name="job_position_start_date_2" id="job_position_start_date_2" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="control-label" for="job_position_end_date_2">End Date</label>
-                        <input class="form-control datepicker" name="job_position_end_date_2" id="job_position_end_date_2" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-1">
-                    <label class="control-label">&nbsp;</label>
-                    <p class="text-right">
-                        <span class="label label-info">3</span>
-                    </p>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label class="control-label" for="job_position_3">Company Name</label>
-                        <input class="form-control" name="job_position_3" id="job_position_3" data-validate="require" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="control-label" for="job_position_3">Job Position</label>
-                        <input class="form-control" name="job_position_3" id="job_position_3" data-validate="require" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="control-label" for="job_position_start_date_3">Start Date</label>
-                        <input class="form-control datepicker" name="job_position_start_date_3" id="job_position_start_date_3" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="control-label" for="job_position_end_date_3">End Date</label>
-                        <input class="form-control datepicker" name="job_position_end_date_3" id="job_position_end_date_3" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-1">
-                    <label class="control-label">&nbsp;</label>
-                    <p class="text-right">
-                        <span class="label label-info">4</span>
-                    </p>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label class="control-label" for="job_position_4">Company Name</label>
-                        <input class="form-control" name="job_position_4" id="job_position_4" data-validate="require" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="control-label" for="job_position_4">Job Position</label>
-                        <input class="form-control" name="job_position_4" id="job_position_4" data-validate="require" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="control-label" for="job_position_start_date_4">Start Date</label>
-                        <input class="form-control datepicker" name="job_position_start_date_4" id="job_position_start_date_4" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="control-label" for="job_position_end_date_4">End Date</label>
-                        <input class="form-control datepicker" name="job_position_end_date_4" id="job_position_end_date_4" placeholder="(Optional)" />
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="tab-pane with-bg" id="fwv-5">
-
-            <div class="form-group">
-                <label class="control-label">Choose Username</label>
-
-                <div class="input-group">
-                    <div class="input-group-addon">
-                        <i class="linecons-user"></i>
-                    </div>
-
-                    <input type="text" class="form-control" name="username" id="username" data-validate="required,minlength[5]" data-message-minlength="Username must have minimum of 5 chars." placeholder="Could also be your email" />
-                </div>
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">Choose Password</label>
-
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                <i class="linecons-lock"></i>
-                            </div>
-
-                            <input type="password" class="form-control" name="password" id="password" data-validate="required" placeholder="Enter strong password" />
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img ng-src="{{infomation.Avartar}}" width="150" height="200" />
+                        </div>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-6" style="line-height:1.94141; border-right : 1px solid black;">
+                            <label class="control-label">Tên: <span style="font-weight : bold">{{infomation.FullName}}</span></label><br />
+                            <label class="control-label">Mã sinh viên: <span style="font-weight : bold">{{infomation.Identifier}}</span></label><br />
+                            <label class="control-label">Công việc: <span style="font-weight : bold">{{infomation.JobName}}</span></label><br />
+                            <label class="control-label">Hệ: <span style="font-weight : bold">{{infomation.TrainingSystem1}}</span></label><br />
+                            <label class="control-label">Mã thẻ đọc: <span style="font-weight : bold">{{infomation.CardReaderCode}}</span></label><br />
+                            <label class="control-label">Ngày mở thẻ: <span style="font-weight : bold">{{infomation.DateStart | date : "dd/MM/yyyy"}}</span></label><br />
+                            <label class="control-label">Ngày hết hạn: <span style="font-weight : bold">{{infomation.DateExpried | date : "dd/MM/yyyy"}}</span></label><br />
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">Repeat Password</label>
+                <div class="col-sm-5">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th width="1%" class="text-center">#</th>
+                                <th width="20%">Mã sách</th>
+                                <th width="50%">Tên sách</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="borrow in listborrow" ng-click="getbook(borrow.BookCode)" style="cursor: pointer" ng-class="{'selected' : borrow.BookCode == BookCodeSelected}">
+                                <td>{{$index + 1}}</td>
+                                <td>{{borrow.BookCode}}</td>
+                                <td>{{borrow.BookName}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                <i class="linecons-lock"></i>
-                            </div>
-
-                            <input type="password" class="form-control" name="password" id="password" data-validate="required,equalTo[#password]" data-message-equal-to="Passwords doesn't match." placeholder="Confirm password" />
+                </div>
+                <div class="col-md-3">
+                    <div class="row">
+                        <div class="col-md-8" style="line-height:2.54141;">
+                            <label class="control-label">Tên sách: <span style="font-weight : bold">{{bookinfo.BookName}}</span></label><br />
+                            <label class="control-label">Tác giả: <span style="font-weight : bold">{{bookinfo.Author}}</span></label><br />
+                            <label class="control-label">Giá tiền: <span style="font-weight : bold">{{bookinfo.Price}} VNĐ</span></label><br />
+                            <label class="control-label">Năm xuất bản: <span style="font-weight : bold">{{bookinfo.YearPublish | date : "yyyy"}}</span></label><br />
+                            <label class="control-label">Danh mục: <span style="font-weight : bold">{{bookinfo.CategoryName}}</span></label><br />
+                            <label class="control-label">Nhà xuất bản: <span style="font-weight : bold">{{bookinfo.CompanyName}}</span></label><br />
+                            <label class="control-label" ng-show="bookinfo.Remaining <= 0"><span class="text-danger" style="font-weight : bold">(*) Sách này đã hết trong thư viện</span></label>
+                        </div>
+                        <div class="col-md-4" style="position: absolute;right: 0;bottom: 0;">
+                            <button ng-show="listborrow[0].PendingStatusName == 'Đặt mượn' || listborrow[0].PendingStatusName == 'Đang xử lý' " class="btn btn-danger" style="margin-bottom: 0; position: absolute;right: -4px;bottom: -19px;" ng-click="openModal()">Từ chối</button>
                         </div>
                     </div>
                 </div>
 
             </div>
 
+
+        </div>
+
+        <div class="tab-pane with-bg" id="fwv-2" ng-style="listborrow[0].PendingStatusName == 'Từ chối' ? {'pointer-events' : 'none', 'opacity' : '0.5', 'background' : '#CCC'} : {'pointer-events' : 'auto', 'opacity' : '1.0', 'background' : '#FFF'}">
             <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel-body">
+                        <label class="col-sm-2 control-label">Thời gian đến nhận sách</label>
 
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">Include Services</label>
-
-                        <select multiple="multiple" name="my-select[]" class="form-control multi-select">
-                            <option value="1">Web Builder</option>
-                            <option value="2" selected>Server Side Scripting</option>
-                            <option value="3">Secure Connection</option>
-                            <option value="4" selected>Database Access</option>
-                            <option value="5" selected>Email</option>
-                            <option value="6">eCommerce</option>
-                            <option value="7">Royalty Free Photos</option>
-                            <option value="8">WordPress Installation</option>
-                            <option value="9">Magento Installation</option>
-                            <option value="10">Reseller Account</option>
-                            <option value="11">WHM Client</option>
-                            <option value="12">Nginx</option>
-                        </select>
+                        <div class="col-sm-2">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="linecons-clock"></i>
+                                </div>
+                                <input type="text" class="form-control timepicker" ng-model="timetoget" />
+                            </div>
+                        </div>
+                        <button ng-show="listborrow[0].PendingStatusName == 'Đặt mượn' || listborrow[0].PendingStatusName == 'Đang xử lý' " style="float:right;" class="btn btn-danger" ng-click="openModal()">Từ chối</button>
+                        <button ng-show="listborrow[0].PendingStatusName == 'Đặt mượn' || listborrow[0].PendingStatusName == 'Đang xử lý' " style="float:right;" class="btn btn-secondary" ng-click="accept()">Xác nhận mượn</button>
                     </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="control-label">Gender</label>
-
-                        <br />
-
-                        <input type="checkbox" class="iswitch iswitch-red" checked>
+                    <div class="col-sm-6">
+                        <label class="col-sm-2 control-label" for="dateborrow">Ngày mượn</label>
+                        <input type="text" class="form-control" id="dateborrow" ng-model="dateborrow">
                     </div>
-
-                    <div class="form-group">
-                        <label class="control-label">Subscribe for Newsletter</label>
-
-                        <br />
-
-                        <input type="checkbox" class="iswitch iswitch-purple" checked>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label">
-                            Auto-renew Subscription
-                            <span class="label label-warning">Yearly</span>
-                        </label>
-
-                        <br />
-
-                        <input type="checkbox" class="iswitch iswitch-secondary" checked>
+                    <div class="col-sm-6">
+                        <label class="col-sm-2 control-label" for="dateexpried">Ngày trả</label>
+                        <input type="text" class="form-control" id="dateexpried" ng-model="dateexpried">
                     </div>
                 </div>
 
             </div>
+        </div>
 
-            <div class="form-group">
-                <input type="checkbox" class="cbr" name="chk-rules" id="chk-rules" data-validate="required" data-message-message="You must accept rules in order to complete this registration.">
-                <label for="chk-rules">By registering I accept terms and conditions.</label>
-            </div>
+        <div class="tab-pane with-bg" id="fwv-3" ng-style=" listborrow[0].PendingStatusName == 'Từ chối' ? {'pointer-events' : 'none', 'opacity' : '0.5', 'background' : '#CCC'} : {'pointer-events' : 'auto', 'opacity' : '1.0', 'background' : '#FFF'}">
 
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Finish Registration</button>
-            </div>
+            
 
         </div>
 
@@ -552,3 +176,33 @@
     </div>
 
 </form>
+
+<script type="text/ng-template" id="modal-confirm">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="currentModal.close();" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Bạn muốn từ chối yêu cầu mượn này? Vui lòng nhập lý do</h4>
+    </div>
+
+    <div class="modal-body">
+        <div class="form-group" ng-form name="myForm">
+            <label class="control-label" for="reaSon">Lý do</label>
+            <input name="reaSon" type="text" class="form-control" ng-model="bindTo" ng-required="true">
+            <br />
+            <span class="text-danger" ng-show="myForm.reaSon.$error.required">Nhập lý do!</span>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-white" ng-click="currentModal.close();">Hủy</button>
+        <button type="button" class="btn btn-info" ng-click="denided();" ng-disabled="myForm.reaSon.$error.required">Xác nhận</button>
+    </div>
+</script>
+<style>
+    body.modal-open .page-container {
+        -webkit-filter: blur(2px);
+        -moz-filter: blur(1px);
+        -o-filter: blur(1px);
+        -ms-filter: blur(1px);
+        filter: blur(2px);
+    }
+</style>

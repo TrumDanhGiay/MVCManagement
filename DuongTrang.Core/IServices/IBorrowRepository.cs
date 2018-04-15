@@ -10,6 +10,8 @@ namespace DuongTrang.Core.IServices
     public interface IBorrowRepository : IBaseRepository<Borrow>
     {
         IQueryable<object> GetAllBorrow();
-        object GetSingle(string borrowId);
+        object GetBorrowInfomation(string borrowCode);
+        bool UpdatePendingStatus(string borrowCode, int PendingStatus);
+        Borrow GetBorrow(string borrowCode);
     }
 }

@@ -35,6 +35,7 @@ namespace DuongTrang.Core.Models
         public System.Guid CreateBy { get; set; }
         public string Keyword { get; set; }
         public bool IsDelete { get; set; }
+        public Nullable<int> Remaining { get; set; }
     
         public virtual Category Category { get; set; }
         public virtual Company Company { get; set; }

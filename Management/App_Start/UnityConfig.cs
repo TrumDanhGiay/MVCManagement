@@ -30,6 +30,7 @@ namespace Management
             container.RegisterType<IDataFirstRepository, DataFirstRepository>();
             container.RegisterType<IGetIdByName, GetIdByName>();
             container.RegisterType<IBorrowRepository, BorrowRepository>();
+            container.RegisterType<ICardReaderRepository, CardReaderRepository>();
             container.RegisterType<AccountController>(new InjectionConstructor());
             container.RegisterType(typeof(ISecureDataFormat<>), typeof(SecureDataFormat<>));
             container.RegisterType<ITextEncoder, Base64UrlTextEncoder>();

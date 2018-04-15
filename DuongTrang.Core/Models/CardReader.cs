@@ -27,6 +27,7 @@ namespace DuongTrang.Core.Models
         public System.Guid CreateBy { get; set; }
         public System.DateTime CreateDate { get; set; }
         public Nullable<bool> IsDelete { get; set; }
+        public string CardReaderCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Borrow> Borrows { get; set; }

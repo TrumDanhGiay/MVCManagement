@@ -275,6 +275,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController\BookController.cs" />
     <Compile Include="Controllers\AdminController\BorrowController.cs" />
+    <Compile Include="Controllers\AdminController\ReaderController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -1214,6 +1215,8 @@
     <Content Include="assets\js\devexpress-web-14.1\js\dx.chartjs.js" />
     <Content Include="assets\js\devexpress-web-14.1\js\globalize.min.js" />
     <Content Include="assets\js\devexpress-web-14.1\js\knockout-3.1.0.js" />
+    <Content Include="Avatar\1.jpg" />
+    <Content Include="Avatar\2.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />

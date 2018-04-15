@@ -34,7 +34,7 @@
                             <th data-priority="1">Mã yêu cầu</th>
                             <th data-priority="3">Tên người mượn</th>
                             <th data-priority="1">Ngày đặt mượn</th>
-                            <th data-priority="3">Tổng</th>
+                            <th data-priority="3">Ngày hẹn trả</th>
                             <th data-priority="3">Trạng thái</th>
                         </tr>
                     </thead>
@@ -43,8 +43,14 @@
                             <td>{{borrow.BorrowCode}}</td>
                             <td>{{borrow.FullName}}</td>
                             <td>{{borrow.DateBorrow | date :  "dd.MM.yyyy"}}</td>
-                            <td>{{borrow.AmountTotal}}</td>
-                            <td>{{borrow.PendingStatusName}}</td>
+                            <td>{{borrow.DateExpried | date :  "dd.MM.yyyy"}}</td>
+                            <td><span ng-class="{'badge badge-warning pull-right' : borrow.PendingStatusName == 'Đặt mượn', 
+                                                 'badge badge-danger pull-right': borrow.PendingStatusName == 'Từ chối',
+                                                 'badge badge-secondary pull-right': borrow.PendingStatusName == 'Đã xác nhận',
+                                                 'badge badge-white pull-right': borrow.PendingStatusName == 'Đã xử lý',
+                                                 'badge badge-pink pull-right': borrow.PendingStatusName == 'Đang xác nhận',
+                                                 'badge badge-info pull-right': borrow.PendingStatusName == 'Đang xử lý',
+                                                 }" style="color: black; float:left !important;margin-top: -2px;">{{borrow.PendingStatusName}}</span></td>
                         </tr>
                     </tbody>
                 </table>

@@ -43,7 +43,8 @@ namespace DuongTrang.Core.DAL
                    a.Book.Content,
                    a.Book.AddDate,
                    a.AspNetUser.FullName,
-                   a.Book.Keyword
+                   a.Book.Keyword,
+                   a.Book.Remaining
                }).FirstOrDefault();
             var bookimage = Context.Images.Where(x => x.BookID == bookinfo.BookID).Select(u => new
             {

@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomModels\BookViewModels.cs" />
+    <Compile Include="CustomModels\BorrowViewModels.cs" />
     <Compile Include="CustomModels\ChildMenuViewModels.cs" />
     <Compile Include="CustomModels\MenuViewModels.cs" />
     <Compile Include="DAL\BaseRepository.cs" />
@@ -60,12 +61,14 @@
     <Compile Include="DAL\DataFirstRepository.cs" />
     <Compile Include="DAL\GetIdByName.cs" />
     <Compile Include="DAL\MenuRepository.cs" />
+    <Compile Include="DAL\CardReaderRepository.cs" />
     <Compile Include="IServices\IBaseRepository.cs" />
     <Compile Include="IServices\IBookRepository.cs" />
     <Compile Include="IServices\IBorrowRepository.cs" />
     <Compile Include="IServices\IDataFirstRepository.cs" />
     <Compile Include="IServices\IGetIdByName.cs" />
     <Compile Include="IServices\IMenuRepository.cs" />
+    <Compile Include="IServices\ICardReaderRepository.cs" />
     <Compile Include="Models\AspNetRole.cs">
       <DependentUpon>DATNEntities.tt</DependentUpon>
     </Compile>

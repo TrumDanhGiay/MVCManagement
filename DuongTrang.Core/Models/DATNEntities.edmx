@@ -87,6 +87,7 @@
           <Property Name="Content" Type="nvarchar(max)" />
           <Property Name="AddDate" Type="date" />
           <Property Name="CreateBy" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Remaining" Type="int" />
           <Property Name="Keyword" Type="nvarchar" MaxLength="150" />
           <Property Name="IsDelete" Type="bit" Nullable="false" />
         </EntityType>
@@ -98,7 +99,10 @@
           <Property Name="BorrowCode" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="CardReaderID" Type="uniqueidentifier" />
           <Property Name="DateBorrow" Type="date" />
+          <Property Name="DateExpried" Type="date" />
           <Property Name="AmountTotal" Type="int" />
+          <Property Name="AcceptBy" Type="uniqueidentifier" />
+          <Property Name="TimeToGet" Type="datetime" Nullable="false" />
           <Property Name="CreateBy" Type="uniqueidentifier" />
           <Property Name="CreateDate" Type="date" />
           <Property Name="PendingStatusID" Type="int" />
@@ -111,7 +115,6 @@
           <Property Name="BorrowDetailID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="BorrowID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="BookID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="DateExpried" Type="date" Nullable="false" />
           <Property Name="CreateDate" Type="date" Nullable="false" />
           <Property Name="CreateBy" Type="uniqueidentifier" Nullable="false" />
           <Property Name="IsDelete" Type="bit" />
@@ -135,6 +138,7 @@
           </Key>
           <Property Name="CardReaderID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ReaderID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CardReaderCode" Type="varchar" MaxLength="256" />
           <Property Name="DateStart" Type="date" />
           <Property Name="DateExpried" Type="date" />
           <Property Name="CreateBy" Type="uniqueidentifier" Nullable="false" />
@@ -798,6 +802,7 @@
           <NavigationProperty Name="Kind" Relationship="Self.FK_Book_Kind" FromRole="Book" ToRole="Kind" />
           <NavigationProperty Name="Language" Relationship="Self.FK_Book_Language" FromRole="Book" ToRole="Language" />
           <NavigationProperty Name="Images" Relationship="Self.FK_Image_Book" FromRole="Book" ToRole="Image" />
+          <Property Name="Remaining" Type="Int32" />
         </EntityType>
         <EntityType Name="Borrow">
           <Key>
@@ -815,6 +820,9 @@
           <Property Name="PendingStatusID" Type="Int32" />
           <NavigationProperty Name="PendingStatu" Relationship="DATNModel.FK_Borrow_PendingStatus" FromRole="Borrow" ToRole="PendingStatu" />
           <Property Name="BorrowCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AcceptBy" Type="Guid" />
+          <Property Name="TimeToGet" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="DateExpried" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="BorrowDetail">
           <Key>
@@ -823,7 +831,6 @@
           <Property Name="BorrowDetailID" Type="Guid" Nullable="false" />
           <Property Name="BorrowID" Type="Guid" Nullable="false" />
           <Property Name="BookID" Type="Guid" Nullable="false" />
-          <Property Name="DateExpried" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="CreateBy" Type="Guid" Nullable="false" />
           <Property Name="IsDelete" Type="Boolean" />
@@ -856,6 +863,7 @@
           <Property Name="IsDelete" Type="Boolean" />
           <NavigationProperty Name="Borrows" Relationship="Self.FK_Borrow_CardReader" FromRole="CardReader" ToRole="Borrow" />
           <NavigationProperty Name="Reader" Relationship="Self.FK_CardReader_Reader" FromRole="CardReader" ToRole="Reader" />
+          <Property Name="CardReaderCode" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -1484,6 +1492,7 @@
           <EntitySetMapping Name="Books">
             <EntityTypeMapping TypeName="DATNModel.Book">
               <MappingFragment StoreEntitySet="Book">
+                <ScalarProperty Name="Remaining" ColumnName="Remaining" />
                 <ScalarProperty Name="BookID" ColumnName="BookID" />
                 <ScalarProperty Name="BookCode" ColumnName="BookCode" />
                 <ScalarProperty Name="BookName" ColumnName="BookName" />
@@ -1505,6 +1514,9 @@
           <EntitySetMapping Name="Borrows">
             <EntityTypeMapping TypeName="DATNModel.Borrow">
               <MappingFragment StoreEntitySet="Borrow">
+                <ScalarProperty Name="DateExpried" ColumnName="DateExpried" />
+                <ScalarProperty Name="TimeToGet" ColumnName="TimeToGet" />
+                <ScalarProperty Name="AcceptBy" ColumnName="AcceptBy" />
                 <ScalarProperty Name="BorrowCode" ColumnName="BorrowCode" />
                 <ScalarProperty Name="PendingStatusID" ColumnName="PendingStatusID" />
                 <ScalarProperty Name="BorrowID" ColumnName="BorrowID" />
@@ -1523,7 +1535,6 @@
                 <ScalarProperty Name="BorrowDetailID" ColumnName="BorrowDetailID" />
                 <ScalarProperty Name="BorrowID" ColumnName="BorrowID" />
                 <ScalarProperty Name="BookID" ColumnName="BookID" />
-                <ScalarProperty Name="DateExpried" ColumnName="DateExpried" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
                 <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
@@ -1547,6 +1558,7 @@
           <EntitySetMapping Name="CardReaders">
             <EntityTypeMapping TypeName="DATNModel.CardReader">
               <MappingFragment StoreEntitySet="CardReader">
+                <ScalarProperty Name="CardReaderCode" ColumnName="CardReaderCode" />
                 <ScalarProperty Name="CardReaderID" ColumnName="CardReaderID" />
                 <ScalarProperty Name="ReaderID" ColumnName="ReaderID" />
                 <ScalarProperty Name="DateStart" ColumnName="DateStart" />

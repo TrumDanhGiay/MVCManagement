@@ -23,7 +23,6 @@ namespace DuongTrang.Core.Models
         public System.Guid BorrowDetailID { get; set; }
         public System.Guid BorrowID { get; set; }
         public System.Guid BookID { get; set; }
-        public System.DateTime DateExpried { get; set; }
         public System.DateTime CreateDate { get; set; }
         public System.Guid CreateBy { get; set; }
         public Nullable<bool> IsDelete { get; set; }
