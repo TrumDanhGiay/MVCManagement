@@ -272,6 +272,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, AS
 						ASSETS.forms.selectboxit,
 						ASSETS.forms.formWizard,
                         ASSETS.forms.timepicker,
+                        ASSETS.extra.toastr
                     ]);
                 },
                 formWizard: function ($ocLazyLoad) {

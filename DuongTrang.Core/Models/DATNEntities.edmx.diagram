@@ -13,7 +13,6 @@
         <EntityTypeShape EntityType="DATNModel.Book" Width="1.5" PointX="11" PointY="13.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DATNModel.Borrow" Width="1.5" PointX="12.75" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="DATNModel.BorrowDetail" Width="1.5" PointX="15" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DATNModel.BorrowDetailLog" Width="1.5" PointX="12.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DATNModel.CardReader" Width="1.5" PointX="10.5" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="DATNModel.Category" Width="1.5" PointX="8.75" PointY="14.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DATNModel.ChildMenu" Width="1.5" PointX="3" PointY="12.625" IsExpanded="true" />
@@ -54,6 +53,7 @@
         <AssociationConnector Association="DATNModel.FK_Return_Reader" ManuallyRouted="false" />
         <AssociationConnector Association="DATNModel.AspNetUserRoles" ManuallyRouted="false" />
         <AssociationConnector Association="DATNModel.FK_Borrow_PendingStatus" />
+        <EntityTypeShape EntityType="DATNModel.BorrowLog" Width="1.5" PointX="16.125" PointY="8.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

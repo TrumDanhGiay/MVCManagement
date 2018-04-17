@@ -51,7 +51,7 @@
                             <td>{{book.Price}}</td>
                             <td>
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-default btn" ng-click="editRow(book);"><i class="glyphicon glyphicon-pencil"></i></button>
+                                    <button type="button" class="btn btn-default btn" ui-sref="app.management.CUBook({id : book.BookCode})"><i class="glyphicon glyphicon-pencil"></i></button>
                                     <button type="button" class="btn btn-default btn" ng-click="deleteRow(book);"><i class="glyphicon glyphicon-trash"></i></button>
                                 </div>
                             </td>

@@ -504,7 +504,7 @@ angular.module('trang.controllers', []).
 
         }
     }).
-    controller('EditBookController', function ($scope, BaseServices, $sessionStorage) {
+    controller('EditBookController', function ($scope, $stateParams, BaseServices, $sessionStorage) {
         $scope.checkhavebook = 0;
         $scope.data = {};
         $scope.data.createby = $sessionStorage['user'].FullName;
@@ -521,6 +521,17 @@ angular.module('trang.controllers', []).
                 console.log(error);
             })
 
+        if ($stateParams.id != undefined) {
+            BaseServices.AuthencationKeyGet('api/Book/' + $stateParams.id, sessionStorage['token'])
+                 .then(function (response) {
+                     if (response.data.length != 0) {
+                         $scope.checkhavebook = 1;
+                         binding_data(response);
+                     }
+                 }).catch(function (error) {
+                 })
+        }
+
         $scope.tabbedout = function (bookCode) {
             BaseServices.AuthencationKeyGet('api/Book/' + bookCode, sessionStorage['token'])
                 .then(function (response) {
@@ -533,6 +544,7 @@ angular.module('trang.controllers', []).
         };
 
         function binding_data(response) {
+            $scope.bookCode = $stateParams.id;
             $scope.data.bookname = response.data[0].BookName;
             $scope.data.author = response.data[0].Author;
             $scope.data.company = response.data[0].CompanyName;
@@ -630,11 +642,16 @@ angular.module('trang.controllers', []).
     .controller('HandingController', function ($scope, $state, $stateParams, BaseServices, $sessionStorage, $rootScope, $modal) {
         $scope.param = $stateParams.id;
         $scope.CardReaderID = sessionStorage["CardReaderID"];
+        $scope.usermanage = $sessionStorage['user'].FullName;
+        var date = new Date();
+        $scope.date = date.getDate();
+        $scope.month = date.getMonth() + 1;
+        $scope.year = date.getFullYear();
         $scope.BookCodeSelected = null;
         //load init data
         BaseServices.AuthencationKeyGet('api/Borrow/' + $scope.param, sessionStorage['token'])
                 .then(function (response) {
-                    if (response.data != 0) {
+                    if (response.data != 2 && response.data != 4) {
                         BaseServices.AuthencationKeyPut('api/Borrow/' + $scope.param, 2, sessionStorage['token'])
                         .then(function (response1) {
                         }).catch(function (error) {
@@ -648,8 +665,9 @@ angular.module('trang.controllers', []).
                         $scope.dateexpried = moment($scope.listborrow[0].DateExpried).format('DD/MM/YYYY');
                     }
                     else {
+                        debugger;
                         toastr.info('Đã có thủ thư khác xử lý yêu cầu này');
-                        $scope.listborrow = [{ PendingStatusName: 'Đang xử lý' }];
+                        $scope.listborrow = [{ PendingStatusName: 'Từ chối' }];
                     }
 
                 }).catch(function (error) {
@@ -698,6 +716,7 @@ angular.module('trang.controllers', []).
             });
         }
 
+        //accept borrow
         $scope.accept = function () {
             var opts = {
                 "closeButton": true,

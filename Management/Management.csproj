@@ -1061,6 +1061,7 @@
     <Content Include="app\js\angular\version.txt" />
     <Content Include="app\js\app.js" />
     <Content Include="app\js\controllers.js" />
+    <Content Include="app\js\angular\datatables.min.js" />
     <Content Include="app\js\directives.js" />
     <Content Include="app\js\factory.js" />
     <Content Include="app\js\min\app-min.js" />
@@ -1069,6 +1070,7 @@
     <Content Include="app\js\min\factory-min.js" />
     <Content Include="app\js\min\services-min.js" />
     <Content Include="app\js\min\xenon-custom-min.js" />
+    <Content Include="app\js\angular\ngStorage.min.js" />
     <Content Include="app\js\oc-lazyload\index.html" />
     <Content Include="app\js\oc-lazyload\ocLazyLoad.js" />
     <Content Include="app\js\oc-lazyload\ocLazyLoad.min.js" />

@@ -90,7 +90,7 @@
     <Compile Include="Models\BorrowDetail.cs">
       <DependentUpon>DATNEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\BorrowDetailLog.cs">
+    <Compile Include="Models\BorrowLog.cs">
       <DependentUpon>DATNEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CardReader.cs">

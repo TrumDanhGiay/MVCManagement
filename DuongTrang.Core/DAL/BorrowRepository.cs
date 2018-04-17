@@ -41,7 +41,7 @@ namespace DuongTrang.Core.DAL
         public object GetBorrowInfomation(string borrowCode)
         {
             var borrowId = Context.Borrows.FirstOrDefault(x => x.BorrowCode.Trim().Equals(borrowCode.Trim()));
-            if (borrowId.PendingStatusID == 1 || borrowId.PendingStatusID == 6)
+            if (borrowId.PendingStatusID == 1 || borrowId.PendingStatusID == 3 || borrowId.PendingStatusID == 5)
             {
                 var borrow = Context.BorrowDetails
                 .Join(Context.Books, a => a.BookID, b => b.BookID, (a, b) => new { BorrowDetail = a, Book = b })
@@ -51,6 +51,7 @@ namespace DuongTrang.Core.DAL
                     u.BorrowDetail.Borrow.BorrowCode,
                     u.Book.BookCode,
                     u.Book.BookName,
+                    u.Book.Author,
                     borrowId.PendingStatu.PendingStatusName,
                     borrowId.TimeToGet,
                     borrowId.DateBorrow,
@@ -60,10 +61,15 @@ namespace DuongTrang.Core.DAL
             }
             else
             {
-                return 0;
+                return borrowId.PendingStatusID;
             }
         }
 
+        /// <summary>
+        /// Lấy yêu cầu mượn dạng entity
+        /// </summary>
+        /// <param name="borrowCode">Mã yêu cầu</param>
+        /// <returns></returns>
         public Borrow GetBorrow(string borrowCode)
         {
             var borrow = Context.Borrows.FirstOrDefault(x => x.BorrowCode.Trim().Equals(borrowCode.Trim()));
@@ -76,11 +82,28 @@ namespace DuongTrang.Core.DAL
         /// <param name="borrowCode">Mã yêu cầu mượn</param>
         /// <param name="PendingStatus">Mã trạng thái mượn</param>
         /// <returns></returns>
-        public bool UpdatePendingStatus(string borrowCode, int PendingStatus)
+        public bool UpdatePendingStatus(string borrowCode, int PendingStatus, Guid modifyby)
         {
             var borrowTemp = Context.Borrows.FirstOrDefault(x => x.BorrowCode.Trim().Equals(borrowCode.Trim()));
             if (borrowTemp != null)
             {
+                Context.BorrowLogs.Add(new BorrowLog
+                {
+                    BorrowID = borrowTemp.BorrowID,
+                    BorrowCode = borrowTemp.BorrowCode,
+                    CardReaderID = borrowTemp.CardReaderID,
+                    DateBorrow = borrowTemp.DateBorrow,
+                    DateExpried = borrowTemp.DateExpried,
+                    AmountTotal = borrowTemp.AmountTotal,
+                    AcceptBy = borrowTemp.AcceptBy,
+                    TimeToGet = borrowTemp.TimeToGet,
+                    CreateBy = borrowTemp.CreateBy,
+                    CreateDate = borrowTemp.CreateDate,
+                    ModifyBy = modifyby,
+                    ModifyDate = DateTime.Now,
+                    PendingStatusID = borrowTemp.PendingStatusID,
+                    IsDelete = borrowTemp.IsDelete
+                });
                 borrowTemp.PendingStatusID = PendingStatus;
                 return true;
             }

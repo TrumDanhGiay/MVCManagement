@@ -12,15 +12,21 @@ namespace DuongTrang.Core.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class BorrowDetailLog
+    public partial class BorrowLog
     {
-        public System.Guid ID { get; set; }
-        public System.Guid BorrowDetailID { get; set; }
-        public System.Guid BookID { get; set; }
+        public System.Guid BorrowID { get; set; }
+        public string BorrowCode { get; set; }
+        public Nullable<System.Guid> CardReaderID { get; set; }
+        public Nullable<System.DateTime> DateBorrow { get; set; }
         public Nullable<System.DateTime> DateExpried { get; set; }
-        public System.Guid PendingStatusID { get; set; }
-        public Nullable<System.DateTime> CreateDate { get; set; }
+        public Nullable<int> AmountTotal { get; set; }
+        public Nullable<System.Guid> AcceptBy { get; set; }
+        public System.DateTime TimeToGet { get; set; }
         public Nullable<System.Guid> CreateBy { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
+        public Nullable<System.Guid> ModifyBy { get; set; }
+        public Nullable<System.DateTime> ModifyDate { get; set; }
+        public Nullable<int> PendingStatusID { get; set; }
         public Nullable<bool> IsDelete { get; set; }
     }
 }

@@ -119,17 +119,23 @@
           <Property Name="CreateBy" Type="uniqueidentifier" Nullable="false" />
           <Property Name="IsDelete" Type="bit" />
         </EntityType>
-        <EntityType Name="BorrowDetailLog">
+        <EntityType Name="BorrowLog">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="BorrowID" />
           </Key>
-          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="BorrowDetailID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="BookID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BorrowID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BorrowCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CardReaderID" Type="uniqueidentifier" />
+          <Property Name="DateBorrow" Type="date" />
           <Property Name="DateExpried" Type="date" />
-          <Property Name="PendingStatusID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="CreateDate" Type="date" />
+          <Property Name="AmountTotal" Type="int" />
+          <Property Name="AcceptBy" Type="uniqueidentifier" />
+          <Property Name="TimeToGet" Type="datetime" Nullable="false" />
           <Property Name="CreateBy" Type="uniqueidentifier" />
+          <Property Name="CreateDate" Type="date" />
+          <Property Name="ModifyBy" Type="uniqueidentifier" />
+          <Property Name="ModifyDate" Type="date" />
+          <Property Name="PendingStatusID" Type="int" />
           <Property Name="IsDelete" Type="bit" />
         </EntityType>
         <EntityType Name="CardReader">
@@ -597,7 +603,7 @@
           <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Borrow" EntityType="Self.Borrow" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BorrowDetail" EntityType="Self.BorrowDetail" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="BorrowDetailLog" EntityType="Self.BorrowDetailLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BorrowLog" EntityType="Self.BorrowLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CardReader" EntityType="Self.CardReader" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChildMenu" EntityType="Self.ChildMenu" Schema="dbo" store:Type="Tables" />
@@ -836,19 +842,6 @@
           <Property Name="IsDelete" Type="Boolean" />
           <NavigationProperty Name="Borrow" Relationship="Self.FK_BorrowDetail_Borrow" FromRole="BorrowDetail" ToRole="Borrow" />
           <NavigationProperty Name="Infringes" Relationship="Self.FK_Infringe_BorrowDetail" FromRole="BorrowDetail" ToRole="Infringe" />
-        </EntityType>
-        <EntityType Name="BorrowDetailLog">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Guid" Nullable="false" />
-          <Property Name="BorrowDetailID" Type="Guid" Nullable="false" />
-          <Property Name="BookID" Type="Guid" Nullable="false" />
-          <Property Name="DateExpried" Type="DateTime" Precision="0" />
-          <Property Name="PendingStatusID" Type="Guid" Nullable="false" />
-          <Property Name="CreateDate" Type="DateTime" Precision="0" />
-          <Property Name="CreateBy" Type="Guid" />
-          <Property Name="IsDelete" Type="Boolean" />
         </EntityType>
         <EntityType Name="CardReader">
           <Key>
@@ -1304,7 +1297,6 @@
           <EntitySet Name="Books" EntityType="Self.Book" />
           <EntitySet Name="Borrows" EntityType="Self.Borrow" />
           <EntitySet Name="BorrowDetails" EntityType="Self.BorrowDetail" />
-          <EntitySet Name="BorrowDetailLogs" EntityType="Self.BorrowDetailLog" />
           <EntitySet Name="CardReaders" EntityType="Self.CardReader" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="ChildMenus" EntityType="Self.ChildMenu" />
@@ -1411,6 +1403,7 @@
             <End Role="PendingStatu" EntitySet="PendingStatus" />
             <End Role="Borrow" EntitySet="Borrows" />
           </AssociationSet>
+          <EntitySet Name="BorrowLogs" EntityType="DATNModel.BorrowLog" />
         </EntityContainer>
         <Association Name="FK_Borrow_PendingStatus">
           <End Type="DATNModel.PendingStatu" Role="PendingStatu" Multiplicity="0..1" />
@@ -1424,6 +1417,25 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="BorrowLog">
+          <Key>
+            <PropertyRef Name="BorrowID" />
+          </Key>
+          <Property Name="BorrowID" Type="Guid" Nullable="false" />
+          <Property Name="BorrowCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CardReaderID" Type="Guid" />
+          <Property Name="DateBorrow" Type="DateTime" Precision="0" />
+          <Property Name="DateExpried" Type="DateTime" Precision="0" />
+          <Property Name="AmountTotal" Type="Int32" />
+          <Property Name="AcceptBy" Type="Guid" />
+          <Property Name="TimeToGet" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreateBy" Type="Guid" />
+          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <Property Name="ModifyBy" Type="Guid" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="0" />
+          <Property Name="PendingStatusID" Type="Int32" />
+          <Property Name="IsDelete" Type="Boolean" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1535,20 +1547,6 @@
                 <ScalarProperty Name="BorrowDetailID" ColumnName="BorrowDetailID" />
                 <ScalarProperty Name="BorrowID" ColumnName="BorrowID" />
                 <ScalarProperty Name="BookID" ColumnName="BookID" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BorrowDetailLogs">
-            <EntityTypeMapping TypeName="DATNModel.BorrowDetailLog">
-              <MappingFragment StoreEntitySet="BorrowDetailLog">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="BorrowDetailID" ColumnName="BorrowDetailID" />
-                <ScalarProperty Name="BookID" ColumnName="BookID" />
-                <ScalarProperty Name="DateExpried" ColumnName="DateExpried" />
-                <ScalarProperty Name="PendingStatusID" ColumnName="PendingStatusID" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
                 <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
@@ -1750,6 +1748,26 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="BorrowLogs">
+            <EntityTypeMapping TypeName="DATNModel.BorrowLog">
+              <MappingFragment StoreEntitySet="BorrowLog">
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="PendingStatusID" ColumnName="PendingStatusID" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="TimeToGet" ColumnName="TimeToGet" />
+                <ScalarProperty Name="AcceptBy" ColumnName="AcceptBy" />
+                <ScalarProperty Name="AmountTotal" ColumnName="AmountTotal" />
+                <ScalarProperty Name="DateExpried" ColumnName="DateExpried" />
+                <ScalarProperty Name="DateBorrow" ColumnName="DateBorrow" />
+                <ScalarProperty Name="CardReaderID" ColumnName="CardReaderID" />
+                <ScalarProperty Name="BorrowCode" ColumnName="BorrowCode" />
+                <ScalarProperty Name="BorrowID" ColumnName="BorrowID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

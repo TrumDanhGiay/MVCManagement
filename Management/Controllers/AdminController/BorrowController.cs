@@ -2,6 +2,7 @@
 using Management.APICustomAuthorize;
 using Management.Const;
 using Management.Property;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,7 +52,7 @@ namespace Management.Controllers.AdminController
         {
             if(id != null && PendingStatus != 0)
             {
-                if(borrowRepository.UpdatePendingStatus(id, PendingStatus) == false)
+                if(borrowRepository.UpdatePendingStatus(id, PendingStatus, Guid.Parse(User.Identity.GetUserId())) == false)
                 {
                     return BadRequest(MConst.ErrorAPI);
                 }
@@ -77,7 +78,7 @@ namespace Management.Controllers.AdminController
                     await borrowRepository.SaveChangesAsync();
                     return Ok(MConst.SuccessEditAPI);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     return BadRequest(MConst.ErrorAPI);
                 }

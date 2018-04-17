@@ -33,7 +33,6 @@ namespace DuongTrang.Core.Models
         public virtual DbSet<Book> Books { get; set; }
         public virtual DbSet<Borrow> Borrows { get; set; }
         public virtual DbSet<BorrowDetail> BorrowDetails { get; set; }
-        public virtual DbSet<BorrowDetailLog> BorrowDetailLogs { get; set; }
         public virtual DbSet<CardReader> CardReaders { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<ChildMenu> ChildMenus { get; set; }
@@ -52,5 +51,6 @@ namespace DuongTrang.Core.Models
         public virtual DbSet<Role_Menu> Role_Menu { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TrainingSystem> TrainingSystems { get; set; }
+        public virtual DbSet<BorrowLog> BorrowLogs { get; set; }
     }
 }

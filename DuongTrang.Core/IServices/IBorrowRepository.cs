@@ -11,7 +11,7 @@ namespace DuongTrang.Core.IServices
     {
         IQueryable<object> GetAllBorrow();
         object GetBorrowInfomation(string borrowCode);
-        bool UpdatePendingStatus(string borrowCode, int PendingStatus);
+        bool UpdatePendingStatus(string borrowCode, int PendingStatus, Guid modifyby);
         Borrow GetBorrow(string borrowCode);
     }
 }

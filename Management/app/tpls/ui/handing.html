@@ -142,7 +142,7 @@
                         <button ng-show="listborrow[0].PendingStatusName == 'Đặt mượn' || listborrow[0].PendingStatusName == 'Đang xử lý' " style="float:right;" class="btn btn-secondary" ng-click="accept()">Xác nhận mượn</button>
                     </div>
                     <div class="col-sm-6">
-                        <label class="col-sm-2 control-label" for="dateborrow">Ngày mượn</label>
+                        <label class="col-sm-3 control-label" for="dateborrow">Ngày mượn</label>
                         <input type="text" class="form-control" id="dateborrow" ng-model="dateborrow">
                     </div>
                     <div class="col-sm-6">
@@ -155,9 +155,99 @@
         </div>
 
         <div class="tab-pane with-bg" id="fwv-3" ng-style=" listborrow[0].PendingStatusName == 'Từ chối' ? {'pointer-events' : 'none', 'opacity' : '0.5', 'background' : '#CCC'} : {'pointer-events' : 'auto', 'opacity' : '1.0', 'background' : '#FFF'}">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Xác nhận thông tin thẻ</label>
+                            <input type="checkbox" class="iswitch iswitch-turquoise">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Xác nhận đã giao sách</label>
+                            <input type="checkbox" class="iswitch iswitch-turquoise">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Xác nhận thông tin phiếu mượn</label>
+                            <input type="checkbox" class="iswitch iswitch-turquoise">
+                        </div>
+                    </div>
+                    <div class="col-md-5" style="border : 1px solid black; padding : 1px;">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <span>THƯ VIỆN TRƯỜNG ĐẠI HỌC GTVT</span><br />
+                                <span>Thành phố Hà Nội</span>
+                            </div>
+                            <div class="col-md-2" style="float:right;"><span>Số : ...</span></div>
+                        </div>
+                        <div class="row">
+                            <h2 style="text-align:center">PHIẾU MƯỢN SÁCH</h2>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span>Mã thẻ : .........{{infomation.CardReaderCode}}..........</span> <span>Mã Phiếu: ......{{param}}.........................</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span>Họ tên độc giả : ..........................{{infomation.FullName}}..............................................</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span>Ngày sinh : ....................................................................................................</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span>Địa chỉ : ....................................................................................................</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span>Số ĐT : ....................................................................................................</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span>Ngày mượn : .....................{{infomation.DateStart | date : "dd/MM/yyyy"}}.......................................................</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span>Ngày trả : .....................{{infomation.DateExpried | date : "dd/MM/yyyy"}}....................................</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th width="12%" class="text-center">Mã</th>
+                                            <th width="50%">Tên sách</th>
+                                            <th width="20%">Tác giả</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="borrow in listborrow">
+                                            <td>{{borrow.BookCode}}</td>
+                                            <td>{{borrow.BookName}}</td>
+                                            <td>{{borrow.Author}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5" style="float:right;">
+                                <span>Ngày.{{date}}.Tháng.{{month}}.Năm.{{year}}.</span><br />
+                                <span>NV Quản lý : {{usermanage}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-            
 
+            </div>
         </div>
 
 
